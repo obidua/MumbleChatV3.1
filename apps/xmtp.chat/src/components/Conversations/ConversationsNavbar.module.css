@@ -1,0 +1,54 @@
+.shell {
+  height: 100%;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(6, 9, 20, 0.88), rgba(6, 9, 20, 0.72));
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  box-shadow: 0 28px 48px rgba(4, 8, 20, 0.4);
+  backdrop-filter: blur(14px);
+}
+
+.header {
+  padding: var(--mantine-spacing-md);
+  background: transparent;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.header :global(.mantine-Badge-root) {
+  padding-inline: var(--mantine-spacing-xs);
+  background: rgba(10, 255, 241, 0.16);
+  border: 1px solid rgba(10, 255, 241, 0.28);
+  color: #0afff1;
+}
+
+.content {
+  padding: var(--mantine-spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-sm);
+}
+
+.empty {
+  color: rgba(203, 213, 225, 0.7);
+}
+
+@media (max-width: 768px) {
+  .shell {
+    border-radius: 20px;
+    border-color: rgba(148, 163, 184, 0.16);
+  }
+
+  .content {
+    padding: var(--mantine-spacing-md) var(--mantine-spacing-sm);
+  }
+}
+
+@media (max-width: 520px) {
+  .header {
+    padding: var(--mantine-spacing-sm) var(--mantine-spacing-xs);
+  }
+
+  .content {
+    padding: var(--mantine-spacing-sm) var(--mantine-spacing-xs);
+  }
+}

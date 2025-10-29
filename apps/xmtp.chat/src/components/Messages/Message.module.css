@@ -1,0 +1,11 @@
+.root {
+  cursor: default;
+}
+
+.root:hover {
+  background-color: transparent;
+}
+
+.root:focus {
+  outline: none;
+}

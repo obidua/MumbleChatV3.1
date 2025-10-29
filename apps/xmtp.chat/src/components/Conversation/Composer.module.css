@@ -1,0 +1,63 @@
+.wrapper {
+  width: 100%;
+}
+
+.composer {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--mantine-spacing-sm);
+  padding: 10px 14px;
+  background: rgba(10, 13, 25, 0.88);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 999px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.actionButton {
+  color: rgba(203, 213, 225, 0.9);
+}
+
+.input {
+  width: 100%;
+  color: rgba(238, 242, 255, 0.95);
+  font-size: 0.95rem;
+}
+
+.input::placeholder {
+  color: rgba(148, 163, 184, 0.75);
+}
+
+.sendButton {
+  padding-inline: 18px;
+  box-shadow: 0 12px 24px rgba(10, 255, 241, 0.2);
+}
+
+.sendButton:disabled {
+  box-shadow: none;
+}
+
+@media (max-width: 640px) {
+  .composer {
+    grid-template-columns: auto 1fr auto;
+    gap: var(--mantine-spacing-xs);
+    padding: 8px 12px;
+    border-radius: 28px;
+  }
+
+  .sendButton {
+    padding-inline: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .composer {
+    padding: 8px 10px;
+    gap: var(--mantine-spacing-xs);
+  }
+
+  .sendButton {
+    padding-inline: 12px;
+    font-size: 0.9rem;
+  }
+}

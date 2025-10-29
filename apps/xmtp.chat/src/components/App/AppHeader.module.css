@@ -1,0 +1,95 @@
+.shell {
+  width: 100%;
+}
+
+.brandGroup {
+  align-items: center;
+}
+
+.brandIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(10, 255, 241, 0.35), rgba(151, 114, 251, 0.4));
+  color: #04070f;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  box-shadow: 0 14px 30px rgba(10, 255, 241, 0.25);
+}
+
+.brandText {
+  margin-top: 2px;
+}
+
+.brandName {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f4f6ff;
+}
+
+.brandTagline {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.6);
+}
+
+.controls {
+  flex-wrap: nowrap;
+}
+
+.environment {
+  background: rgba(10, 255, 241, 0.12);
+  color: #0afff1;
+  border: 1px solid rgba(10, 255, 241, 0.3);
+  padding: 6px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 12px 24px rgba(10, 255, 241, 0.18);
+}
+
+.account {
+  padding: 10px 16px;
+  border-radius: 16px;
+  background: linear-gradient(120deg, rgba(10, 255, 241, 0.18), rgba(151, 114, 251, 0.22));
+  border: 1px solid rgba(10, 255, 241, 0.25);
+  color: #e8f7ff;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+  user-select: none;
+}
+
+.account:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 32px rgba(10, 255, 241, 0.25);
+}
+
+.account:focus-visible {
+  outline: 2px solid rgba(10, 255, 241, 0.6);
+  outline-offset: 2px;
+}
+
+.burger {
+  display: none;
+}
+
+@media screen and (max-width: 1080px) {
+  .burger {
+    display: block;
+  }
+
+  .brandName {
+    font-size: 1.1rem;
+  }
+
+  .brandTagline {
+    letter-spacing: 0.16em;
+  }
+}

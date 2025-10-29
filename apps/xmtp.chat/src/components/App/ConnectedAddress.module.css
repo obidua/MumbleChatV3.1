@@ -1,0 +1,25 @@
+.wrapper {
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.address {
+  display: inline-block;
+  max-width: 12rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 480px) {
+  .address {
+    max-width: 8.5rem;
+  }
+}
+
+@media (min-width: 600px) {
+  .wrapper {
+    flex-wrap: nowrap;
+  }
+}
