@@ -48,11 +48,15 @@ export const ContentLayoutHeader: React.FC<ContentLayoutHeaderProps> = ({
     <Group
       align="center"
       gap="xs"
-      p="md"
       wrap="nowrap"
+      style={{
+        width: "100%",
+        flexShrink: 0,
+        padding: "var(--mantine-spacing-md)",
+      }}
       className={headerClassNames.join(" ")}>
       {typeof title === "string" ? (
-        <Text fw={700} size="lg" truncate>
+        <Text fw={700} size="lg" truncate style={{ flexShrink: 1 }}>
           {title}
         </Text>
       ) : (

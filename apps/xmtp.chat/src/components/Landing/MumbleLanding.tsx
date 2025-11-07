@@ -1,14 +1,15 @@
 import { useEffect, useState, type FC } from "react";
+import { MumbleChatLogo } from "@/icons/MumbleChatLogo";
 import classes from "./MumbleLanding.module.css";
-
-const Logo = "/favicon.svg";
 
 const navLinks = [
   { label: "Home", href: "#home" },
-  { label: "Powered By", href: "#powered-by" },
-  { label: "Roadmap", href: "#roadmap" },
-  { label: "Tokenomics", href: "#tokenomics" },
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Features", href: "#features" },
+  { label: "Mobile", href: "#mobile-support" },
+  { label: "Security", href: "#security" },
   { label: "FAQs", href: "#faqs" },
+  { label: "Support", href: "#support" },
 ];
 
 const featureCards = [
@@ -135,6 +136,36 @@ const faqItems = [
     answer:
       "Ramestta keeps fees minimal. MumbleChat batches writes where possible so everyday messaging stays affordable.",
   },
+  {
+    question: "What is the 3-month device access expiry?",
+    answer:
+      "For security, each device installation expires after 90 days (3 months). This protects your account from compromised devices and forces periodic wallet verification. Simply reconnect your wallet to continue—your message history remains intact.",
+  },
+  {
+    question: "Which mobile wallets are supported?",
+    answer:
+      "MumbleChat works with MetaMask Mobile, Trust Wallet, Coinbase Wallet, and 300+ other wallets via WalletConnect. Simply open the PWA on your mobile browser, connect your installed wallet, and start chatting.",
+  },
+  {
+    question: "Can I use MumbleChat on multiple devices?",
+    answer:
+      "Yes! Connect your wallet on each device (phone, laptop, tablet). Each device gets its own Installation ID and expires independently after 90 days. Messages sync across all connected devices automatically.",
+  },
+  {
+    question: "How do I add a custom network like Rametta?",
+    answer:
+      "MumbleChat supports all EVM-compatible networks. You can manually add networks in your wallet settings, or use the app's network switcher. Compatible with Polygon, Ethereum, Arbitrum, Base, Optimism, and more.",
+  },
+  {
+    question: "What happens if my device expires?",
+    answer:
+      "After 90 days, the device loses access to send/receive messages. Simply reconnect your wallet to create a new installation. All your previous conversations, groups, and contacts remain—messages are stored on XMTP network, not your device.",
+  },
+  {
+    question: "Is my message history stored on my device?",
+    answer:
+      "No. Messages are stored on the XMTP network and encrypted. Your device caches messages for faster access, but everything syncs from the network when you reconnect, even on a new device.",
+  },
 ];
 
 const classNames = (...values: Array<string | false | undefined>) =>
@@ -171,12 +202,9 @@ export const MumbleLanding: FC = () => {
             onClick={() => {
               setMenuOpen(false);
             }}>
-            <img
-              src={Logo}
-              alt="MumbleChat Logo"
-              className={classes.brandIcon}
-              style={{ height: 32, width: 32 }}
-            />
+            <div className={classes.brandIcon}>
+              <MumbleChatLogo className={classes.brandLogo} />
+            </div>
             <span className={classes.brandLabel}>MumbleChat</span>
           </a>
           <nav className={classes.navLinks} aria-label="Primary">
@@ -236,6 +264,11 @@ export const MumbleLanding: FC = () => {
 
       <main className={classes.content}>
         <section className={classes.hero} id="home">
+          {/* Floating Logo */}
+          <div className={classes.heroLogoWrapper}>
+            <MumbleChatLogo className={classes.heroLogo} />
+          </div>
+
           <div className={classes.heroBadge}>Ramestta Layer-3 Blockchain</div>
           <h1 className={classes.heroTitle}>
             Institutional-grade decentralized messaging, powered by Ramestta.
@@ -469,6 +502,964 @@ export const MumbleLanding: FC = () => {
           </div>
         </section>
 
+        <section className={classes.howItWorks} id="how-it-works">
+          <div className={classes.sectionHeading}>
+            <span className={classes.sectionEyebrow}>How It Works</span>
+            <h2>Understanding MumbleChat</h2>
+            <p>
+              MumbleChat is built on XMTP (Extensible Message Transport
+              Protocol), a decentralized messaging network. Here's everything
+              you need to know about how it works.
+            </p>
+          </div>
+          <div className={classes.conceptsGrid}>
+            <article className={classes.conceptCard}>
+              <h3>🔑 Wallet Address as Identity</h3>
+              <p>
+                <strong>Your wallet is your identity.</strong> No phone numbers,
+                emails, or usernames required. Your Ethereum/Ramestta wallet
+                address (e.g., 0x1234...5678) serves as your unique identifier
+                across the network.
+              </p>
+              <ul>
+                <li>
+                  <strong>ENS/Basename Support:</strong> Use human-readable
+                  names like "alice.eth" or "bob.base"
+                </li>
+                <li>
+                  <strong>Cross-Chain Compatible:</strong> One address works
+                  across all supported networks
+                </li>
+                <li>
+                  <strong>Self-Sovereign:</strong> You own your identity—no
+                  platform can ban or censor you
+                </li>
+              </ul>
+            </article>
+
+            <article className={classes.conceptCard}>
+              <h3>📬 Inbox ID</h3>
+              <p>
+                <strong>Your unique inbox identifier.</strong> When you first
+                connect your wallet to XMTP, an Inbox ID is created—a permanent
+                inbox tied to your wallet address.
+              </p>
+              <ul>
+                <li>
+                  <strong>Permanent:</strong> Your Inbox ID never changes
+                </li>
+                <li>
+                  <strong>Privacy:</strong> Different from your wallet address
+                  for additional privacy
+                </li>
+                <li>
+                  <strong>Universal:</strong> Access your inbox from any XMTP
+                  client (MumbleChat, Converse, etc.)
+                </li>
+              </ul>
+            </article>
+
+            <article className={classes.conceptCard}>
+              <h3>💻 Installation ID</h3>
+              <p>
+                <strong>Each device gets a unique installation.</strong> When
+                you connect a device (phone, laptop, tablet), XMTP creates an
+                Installation ID—a cryptographic identity for that specific
+                device.
+              </p>
+              <ul>
+                <li>
+                  <strong>Multi-Device:</strong> Use MumbleChat on unlimited
+                  devices simultaneously
+                </li>
+                <li>
+                  <strong>Secure Keys:</strong> Each device has its own
+                  encryption keys
+                </li>
+                <li>
+                  <strong>Sync Everywhere:</strong> Messages sync across all
+                  your connected devices
+                </li>
+              </ul>
+            </article>
+
+            <article className={classes.conceptCard}>
+              <h3>⏰ 3-Month Device Expiry</h3>
+              <p>
+                <strong>Security feature: 90-day expiration.</strong> For your
+                protection, each device installation expires after 3 months.
+                This prevents compromised or stolen devices from accessing your
+                messages indefinitely.
+              </p>
+              <ul>
+                <li>
+                  <strong>Why 90 Days?</strong> Balances convenience with
+                  security—industry standard for session tokens
+                </li>
+                <li>
+                  <strong>Easy Renewal:</strong> Simply reconnect your wallet
+                  when expired (takes 30 seconds)
+                </li>
+                <li>
+                  <strong>Auto-Revoke:</strong> Old/forgotten devices
+                  automatically lose access
+                </li>
+                <li>
+                  <strong>Data Preserved:</strong> All message history remains
+                  intact after reconnection
+                </li>
+              </ul>
+            </article>
+
+            <article className={classes.conceptCard}>
+              <h3>🔐 End-to-End Encryption</h3>
+              <p>
+                <strong>Military-grade encryption.</strong> Messages are
+                encrypted on your device before sending and only decrypted by
+                the recipient. Nobody—not even MumbleChat or XMTP—can read your
+                messages.
+              </p>
+              <ul>
+                <li>
+                  <strong>Protocol:</strong> Signal Protocol (same as WhatsApp,
+                  Signal app)
+                </li>
+                <li>
+                  <strong>Keys:</strong> Unique encryption keys per conversation
+                </li>
+                <li>
+                  <strong>Metadata:</strong> Minimal metadata stored—only what's
+                  needed for delivery
+                </li>
+              </ul>
+            </article>
+
+            <article className={classes.conceptCard}>
+              <h3>🌐 Decentralized Storage</h3>
+              <p>
+                <strong>Messages stored on XMTP network.</strong> Your messages
+                are stored on a decentralized network of nodes, not centralized
+                servers. This ensures censorship resistance and data
+                sovereignty.
+              </p>
+              <ul>
+                <li>
+                  <strong>No Single Point of Failure:</strong> Distributed
+                  across multiple nodes
+                </li>
+                <li>
+                  <strong>Immutable:</strong> Once sent, messages can't be
+                  altered or deleted by third parties
+                </li>
+                <li>
+                  <strong>Always Accessible:</strong> Access from anywhere, any
+                  XMTP client
+                </li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section className={classes.howToUse} id="how-to-use">
+          <div className={classes.sectionHeading}>
+            <span className={classes.sectionEyebrow}>Getting Started</span>
+            <h2>How to Use MumbleChat</h2>
+            <p>
+              Start chatting securely in minutes with this simple step-by-step
+              guide.
+            </p>
+          </div>
+          <div className={classes.howToUseGrid}>
+            <article className={classes.howToUseCard}>
+              <div className={classes.howToUseNumber}>1</div>
+              <h3>Connect Your Wallet</h3>
+              <p>
+                Use MetaMask, WalletConnect, or any compatible wallet to sign
+                in. Your wallet address becomes your identity—no email or phone
+                number required.
+              </p>
+              <ul>
+                <li>Click "Connect Wallet" button</li>
+                <li>
+                  Select your preferred wallet (MetaMask, Trust Wallet,
+                  Coinbase, etc.)
+                </li>
+                <li>Sign the message to create your secure XMTP identity</li>
+                <li>Your inbox is ready in seconds!</li>
+              </ul>
+            </article>
+
+            <article className={classes.howToUseCard}>
+              <div className={classes.howToUseNumber}>2</div>
+              <h3>Start a Conversation</h3>
+              <p>
+                Tap the "New" button, enter a wallet address or ENS name, and
+                start messaging. You can also create group chats with multiple
+                people.
+              </p>
+              <ul>
+                <li>
+                  <strong>Direct Message:</strong> Enter any Ethereum address
+                  (0x1234...)
+                </li>
+                <li>
+                  <strong>ENS Names:</strong> Use readable names like
+                  "alice.eth"
+                </li>
+                <li>
+                  <strong>Group Chat:</strong> Add multiple members and set
+                  group name
+                </li>
+                <li>
+                  <strong>Group Permissions:</strong> Control who can add
+                  members or change settings
+                </li>
+              </ul>
+            </article>
+
+            <article className={classes.howToUseCard}>
+              <div className={classes.howToUseNumber}>3</div>
+              <h3>Send Messages & Media</h3>
+              <p>
+                Type your message and hit send. You can also share attachments,
+                react to messages, and reply to specific messages for organized
+                conversations.
+              </p>
+              <ul>
+                <li>
+                  <strong>Text Messages:</strong> Full emoji support and rich
+                  text
+                </li>
+                <li>
+                  <strong>Attachments:</strong> Share images, documents, and
+                  files
+                </li>
+                <li>
+                  <strong>Reactions:</strong> React with ❤️ 👍 😂 and more
+                </li>
+                <li>
+                  <strong>Replies:</strong> Quote and reply to specific messages
+                </li>
+              </ul>
+            </article>
+
+            <article className={classes.howToUseCard}>
+              <div className={classes.howToUseNumber}>4</div>
+              <h3>Manage Your Devices</h3>
+              <p>
+                Visit the Profile tab to see all connected devices and revoke
+                access from devices you no longer use. Stay secure with
+                automatic 90-day expiry.
+              </p>
+              <ul>
+                <li>
+                  <strong>View Installations:</strong> See all your connected
+                  devices
+                </li>
+                <li>
+                  <strong>Check Expiry:</strong> Monitor when devices need
+                  renewal
+                </li>
+                <li>
+                  <strong>Revoke Access:</strong> Remove compromised or old
+                  devices
+                </li>
+                <li>
+                  <strong>Reconnect:</strong> Simply sign in again after expiry
+                </li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section className={classes.featuresDetailed} id="features-detailed">
+          <div className={classes.sectionHeading}>
+            <span className={classes.sectionEyebrow}>Features</span>
+            <h2>Everything You Need for Secure Communication</h2>
+            <p>
+              MumbleChat provides all the features you expect from a modern
+              messenger, with the added benefits of decentralization and true
+              ownership.
+            </p>
+          </div>
+          <div className={classes.featuresDetailedGrid}>
+            <article className={classes.featureDetailCard}>
+              <div className={classes.featureIcon}>💬</div>
+              <h3>Direct Messages</h3>
+              <p>
+                Private 1-on-1 conversations with end-to-end encryption. Send
+                messages to any Ethereum address or ENS name—messages are
+                encrypted from your device to theirs, with zero access from
+                intermediaries.
+              </p>
+              <ul>
+                <li>✅ End-to-end encrypted</li>
+                <li>✅ No central server can read your messages</li>
+                <li>✅ Permanent message history on XMTP network</li>
+                <li>✅ Works with any XMTP-compatible client</li>
+              </ul>
+            </article>
+
+            <article className={classes.featureDetailCard}>
+              <div className={classes.featureIcon}>👥</div>
+              <h3>Group Chats</h3>
+              <p>
+                Create groups, manage members, and chat with multiple people.
+                Group admins can control permissions, add/remove members, and
+                customize group metadata.
+              </p>
+              <ul>
+                <li>✅ Unlimited group size</li>
+                <li>✅ Custom group names and descriptions</li>
+                <li>
+                  ✅ Granular permissions (add members, change metadata, etc.)
+                </li>
+                <li>✅ Member management (add, remove, view members)</li>
+              </ul>
+            </article>
+
+            <article className={classes.featureDetailCard}>
+              <div className={classes.featureIcon}>📎</div>
+              <h3>File Sharing</h3>
+              <p>
+                Share images, documents, and other files securely. Files are
+                encrypted and stored on decentralized infrastructure, ensuring
+                privacy and availability.
+              </p>
+              <ul>
+                <li>✅ Support for images, PDFs, documents</li>
+                <li>✅ Encrypted file storage</li>
+                <li>✅ Decentralized hosting</li>
+                <li>✅ Preview images directly in chat</li>
+              </ul>
+            </article>
+
+            <article className={classes.featureDetailCard}>
+              <div className={classes.featureIcon}>🔄</div>
+              <h3>Multi-Device Sync</h3>
+              <p>
+                Access your messages from any device seamlessly. Connect
+                unlimited devices—phone, laptop, tablet—and all your
+                conversations sync automatically across all devices.
+              </p>
+              <ul>
+                <li>✅ Unlimited devices supported</li>
+                <li>✅ Real-time message sync</li>
+                <li>✅ Independent device encryption keys</li>
+                <li>✅ Manage devices from Profile page</li>
+              </ul>
+            </article>
+
+            <article className={classes.featureDetailCard}>
+              <div className={classes.featureIcon}>❤️</div>
+              <h3>Reactions</h3>
+              <p>
+                React to messages with emojis for quick responses. Express
+                yourself without typing—perfect for group chats and quick
+                acknowledgments.
+              </p>
+              <ul>
+                <li>✅ Full emoji support</li>
+                <li>✅ Multiple reactions per message</li>
+                <li>✅ See who reacted</li>
+                <li>✅ Add or remove your reactions</li>
+              </ul>
+            </article>
+
+            <article className={classes.featureDetailCard}>
+              <div className={classes.featureIcon}>↩️</div>
+              <h3>Replies</h3>
+              <p>
+                Reply to specific messages to keep conversations organized.
+                Quote and respond to messages in threads—perfect for busy group
+                chats or following up on specific topics.
+              </p>
+              <ul>
+                <li>✅ Quote original message</li>
+                <li>✅ Visual thread indicators</li>
+                <li>✅ Jump to referenced message</li>
+                <li>✅ Works in DMs and groups</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section className={classes.deviceManagement} id="device-management">
+          <div className={classes.sectionHeading}>
+            <span className={classes.sectionEyebrow}>Device Management</span>
+            <h2>Managing Your Installations</h2>
+            <p>
+              Learn how to manage devices, check expiry dates, and maintain
+              secure access to your conversations.
+            </p>
+          </div>
+          <div className={classes.guideGrid}>
+            <article className={classes.guideCard}>
+              <div className={classes.guideNumber}>01</div>
+              <h3>Viewing Your Installations</h3>
+              <ol>
+                <li>Open MumbleChat and connect your wallet</li>
+                <li>Navigate to Profile tab (bottom right)</li>
+                <li>Your installations list shows all connected devices:</li>
+              </ol>
+              <ul>
+                <li>
+                  <strong>Installation ID:</strong> Unique identifier (e.g.,
+                  0x1234...5678)
+                </li>
+                <li>
+                  <strong>Created:</strong> When you connected this device
+                  (e.g., "2 months ago")
+                </li>
+                <li>
+                  <strong>Expires:</strong> Time remaining (e.g., "in 1 month")
+                </li>
+                <li>
+                  <strong>Status:</strong> 🟢 Active | 🟡 Expiring Soon | 🔴
+                  Expired
+                </li>
+                <li>
+                  <strong>Current:</strong> Badge showing your current device
+                </li>
+              </ul>
+            </article>
+
+            <article className={classes.guideCard}>
+              <div className={classes.guideNumber}>02</div>
+              <h3>When a Device Expires</h3>
+              <p>
+                <strong>What happens after 90 days:</strong>
+              </p>
+              <ul>
+                <li>❌ Device loses access to send/receive messages</li>
+                <li>⚠️ Status shows "Expired" in red</li>
+                <li>🔴 Red indicator in installations list</li>
+                <li>✅ Message history preserved on XMTP network</li>
+              </ul>
+              <p>
+                <strong>What you keep:</strong>
+              </p>
+              <ul>
+                <li>✅ All previous conversations</li>
+                <li>✅ Group memberships</li>
+                <li>✅ Contact list</li>
+                <li>✅ Wallet address/identity</li>
+              </ul>
+            </article>
+
+            <article className={classes.guideCard}>
+              <div className={classes.guideNumber}>03</div>
+              <h3>Reconnecting an Expired Device</h3>
+              <ol>
+                <li>Open MumbleChat on the expired device</li>
+                <li>Click "Connect Wallet"</li>
+                <li>Sign authentication message with your wallet</li>
+                <li>✅ New 90-day installation created (takes ~30 seconds)</li>
+                <li>Messages automatically sync from network</li>
+              </ol>
+              <p>
+                <strong>Note:</strong> You'll get a new Installation ID, but
+                your Inbox ID remains the same—all conversations intact!
+              </p>
+            </article>
+
+            <article className={classes.guideCard}>
+              <div className={classes.guideNumber}>04</div>
+              <h3>Revoking Devices</h3>
+              <p>
+                <strong>Manual revocation:</strong> Remove access from specific
+                devices before they expire.
+              </p>
+              <ol>
+                <li>Go to Profile → View Installations</li>
+                <li>
+                  Find the device you want to revoke in the installations list
+                </li>
+                <li>
+                  Click "Revoke" button next to that installation, or click
+                  "Revoke All Other Installations" to keep only current device
+                </li>
+                <li>✅ Device immediately loses access</li>
+              </ol>
+              <p>
+                <strong>When to revoke:</strong>
+              </p>
+              <ul>
+                <li>Lost or stolen device</li>
+                <li>Selling/disposing of old device</li>
+                <li>Suspicious activity detected</li>
+                <li>No longer using that device</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section className={classes.mobileSupport} id="mobile-support">
+          <div className={classes.sectionHeading}>
+            <span className={classes.sectionEyebrow}>Mobile Support</span>
+            <h2>Using MumbleChat on Mobile</h2>
+            <p>
+              MumbleChat is a Progressive Web App (PWA) that works seamlessly on
+              mobile devices with your favorite crypto wallets.
+            </p>
+          </div>
+          <div className={classes.mobileGrid}>
+            <article className={classes.mobileCard}>
+              <h3>📱 Supported Mobile Wallets</h3>
+              <ul>
+                <li>
+                  <strong>MetaMask Mobile:</strong> Full support via injected
+                  provider and WalletConnect
+                </li>
+                <li>
+                  <strong>Trust Wallet:</strong> Native support with automatic
+                  detection
+                </li>
+                <li>
+                  <strong>Coinbase Wallet:</strong> Dedicated connector with
+                  deep linking
+                </li>
+                <li>
+                  <strong>Rainbow Wallet:</strong> Via WalletConnect protocol
+                </li>
+                <li>
+                  <strong>300+ Other Wallets:</strong> Any wallet supporting
+                  WalletConnect v2
+                </li>
+              </ul>
+            </article>
+
+            <article className={classes.mobileCard}>
+              <h3>🔗 How Mobile Connection Works</h3>
+              <ol>
+                <li>
+                  <strong>Open PWA:</strong> Visit mumblechat.com on your mobile
+                  browser (Chrome, Safari, etc.)
+                </li>
+                <li>
+                  <strong>Click Connect Wallet:</strong> App detects available
+                  wallets on your device
+                </li>
+                <li>
+                  <strong>Choose Wallet:</strong>
+                  <ul>
+                    <li>
+                      If MetaMask/Trust Wallet installed → Opens wallet app
+                      directly
+                    </li>
+                    <li>
+                      If no wallet → Shows WalletConnect QR/deeplink options
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Sign Message:</strong> Approve authentication in your
+                  wallet app
+                </li>
+                <li>
+                  <strong>✅ Connected:</strong> Start chatting immediately!
+                </li>
+              </ol>
+            </article>
+
+            <article className={classes.mobileCard}>
+              <h3>🌐 Custom Networks & Rametta</h3>
+              <p>
+                <strong>
+                  Adding custom EVM networks to your mobile wallet:
+                </strong>
+              </p>
+              <ol>
+                <li>Open your wallet app (MetaMask, Trust Wallet, etc.)</li>
+                <li>Go to Settings → Networks → Add Network</li>
+                <li>Enter network details:</li>
+              </ol>
+              <ul>
+                <li>
+                  <strong>Network Name:</strong> Rametta (or your custom
+                  network)
+                </li>
+                <li>
+                  <strong>RPC URL:</strong> https://blockchain.ramestta.com
+                </li>
+                <li>
+                  <strong>Chain ID:</strong> 1370 (for Rametta)
+                </li>
+                <li>
+                  <strong>Currency Symbol:</strong> RAMA
+                </li>
+                <li>
+                  <strong>Block Explorer:</strong> https://ramascan.com
+                </li>
+              </ul>
+              <p>
+                <strong>Auto-add via app:</strong> MumbleChat can prompt your
+                wallet to add networks automatically when you try to switch.
+              </p>
+            </article>
+
+            <article className={classes.mobileCard}>
+              <h3>💾 Installing as PWA</h3>
+              <p>
+                <strong>iOS (Safari):</strong>
+              </p>
+              <ol>
+                <li>Visit mumblechat.com in Safari</li>
+                <li>Tap Share icon (square with arrow up)</li>
+                <li>Scroll down and tap "Add to Home Screen"</li>
+                <li>✅ App icon appears on home screen</li>
+              </ol>
+              <p>
+                <strong>Android (Chrome):</strong>
+              </p>
+              <ol>
+                <li>Visit mumblechat.com in Chrome</li>
+                <li>
+                  Tap three-dot menu → "Install App" or "Add to Home screen"
+                </li>
+                <li>✅ App installs like native app</li>
+              </ol>
+              <p>
+                <strong>Benefits:</strong> Works offline, fast loading, native
+                app feel, push notifications
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section className={classes.security} id="security">
+          <div className={classes.sectionHeading}>
+            <span className={classes.sectionEyebrow}>Security & Privacy</span>
+            <h2>How We Keep You Safe</h2>
+            <p>
+              MumbleChat prioritizes your security and privacy through multiple
+              layers of protection.
+            </p>
+          </div>
+          <div className={classes.securityGrid}>
+            <article className={classes.securityCard}>
+              <h3>🔐 Encryption Standards</h3>
+              <ul>
+                <li>
+                  <strong>Protocol:</strong> Signal Protocol with Double Ratchet
+                  algorithm
+                </li>
+                <li>
+                  <strong>Key Exchange:</strong> Diffie-Hellman key agreement
+                </li>
+                <li>
+                  <strong>Forward Secrecy:</strong> New keys generated for each
+                  message
+                </li>
+                <li>
+                  <strong>Post-Compromise Security:</strong> Automatic key
+                  rotation after potential compromise
+                </li>
+              </ul>
+            </article>
+
+            <article className={classes.securityCard}>
+              <h3>🛡️ Device Security</h3>
+              <ul>
+                <li>
+                  <strong>90-Day Expiry:</strong> Limits exposure from
+                  compromised devices
+                </li>
+                <li>
+                  <strong>Device-Specific Keys:</strong> Each installation has
+                  unique cryptographic keys
+                </li>
+                <li>
+                  <strong>Revocation:</strong> Instantly remove access from any
+                  device
+                </li>
+                <li>
+                  <strong>Activity Monitoring:</strong> View all connected
+                  devices in Profile
+                </li>
+              </ul>
+            </article>
+
+            <article className={classes.securityCard}>
+              <h3>🔒 What We DON'T Store</h3>
+              <ul>
+                <li>❌ Message content (encrypted end-to-end)</li>
+                <li>❌ Private keys (stored only on your device/wallet)</li>
+                <li>❌ Phone numbers or email addresses</li>
+                <li>❌ Personal information or KYC data</li>
+                <li>❌ Browsing history or analytics</li>
+              </ul>
+            </article>
+
+            <article className={classes.securityCard}>
+              <h3>✅ Best Practices</h3>
+              <ul>
+                <li>
+                  <strong>Use Strong Passwords:</strong> Protect your wallet
+                  with strong password/PIN
+                </li>
+                <li>
+                  <strong>Enable 2FA:</strong> If your wallet supports it
+                </li>
+                <li>
+                  <strong>Verify Addresses:</strong> Always double-check
+                  recipient addresses
+                </li>
+                <li>
+                  <strong>Revoke Unused Devices:</strong> Remove old
+                  installations regularly
+                </li>
+                <li>
+                  <strong>Keep Wallet Secure:</strong> Never share seed phrase
+                  or private keys
+                </li>
+                <li>
+                  <strong>Reconnect Before Expiry:</strong> Avoid disruption by
+                  reconnecting devices proactively
+                </li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section className={classes.support} id="support">
+          <div className={classes.sectionHeading}>
+            <span className={classes.sectionEyebrow}>Help & Support</span>
+            <h2>Need Help? We're Here.</h2>
+            <p>
+              Get assistance with MumbleChat, XMTP, or Ramestta blockchain
+              integration.
+            </p>
+          </div>
+          <div className={classes.supportGrid}>
+            <article className={classes.supportCard}>
+              <h3>📖 In-App Help</h3>
+              <p>Access comprehensive help directly in the app:</p>
+              <ol>
+                <li>Open MumbleChat and connect your wallet</li>
+                <li>Navigate to Profile tab (bottom navigation)</li>
+                <li>Click the Help icon (🛈) next to "Identity" title</li>
+                <li>Browse detailed explanations of all concepts:</li>
+              </ol>
+              <ul>
+                <li>What is MumbleChat?</li>
+                <li>Wallet Address, Inbox ID, Installation ID explained</li>
+                <li>How to use MumbleChat (step-by-step guide)</li>
+                <li>Features overview (DMs, Groups, Files, Sync, etc.)</li>
+                <li>Security & Privacy details</li>
+              </ul>
+            </article>
+
+            <article className={classes.supportCard}>
+              <h3>🌐 External Resources</h3>
+              <ul>
+                <li>
+                  <strong>XMTP Documentation:</strong>{" "}
+                  <a
+                    href="https://docs.xmtp.org/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    docs.xmtp.org
+                  </a>{" "}
+                  — Protocol specs and developer guides
+                </li>
+                <li>
+                  <strong>XMTP Community:</strong>{" "}
+                  <a
+                    href="https://community.xmtp.org/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    community.xmtp.org
+                  </a>{" "}
+                  — Community forum and discussions
+                </li>
+                <li>
+                  <strong>Ramestta Blockchain:</strong>{" "}
+                  <a
+                    href="https://www.ramestta.com/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    ramestta.com
+                  </a>{" "}
+                  — Learn about the Layer-3 blockchain
+                </li>
+                <li>
+                  <strong>Block Explorer:</strong>{" "}
+                  <a
+                    href="https://ramascan.com/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    ramascan.com
+                  </a>{" "}
+                  — View transactions and network stats
+                </li>
+              </ul>
+            </article>
+
+            <article className={classes.supportCard}>
+              <h3>❓ Common Issues</h3>
+              <p>
+                <strong>Can't connect wallet:</strong>
+              </p>
+              <ul>
+                <li>Ensure wallet extension/app is installed and unlocked</li>
+                <li>Try refreshing the page</li>
+                <li>Clear browser cache and cookies</li>
+                <li>Check if wallet supports the network</li>
+              </ul>
+              <p>
+                <strong>Messages not syncing:</strong>
+              </p>
+              <ul>
+                <li>Check internet connection</li>
+                <li>Click sync button in top-right menu (⋮)</li>
+                <li>Try reconnecting your wallet</li>
+                <li>Verify device hasn't expired (check Profile)</li>
+              </ul>
+              <p>
+                <strong>Device shows as expired:</strong>
+              </p>
+              <ul>
+                <li>Simply reconnect your wallet (Connect Wallet button)</li>
+                <li>Sign the authentication message</li>
+                <li>New 90-day installation created automatically</li>
+                <li>Messages sync within seconds</li>
+              </ul>
+            </article>
+
+            <article className={classes.supportCard}>
+              <h3>💬 Contact Support</h3>
+              <p>Still need help? Reach out through these channels:</p>
+              <ul>
+                <li>
+                  <strong>Email:</strong> support@mumblechat.com (if applicable)
+                </li>
+                <li>
+                  <strong>Discord:</strong> Join our community server for
+                  real-time support
+                </li>
+                <li>
+                  <strong>Telegram:</strong> @MumbleChatSupport (if applicable)
+                </li>
+                <li>
+                  <strong>GitHub:</strong> Report bugs and feature requests on
+                  our repository
+                </li>
+              </ul>
+              <p>
+                <strong>Response Time:</strong> We typically respond within
+                24-48 hours. For urgent security issues, use priority support
+                channels.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section className={classes.comparison} id="comparison">
+          <div className={classes.sectionHeading}>
+            <span className={classes.sectionEyebrow}>Comparison</span>
+            <h2>MumbleChat vs Traditional Messengers</h2>
+            <p>
+              See how MumbleChat's decentralized approach compares to
+              centralized messaging apps.
+            </p>
+          </div>
+          <div className={classes.comparisonTable}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>MumbleChat (XMTP)</th>
+                  <th>WhatsApp/Telegram</th>
+                  <th>Discord</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>Identity</strong>
+                  </td>
+                  <td>✅ Wallet address (self-owned)</td>
+                  <td>❌ Phone number required</td>
+                  <td>❌ Email/password required</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Encryption</strong>
+                  </td>
+                  <td>✅ End-to-end (E2EE)</td>
+                  <td>✅ E2EE (WhatsApp), ⚠️ Optional (Telegram)</td>
+                  <td>❌ Transport only (not E2EE)</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Data Storage</strong>
+                  </td>
+                  <td>✅ Decentralized (XMTP network)</td>
+                  <td>❌ Centralized servers</td>
+                  <td>❌ Centralized servers</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Censorship</strong>
+                  </td>
+                  <td>✅ Resistant (no central authority)</td>
+                  <td>❌ Can be banned by governments</td>
+                  <td>❌ Platform can ban users</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Data Ownership</strong>
+                  </td>
+                  <td>✅ You own your data</td>
+                  <td>❌ Platform owns your data</td>
+                  <td>❌ Platform owns your data</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Account Deletion</strong>
+                  </td>
+                  <td>✅ Cannot be deleted by platform</td>
+                  <td>❌ Platform can delete account</td>
+                  <td>❌ Platform can delete account</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Open Source</strong>
+                  </td>
+                  <td>✅ Fully open source (XMTP protocol)</td>
+                  <td>⚠️ Partially open (clients only)</td>
+                  <td>❌ Closed source</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Multi-Client</strong>
+                  </td>
+                  <td>✅ Works with any XMTP client</td>
+                  <td>❌ Locked to official apps</td>
+                  <td>❌ Locked to official apps</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Session Expiry</strong>
+                  </td>
+                  <td>✅ 90 days (security feature)</td>
+                  <td>⚠️ Varies (14-30 days for web)</td>
+                  <td>❌ Never expires</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Blockchain Native</strong>
+                  </td>
+                  <td>✅ Built for crypto communities</td>
+                  <td>❌ Not blockchain-native</td>
+                  <td>❌ Not blockchain-native</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         <section className={classes.cta}>
           <h2>Ready to take control of your conversations?</h2>
           <p>
@@ -571,12 +1562,9 @@ export const MumbleLanding: FC = () => {
 
       <footer className={classes.footer}>
         <div className={classes.footerBrand}>
-          <img
-            src={Logo}
-            alt="MumbleChat Logo"
-            className={classes.brandIcon}
-            style={{ height: 32, width: 32 }}
-          />
+          <div className={classes.brandIcon}>
+            <MumbleChatLogo className={classes.brandLogo} />
+          </div>
           <div>
             <p className={classes.brandLabel}>MumbleChat</p>
             <p className={classes.footerCopy}>

@@ -1,10 +1,12 @@
-import { Button, Group } from "@mantine/core";
+import { Button, Group, Text } from "@mantine/core";
 import { Group as XmtpGroup } from "@xmtp/browser-sdk";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router";
+import { AppHeader } from "@/components/App/AppHeader";
 import type { ConversationOutletContext } from "@/components/Conversation/ConversationOutletContext";
 import { Metadata } from "@/components/Conversation/Metadata";
 import { Modal } from "@/components/Modal";
+import { useClient } from "@/contexts/XMTPContext";
 import { useClientPermissions } from "@/hooks/useClientPermissions";
 import { useCollapsedMediaQuery } from "@/hooks/useCollapsedMediaQuery";
 import { useConversation } from "@/hooks/useConversation";
@@ -18,6 +20,7 @@ export const ManageMetadataModal: React.FC = () => {
   const { addConversation } = useActions();
   const navigate = useNavigate();
   const fullScreen = useCollapsedMediaQuery();
+  const client = useClient();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -100,8 +103,21 @@ export const ManageMetadataModal: React.FC = () => {
       onClose={handleClose}
       size="md"
       padding={0}>
+      <AppHeader client={client} />
       <ContentLayout
-        title="Manage metadata"
+        title={
+          <Text
+            size="lg"
+            fw={700}
+            style={{
+              background: "linear-gradient(135deg, #0afff1, #9772fb)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
+            Manage metadata
+          </Text>
+        }
         maxHeight={contentHeight}
         footer={footer}
         withScrollFade={false}

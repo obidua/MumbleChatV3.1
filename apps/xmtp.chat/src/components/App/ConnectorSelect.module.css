@@ -1,12 +1,21 @@
 .root {
-  background-color: light-dark(
-    var(--mantine-color-gray-3),
-    var(--mantine-color-dark-4)
+  background: linear-gradient(
+    135deg,
+    rgba(6, 9, 20, 0.92),
+    rgba(8, 11, 22, 0.88)
   );
-  border-style: solid;
-  border-color: light-dark(
-    var(--mantine-color-gray-3),
-    var(--mantine-color-dark-4)
-  );
-  border-width: 1px 0 1px 0;
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  border-radius: var(--mantine-spacing-md);
+  padding: var(--mantine-spacing-lg);
+  box-shadow:
+    0 12px 32px rgba(4, 8, 20, 0.5),
+    0 0 60px rgba(10, 255, 241, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+@media (max-width: 768px) {
+  .root {
+    padding: var(--mantine-spacing-md);
+    border-radius: var(--mantine-spacing-sm);
+  }
 }

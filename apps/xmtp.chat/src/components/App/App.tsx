@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router";
+import { AppLayout } from "@/components/App/AppLayout";
 import { BasicLayout } from "@/components/App/BasicLayout";
 import { Disconnect } from "@/components/App/Disconnect";
 import { ErrorModal } from "@/components/App/ErrorModal";
@@ -12,13 +13,13 @@ import { ManageMetadataModal } from "@/components/Conversation/ManageMetadataMod
 import { ManagePermissionsModal } from "@/components/Conversation/ManagePermissionsModal";
 import { CreateDmModal } from "@/components/Conversations/CreateDmModal";
 import { CreateGroupModal } from "@/components/Conversations/CreateGroupModal";
+import { HelpModal } from "@/components/Identity/HelpModal";
 import { IdentityModal } from "@/components/Identity/IdentityModal";
 import { InboxTools } from "@/components/InboxTools/InboxTools";
 import { InboxToolsLayout } from "@/components/InboxTools/InboxToolsLayout";
-import { MessageModal } from "@/components/Messages/MessageModal";
 import { MumbleLanding } from "@/components/Landing/MumbleLanding";
+import { MessageModal } from "@/components/Messages/MessageModal";
 import { useAnalytics } from "@/hooks/useAnalytics";
-import { AppLayout } from "@/components/App/AppLayout";
 
 export const App: React.FC = () => {
   useAnalytics();
@@ -40,11 +41,15 @@ export const App: React.FC = () => {
             <Route index element={<SelectConversation />} />
             <Route path="new-dm" element={<CreateDmModal />} />
             <Route path="new-group" element={<CreateGroupModal />} />
-            <Route path="identity" element={<IdentityModal />} />
+            <Route path="identity" element={<IdentityModal />}>
+              <Route path="help" element={<HelpModal />} />
+            </Route>
             <Route path=":conversationId" element={<LoadConversation />}>
               <Route path="new-dm" element={<CreateDmModal />} />
               <Route path="new-group" element={<CreateGroupModal />} />
-              <Route path="identity" element={<IdentityModal />} />
+              <Route path="identity" element={<IdentityModal />}>
+                <Route path="help" element={<HelpModal />} />
+              </Route>
               <Route path="message/:messageId" element={<MessageModal />} />
               <Route path="manage">
                 <Route path="consent" element={<ManageConsentModal />} />

@@ -1,7 +1,9 @@
-import { Box, Button, Group, TextInput } from "@mantine/core";
+import { Box, Button, Group, Text, TextInput } from "@mantine/core";
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
+import { AppHeader } from "@/components/App/AppHeader";
 import { Modal } from "@/components/Modal";
+import { useClient } from "@/contexts/XMTPContext";
 import { useCollapsedMediaQuery } from "@/hooks/useCollapsedMediaQuery";
 import { useConversations } from "@/hooks/useConversations";
 import { useMemberId } from "@/hooks/useMemberId";
@@ -21,6 +23,7 @@ export const CreateDmModal: React.FC = () => {
   const navigate = useNavigate();
   const fullScreen = useCollapsedMediaQuery();
   const contentHeight = fullScreen ? "auto" : 500;
+  const client = useClient();
 
   const handleClose = useCallback(() => {
     void navigate(-1);
@@ -67,8 +70,21 @@ export const CreateDmModal: React.FC = () => {
       onClose={handleClose}
       size="600"
       padding={0}>
+      <AppHeader client={client} />
       <ContentLayout
-        title="Create direct message"
+        title={
+          <Text
+            size="lg"
+            fw={700}
+            style={{
+              background: "linear-gradient(135deg, #0afff1, #9772fb)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
+            Create direct message
+          </Text>
+        }
         maxHeight={contentHeight}
         footer={footer}
         withScrollAreaPadding={false}>

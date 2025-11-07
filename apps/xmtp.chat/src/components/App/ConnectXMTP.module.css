@@ -1,8 +1,87 @@
-.actions {
-  border-top-width: 1px;
-  border-top-style: solid;
-  border-top-color: light-dark(
-    var(--mantine-color-gray-3),
-    var(--mantine-color-dark-4)
+/* ConnectXMTP Styles */
+
+.xmtpCard {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(6, 9, 20, 0.8),
+    rgba(8, 11, 22, 0.75)
   );
+  border: 1px solid rgba(151, 114, 251, 0.2);
+  border-radius: var(--mantine-spacing-md);
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(4, 8, 20, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.xmtpCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #9772fb, #0afff1, #9772fb);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.xmtpCard:hover {
+  border-color: rgba(151, 114, 251, 0.3);
+  box-shadow:
+    0 12px 40px rgba(4, 8, 20, 0.7),
+    0 0 60px rgba(151, 114, 251, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.settingsSection {
+  padding: var(--mantine-spacing-md);
+  background: rgba(10, 13, 25, 0.4);
+  border-bottom: 1px solid rgba(151, 114, 251, 0.1);
+}
+
+.actions {
+  border-top: 1px solid rgba(151, 114, 251, 0.1);
+  padding: var(--mantine-spacing-md);
+  background: rgba(10, 13, 25, 0.3);
+}
+
+.connectButton {
+  background: linear-gradient(135deg, #0afff1, #9772fb);
+  color: #04060f;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 16px rgba(10, 255, 241, 0.3);
+  transition: all 0.3s ease;
+}
+
+.connectButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0afff1, #9772fb);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(10, 255, 241, 0.4);
+}
+
+.connectButton:disabled {
+  background: rgba(148, 163, 184, 0.2);
+  color: rgba(148, 163, 184, 0.5);
+  box-shadow: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .settingsSection,
+  .actions {
+    padding: var(--mantine-spacing-sm);
+  }
 }

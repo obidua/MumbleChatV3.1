@@ -7,12 +7,14 @@ import { useXMTP } from "@/contexts/XMTPContext";
 import { useConnectWallet } from "@/hooks/useConnectWallet";
 import { useRedirect } from "@/hooks/useRedirect";
 import { useSettings } from "@/hooks/useSettings";
+import classes from "./Connect.module.css";
 
 export const Connect = () => {
   const { isConnected, disconnect, loading } = useConnectWallet();
   const {
     ephemeralAccountEnabled,
     setEphemeralAccountEnabled,
+    setEphemeralAccountKey,
     setAutoConnect,
   } = useSettings();
   const { client } = useXMTP();
@@ -49,19 +51,42 @@ export const Connect = () => {
       disconnect();
     } else {
       setEphemeralAccountEnabled(false);
+      setEphemeralAccountKey(null);
     }
     setAutoConnect(false);
-  }, [isConnected, disconnect]);
+  }, [
+    isConnected,
+    disconnect,
+    setEphemeralAccountEnabled,
+    setEphemeralAccountKey,
+    setAutoConnect,
+  ]);
 
   return (
-    <Stepper active={active} onStepClick={setActive}>
+    <Stepper
+      active={active}
+      onStepClick={setActive}
+      classNames={{
+        root: classes.stepper,
+        step: classes.step,
+        stepIcon: classes.stepIcon,
+        stepCompletedIcon: classes.stepCompletedIcon,
+        stepBody: classes.stepBody,
+        stepLabel: classes.stepLabel,
+        stepDescription: classes.stepDescription,
+        separator: classes.separator,
+      }}>
       <Stepper.Step
-        label="Connect your wallet"
+        label="Connect Wallet"
+        description="Choose your wallet provider"
         allowStepSelect={false}
         loading={loading}>
         <WalletConnect />
       </Stepper.Step>
-      <Stepper.Step label="Connect to MMCT (MumbleChat)" allowStepSelect={false}>
+      <Stepper.Step
+        label="Connect to MumbleChat"
+        description="Setup secure messaging"
+        allowStepSelect={false}>
         <ConnectXMTP onDisconnectWallet={handleDisconnectWallet} />
       </Stepper.Step>
     </Stepper>

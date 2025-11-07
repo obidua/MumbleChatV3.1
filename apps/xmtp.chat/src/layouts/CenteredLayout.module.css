@@ -4,25 +4,54 @@
   align-items: center;
   position: relative;
   flex-grow: 1;
+  padding: var(--mantine-spacing-md);
 }
 
 .root.fullScreen {
   height: 100dvh;
   width: 100dvw;
+  padding: 0;
 }
 
 .content {
   width: 70ch;
+  max-width: 100%;
   position: relative;
   flex-grow: 1;
 }
 
 .fullScreen > .content {
   width: 100dvw;
+  max-width: 100dvw;
 }
 
 @media screen and (max-width: 1080px) {
   .content {
     width: auto;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .root {
+    padding: var(--mantine-spacing-sm);
+    padding-bottom: calc(
+      var(--bottom-nav-height) + var(--mobile-safe-area-bottom) +
+        var(--mantine-spacing-sm)
+    );
+  }
+
+  .content {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .root {
+    padding: var(--mantine-spacing-xs);
+    padding-bottom: calc(
+      var(--bottom-nav-height) + var(--mobile-safe-area-bottom) +
+        var(--mantine-spacing-xs)
+    );
   }
 }

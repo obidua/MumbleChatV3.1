@@ -1,11 +1,13 @@
-import { Button, Group } from "@mantine/core";
+import { Button, Group, Text } from "@mantine/core";
 import { Group as XmtpGroup } from "@xmtp/browser-sdk";
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router";
+import { AppHeader } from "@/components/App/AppHeader";
 import type { PendingMember } from "@/components/Conversation/AddMembers";
 import type { ConversationOutletContext } from "@/components/Conversation/ConversationOutletContext";
 import { Members } from "@/components/Conversation/Members";
 import { Modal } from "@/components/Modal";
+import { useClient } from "@/contexts/XMTPContext";
 import { isValidEthereumAddress, isValidInboxId } from "@/helpers/strings";
 import { useClientPermissions } from "@/hooks/useClientPermissions";
 import { useCollapsedMediaQuery } from "@/hooks/useCollapsedMediaQuery";
@@ -24,6 +26,7 @@ export const ManageMembersModal: React.FC = () => {
   const clientPermissions = useClientPermissions(conversationId);
   const { addConversation } = useActions();
   const navigate = useNavigate();
+  const client = useClient();
   const [isLoading, setIsLoading] = useState(false);
   const [addedMembers, setAddedMembers] = useState<PendingMember[]>([]);
   const [removedMembers, setRemovedMembers] = useState<MemberProfile[]>([]);
@@ -111,8 +114,21 @@ export const ManageMembersModal: React.FC = () => {
       onClose={handleClose}
       size="600"
       padding={0}>
+      <AppHeader client={client} />
       <ContentLayout
-        title="Manage members"
+        title={
+          <Text
+            size="lg"
+            fw={700}
+            style={{
+              background: "linear-gradient(135deg, #0afff1, #9772fb)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
+            Manage members
+          </Text>
+        }
         maxHeight={contentHeight}
         footer={footer}
         loading={isLoading}

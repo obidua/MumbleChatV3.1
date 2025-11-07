@@ -1,11 +1,39 @@
 .badge {
-  background-color: light-dark(
-    var(--mantine-color-gray-1),
-    var(--mantine-color-dark-5)
+  background: linear-gradient(
+    135deg,
+    rgba(10, 13, 25, 0.9),
+    rgba(8, 11, 22, 0.85)
   );
-  color: light-dark(var(--mantine-color-light-4), var(--mantine-color-dark-1));
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  color: rgba(226, 232, 240, 0.95);
+  font-family: "Monaco", "Menlo", "Courier New", monospace;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow:
+    0 4px 12px rgba(4, 8, 20, 0.3),
+    0 0 20px rgba(10, 255, 241, 0.05);
+}
+
+.badge:hover {
+  border-color: rgba(10, 255, 241, 0.35);
+  box-shadow:
+    0 6px 16px rgba(4, 8, 20, 0.4),
+    0 0 30px rgba(10, 255, 241, 0.1);
+  transform: translateY(-1px);
 }
 
 .button {
-  color: light-dark(var(--mantine-color-light-4), var(--mantine-color-dark-1));
+  color: rgba(10, 255, 241, 0.8);
+  transition: all 0.2s ease;
+  background: rgba(10, 255, 241, 0.08);
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.button:hover {
+  color: #0afff1;
+  background: rgba(10, 255, 241, 0.16);
+  transform: scale(1.1);
 }

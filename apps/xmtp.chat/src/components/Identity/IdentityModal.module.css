@@ -1,0 +1,405 @@
+/* Identity Modal Styles */
+
+.profileHeader {
+  position: relative;
+  padding: var(--mantine-spacing-xl);
+  background: linear-gradient(
+    135deg,
+    rgba(10, 255, 241, 0.12),
+    rgba(151, 114, 251, 0.12)
+  );
+  border-radius: var(--mantine-spacing-md);
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  overflow: hidden;
+}
+
+.profileHeader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(10, 255, 241, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 50%,
+      rgba(151, 114, 251, 0.15) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.profileContent {
+  position: relative;
+  z-index: 1;
+}
+
+.identityCard {
+  position: relative;
+  padding: var(--mantine-spacing-lg);
+  background: linear-gradient(
+    135deg,
+    rgba(6, 9, 20, 0.95),
+    rgba(8, 11, 22, 0.92)
+  );
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  border-radius: var(--mantine-spacing-md);
+  box-shadow:
+    0 12px 32px rgba(4, 8, 20, 0.5),
+    0 0 60px rgba(10, 255, 241, 0.08);
+  backdrop-filter: blur(16px);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.identityCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(10, 255, 241, 0.08),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.identityCard:hover {
+  border-color: rgba(10, 255, 241, 0.35);
+  box-shadow:
+    0 16px 40px rgba(4, 8, 20, 0.6),
+    0 0 80px rgba(10, 255, 241, 0.12);
+  transform: translateY(-2px);
+}
+
+.cardContent {
+  position: relative;
+  z-index: 1;
+}
+
+.infoRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mantine-spacing-md);
+  padding: var(--mantine-spacing-sm) 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+}
+
+.infoRow:last-child {
+  border-bottom: none;
+}
+
+.infoLabel {
+  flex: 0 0 120px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(10, 255, 241, 0.9);
+  display: flex;
+  align-items: center;
+  gap: var(--mantine-spacing-xs);
+}
+
+.labelIcon {
+  width: 18px;
+  height: 18px;
+  color: rgba(10, 255, 241, 0.7);
+}
+
+.infoValue {
+  flex: 1;
+  min-width: 0;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0afff1, #9772fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--mantine-spacing-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--mantine-spacing-sm);
+}
+
+.sectionIcon {
+  width: 24px;
+  height: 24px;
+  color: #0afff1;
+}
+
+.installationsCard {
+  position: relative;
+  padding: var(--mantine-spacing-lg);
+  background: linear-gradient(
+    135deg,
+    rgba(6, 9, 20, 0.95),
+    rgba(8, 11, 22, 0.92)
+  );
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  border-radius: var(--mantine-spacing-md);
+  box-shadow:
+    0 12px 32px rgba(4, 8, 20, 0.5),
+    0 0 60px rgba(10, 255, 241, 0.08);
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+}
+
+.installationsCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at bottom left,
+    rgba(151, 114, 251, 0.08),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.installationRow {
+  position: relative;
+  padding: var(--mantine-spacing-md);
+  background: rgba(10, 13, 25, 0.6);
+  border: 1px solid rgba(10, 255, 241, 0.12);
+  border-radius: var(--mantine-spacing-sm);
+  margin-bottom: var(--mantine-spacing-sm);
+  transition: all 0.2s ease;
+}
+
+.installationRow:hover {
+  background: rgba(10, 13, 25, 0.8);
+  border-color: rgba(10, 255, 241, 0.24);
+  transform: translateX(4px);
+}
+
+.installationRow:last-child {
+  margin-bottom: 0;
+}
+
+.installationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mantine-spacing-sm);
+  margin-bottom: var(--mantine-spacing-xs);
+}
+
+.installationId {
+  flex: 1;
+  min-width: 0;
+}
+
+.installationMeta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--mantine-spacing-sm);
+  margin-top: var(--mantine-spacing-sm);
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metaLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(148, 163, 184, 0.7);
+}
+
+.metaValue {
+  font-size: 0.85rem;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.currentBadge {
+  padding: 4px 10px;
+  background: linear-gradient(135deg, #0afff1, rgba(10, 255, 241, 0.8));
+  color: #04060f;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(10, 255, 241, 0.3);
+}
+
+.revokeButton {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.2),
+    rgba(220, 38, 38, 0.2)
+  );
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: rgba(248, 113, 113, 0.95);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.revokeButton:hover:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.3),
+    rgba(220, 38, 38, 0.3)
+  );
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25);
+}
+
+.revokeAllButton {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.15),
+    rgba(220, 38, 38, 0.15)
+  );
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: rgba(248, 113, 113, 0.95);
+  font-weight: 600;
+  padding: var(--mantine-spacing-sm) var(--mantine-spacing-lg);
+  transition: all 0.2s ease;
+}
+
+.revokeAllButton:hover:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.25),
+    rgba(220, 38, 38, 0.25)
+  );
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(239, 68, 68, 0.3);
+}
+
+.emptyState {
+  padding: var(--mantine-spacing-xl);
+  text-align: center;
+  color: rgba(148, 163, 184, 0.7);
+  font-style: italic;
+}
+
+.disconnectCard {
+  position: relative;
+  padding: var(--mantine-spacing-lg);
+  background: linear-gradient(
+    135deg,
+    rgba(6, 9, 20, 0.95),
+    rgba(8, 11, 22, 0.92)
+  );
+  border: 1px solid rgba(250, 82, 82, 0.2);
+  border-radius: var(--mantine-spacing-md);
+  box-shadow:
+    0 12px 32px rgba(4, 8, 20, 0.5),
+    0 0 60px rgba(250, 82, 82, 0.08);
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.disconnectCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(250, 82, 82, 0.08),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.disconnectCard:hover {
+  border-color: rgba(250, 82, 82, 0.35);
+  box-shadow:
+    0 16px 40px rgba(4, 8, 20, 0.6),
+    0 0 80px rgba(250, 82, 82, 0.12);
+}
+
+.errorBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(248, 113, 113, 0.95);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.errorBadge:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .profileHeader {
+    padding: var(--mantine-spacing-md);
+  }
+
+  .identityCard {
+    padding: var(--mantine-spacing-md);
+  }
+
+  .infoRow {
+    flex-direction: column;
+    gap: var(--mantine-spacing-xs);
+  }
+
+  .infoLabel {
+    flex: 0 0 auto;
+  }
+
+  .installationsCard {
+    padding: var(--mantine-spacing-md);
+  }
+
+  .disconnectCard {
+    padding: var(--mantine-spacing-md);
+  }
+
+  .installationRow {
+    padding: var(--mantine-spacing-sm);
+  }
+
+  .installationMeta {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .profileHeader,
+  .identityCard,
+  .installationsCard,
+  .disconnectCard {
+    padding: var(--mantine-spacing-sm);
+    border-radius: var(--mantine-spacing-sm);
+  }
+
+  .infoLabel {
+    font-size: 0.75rem;
+  }
+
+  .sectionTitle {
+    font-size: 1rem;
+  }
+
+  .installationRow {
+    padding: var(--mantine-spacing-xs);
+  }
+}

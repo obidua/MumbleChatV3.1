@@ -58,6 +58,20 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
     return "Untitled";
   }, [name, otherMemberAddress]);
 
+  const avatarText = useMemo(() => {
+    const address = otherMemberAddress || name || "";
+    return address.slice(-2).toUpperCase();
+  }, [otherMemberAddress, name]);
+
+  const avatarColor = useMemo(() => {
+    const address = otherMemberAddress || name || "";
+    const hash = address.split("").reduce((acc, char) => {
+      return char.charCodeAt(0) + ((acc << 5) - acc);
+    }, 0);
+    const hue = Math.abs(hash % 360);
+    return `hsl(${hue}, 65%, 55%)`;
+  }, [otherMemberAddress, name]);
+
   const { previewText, sentAtLabel } = useMemo(() => {
     const latest = messages[messages.length - 1];
 
@@ -126,24 +140,33 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           styles.root,
           conversationId === paramsConversationId && styles.selected,
         ].join(" ")}>
-        <Stack gap="xs">
-          <Flex align="flex-start" justify="space-between" gap="xs">
-            <Text fw={700} className={styles.title} lineClamp={1}>
-              {displayName}
-            </Text>
-            {sentAtLabel && (
-              <Text size="xs" c="dimmed" className={styles.time}>
-                {sentAtLabel}
+        <Flex gap="md" align="flex-start">
+          <Box
+            className={styles.avatar}
+            style={{
+              backgroundColor: avatarColor,
+            }}>
+            <Text className={styles.avatarText}>{avatarText}</Text>
+          </Box>
+          <Stack gap="xs" style={{ flex: 1, minWidth: 0 }}>
+            <Flex align="flex-start" justify="space-between" gap="xs">
+              <Text fw={700} className={styles.title} lineClamp={1}>
+                {displayName}
               </Text>
-            )}
-          </Flex>
-          <Text size="sm" c="dimmed" className={styles.preview} lineClamp={2}>
-            {previewText}
-          </Text>
-          <Text size="xs" c="dimmed" className={styles.meta}>
-            {memberCount} member{memberCount !== 1 ? "s" : ""}
-          </Text>
-        </Stack>
+              {sentAtLabel && (
+                <Text size="xs" c="dimmed" className={styles.time}>
+                  {sentAtLabel}
+                </Text>
+              )}
+            </Flex>
+            <Text size="sm" c="dimmed" className={styles.preview} lineClamp={2}>
+              {previewText}
+            </Text>
+            <Text size="xs" c="dimmed" className={styles.meta}>
+              {memberCount} member{memberCount !== 1 ? "s" : ""}
+            </Text>
+          </Stack>
+        </Flex>
       </Card>
     </Box>
   );

@@ -1,4 +1,4 @@
-import { Box, Button, Group, NativeSelect } from "@mantine/core";
+import { Box, Button, Group, NativeSelect, Text } from "@mantine/core";
 import { ConsentState } from "@xmtp/browser-sdk";
 import {
   useCallback,
@@ -9,7 +9,9 @@ import {
   type ChangeEvent,
 } from "react";
 import { useNavigate, useOutletContext } from "react-router";
+import { AppHeader } from "@/components/App/AppHeader";
 import { Modal } from "@/components/Modal";
+import { useClient } from "@/contexts/XMTPContext";
 import { useCollapsedMediaQuery } from "@/hooks/useCollapsedMediaQuery";
 import { useConversation } from "@/hooks/useConversation";
 import { ContentLayout } from "@/layouts/ContentLayout";
@@ -20,6 +22,7 @@ export const ManageConsentModal: React.FC = () => {
   const { conversation } = useConversation(conversationId);
   const navigate = useNavigate();
   const fullScreen = useCollapsedMediaQuery();
+  const client = useClient();
   const contentHeight = fullScreen ? "auto" : 500;
   const initialConsentState = useRef<ConsentState>(ConsentState.Unknown);
   const [consentState, setConsentState] = useState<ConsentState>(
@@ -86,8 +89,21 @@ export const ManageConsentModal: React.FC = () => {
       onClose={handleClose}
       size="xs"
       padding={0}>
+      <AppHeader client={client} />
       <ContentLayout
-        title="Manage consent"
+        title={
+          <Text
+            size="lg"
+            fw={700}
+            style={{
+              background: "linear-gradient(135deg, #0afff1, #9772fb)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
+            Manage consent
+          </Text>
+        }
         maxHeight={contentHeight}
         footer={footer}
         withScrollFade={false}

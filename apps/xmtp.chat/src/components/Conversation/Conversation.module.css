@@ -99,8 +99,9 @@
     padding: var(--mantine-spacing-md) var(--mantine-spacing-sm);
     border-radius: 0;
     padding-bottom: calc(
-      var(--mantine-spacing-md) + env(safe-area-inset-bottom, 0)
-    );
+      var(--bottom-nav-height) + var(--mobile-safe-area-bottom) +
+        var(--mantine-spacing-md)
+    ) !important;
   }
 }
 
@@ -122,8 +123,9 @@
     border-top-width: 0;
     border-radius: 0;
     padding-bottom: calc(
-      var(--mantine-spacing-sm) + env(safe-area-inset-bottom, 0)
-    );
+      var(--bottom-nav-height) + var(--mobile-safe-area-bottom) +
+        var(--mantine-spacing-sm)
+    ) !important;
   }
 
   .membersAside {

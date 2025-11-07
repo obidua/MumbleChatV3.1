@@ -54,11 +54,46 @@
   flex-shrink: 0;
   position: relative;
   z-index: 2;
-  background: rgba(10, 13, 25, 0.9);
-  border: 1px solid rgba(10, 255, 241, 0.18);
-  border-radius: 26px;
-  box-shadow: 0 28px 52px rgba(5, 10, 24, 0.45);
-  backdrop-filter: blur(12px);
+  background: linear-gradient(
+    135deg,
+    rgba(10, 13, 25, 0.95),
+    rgba(6, 9, 20, 0.9)
+  );
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  border-radius: 28px;
+  box-shadow:
+    0 8px 32px rgba(5, 10, 24, 0.6),
+    0 0 0 1px rgba(10, 255, 241, 0.1) inset,
+    0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top center,
+    rgba(10, 255, 241, 0.1),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(10, 255, 241, 0.4) 50%,
+    transparent
+  );
 }
 
 .headerContent {

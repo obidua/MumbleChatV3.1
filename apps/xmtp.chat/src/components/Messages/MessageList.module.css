@@ -2,20 +2,65 @@
   display: flex;
   flex-direction: column;
   gap: var(--mantine-spacing-sm);
-  padding: 0 var(--mantine-spacing-sm) var(--mantine-spacing-lg);
+  padding: var(--mantine-spacing-lg) var(--mantine-spacing-md)
+    var(--mantine-spacing-xl);
+  background: linear-gradient(
+    180deg,
+    rgba(4, 8, 18, 0.4) 0%,
+    rgba(6, 10, 20, 0.5) 50%,
+    rgba(4, 8, 18, 0.4) 100%
+  );
+  position: relative;
+}
+
+.root::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(10, 255, 241, 0.03) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(151, 114, 251, 0.03) 0%,
+      transparent 40%
+    );
+  pointer-events: none;
+  z-index: 0;
 }
 
 .root > * {
-  padding-top: var(--mantine-spacing-sm);
+  position: relative;
+  z-index: 1;
+  padding-top: var(--mantine-spacing-xs);
 }
 
 .root > *:last-child {
   padding-bottom: var(--mantine-spacing-sm);
 }
 
-@media (max-width: 520px) {
+@media (max-width: 768px) {
   .root {
     gap: var(--mantine-spacing-xs);
-    padding: 0 var(--mantine-spacing-xs) var(--mantine-spacing-lg);
+    padding: var(--mantine-spacing-md) var(--mantine-spacing-sm)
+      var(--mantine-spacing-lg);
+  }
+}
+
+@media (max-width: 520px) {
+  .root {
+    gap: 6px;
+    padding: var(--mantine-spacing-sm) var(--mantine-spacing-xs)
+      var(--mantine-spacing-lg);
+  }
+
+  .root > * {
+    padding-top: 4px;
   }
 }

@@ -3,7 +3,7 @@ import { type ClientOptions } from "@xmtp/browser-sdk";
 import { useSettings } from "@/hooks/useSettings";
 
 export const LoggingSelect: React.FC = () => {
-  const { loggingLevel, setLoggingLevel } = useSettings();
+  const { setLoggingLevel } = useSettings();
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setLoggingLevel(event.currentTarget.value as ClientOptions["loggingLevel"]);
@@ -16,12 +16,23 @@ export const LoggingSelect: React.FC = () => {
           Logging level
         </Text>
         <NativeSelect
-          data={["off", "error", "warn", "info", "debug", "trace"]}
-          value={loggingLevel}
+          data={["warn"]}
+          value="warn"
           onChange={handleChange}
+          disabled
+          styles={{
+            input: {
+              backgroundColor: "rgba(151, 114, 251, 0.05)",
+              borderColor: "rgba(151, 114, 251, 0.2)",
+              color: "rgba(226, 232, 240, 0.9)",
+              cursor: "not-allowed",
+            },
+          }}
         />
       </Group>
-      <Text size="sm">Enable logging to help debug issues</Text>
+      <Text size="sm" c="dimmed">
+        Standard logging enabled for optimal performance
+      </Text>
     </Stack>
   );
 };

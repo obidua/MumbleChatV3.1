@@ -140,10 +140,29 @@ export const XMTPProvider: React.FC<XMTPProviderProps> = ({
           });
           setClient(xmtpClient);
         } catch (e) {
+          const error = e as Error;
+
+          // Handle "Multiple create operations detected" error
+          if (error.message.includes("Multiple create operations detected")) {
+            console.error(
+              "XMTP identity already exists for this address. Please reset your ephemeral wallet or clear browser data.",
+            );
+
+            // Try to clear IndexedDB to recover
+            try {
+              indexedDB.deleteDatabase("xmtp");
+              console.log(
+                "Cleared XMTP database. Please try connecting again.",
+              );
+            } catch (dbError) {
+              console.error("Failed to clear XMTP database:", dbError);
+            }
+          }
+
           setClient(undefined);
-          setError(e as Error);
+          setError(error);
           // re-throw error for upstream consumption
-          throw e;
+          throw error;
         } finally {
           initializingRef.current = false;
           setInitializing(false);

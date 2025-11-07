@@ -24,16 +24,15 @@ export const ConnectXMTP = ({ onDisconnectWallet }: ConnectXMTPProps) => {
   }, [connect]);
 
   return (
-    <Paper withBorder radius="md">
+    <Paper className={classes.xmtpCard}>
       <Stack gap="xs">
-        <Stack gap="md" p="md">
+        <Stack gap="md" className={classes.settingsSection}>
           <NetworkSelect />
           <LoggingSelect />
         </Stack>
         <Group
           justify="space-between"
           align="center"
-          p="md"
           className={classes.actions}>
           <ConnectedAddress
             size="sm"
@@ -42,10 +41,11 @@ export const ConnectXMTP = ({ onDisconnectWallet }: ConnectXMTPProps) => {
           />
           <Group gap="xs" align="center">
             <Button
+              className={classes.connectButton}
               disabled={!isConnected && !ephemeralAccountEnabled}
               onClick={handleConnectClick}
               loading={loading}>
-              Connect
+              Connect to MumbleChat
             </Button>
           </Group>
         </Group>

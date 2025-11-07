@@ -1,4 +1,4 @@
-import { ActionIcon, Group, Text, Tooltip } from "@mantine/core";
+import { ActionIcon, Button, Group, Text, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Dm, Group as XmtpGroup } from "@xmtp/browser-sdk";
 import { useCallback, useEffect, useMemo } from "react";
@@ -61,6 +61,10 @@ export const Conversation: React.FC<ConversationProps> = ({
     void navigate("/conversations");
   };
 
+  const handleDisconnect = useCallback(() => {
+    void navigate("/disconnect");
+  }, [navigate]);
+
   const otherMemberAddress = useMemo(() => {
     if (!(conversation instanceof Dm)) {
       return null;
@@ -121,6 +125,21 @@ export const Conversation: React.FC<ConversationProps> = ({
                 onSync={() => void handleSync()}
                 disabled={conversationSyncing}
               />
+              {/* Disconnect button - visible on all devices including mobile/webview */}
+              <Tooltip label="Disconnect wallet">
+                <Button
+                  size={isMobile ? "compact-xs" : "xs"}
+                  variant="default"
+                  onClick={handleDisconnect}
+                  styles={{
+                    root: {
+                      fontSize: isMobile ? "11px" : undefined,
+                      padding: isMobile ? "4px 8px" : undefined,
+                    },
+                  }}>
+                  Disconnect
+                </Button>
+              </Tooltip>
               {!isMobile && (
                 <Tooltip
                   label={

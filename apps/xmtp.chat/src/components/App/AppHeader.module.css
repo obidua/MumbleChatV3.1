@@ -2,94 +2,203 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--mantine-spacing-sm);
-  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 var(--mantine-spacing-md);
+  position: relative;
+}
+
+.leftSection {
+  flex: 1;
+  justify-content: flex-start;
 }
 
 .brandGroup {
   align-items: center;
+  cursor: pointer;
+  transition: transform 250ms ease;
+}
+
+.brandGroup:hover {
+  transform: translateY(-2px);
 }
 
 .brandIcon {
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(10, 255, 241, 0.35), rgba(151, 114, 251, 0.4));
-  color: #04070f;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
-  box-shadow: 0 14px 30px rgba(10, 255, 241, 0.25);
+  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 255, 241, 0.08),
+    rgba(151, 114, 251, 0.12)
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  box-shadow:
+    0 8px 32px rgba(10, 255, 241, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 300ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.brandIcon::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(10, 255, 241, 0.3),
+    transparent 30%
+  );
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.brandIcon::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(6, 9, 20, 0.95),
+    rgba(10, 13, 25, 0.9)
+  );
+  border-radius: 17px;
+  z-index: 1;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 2px 12px rgba(10, 255, 241, 0.4));
 }
 
 .brandText {
-  margin-top: 2px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.separator {
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(10, 255, 241, 0.4),
+    transparent
+  );
+  flex-shrink: 0;
+  display: none; /* Hidden since we're using vertical layout */
 }
 
 .brandName {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #f4f6ff;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(135deg, #0afff1 0%, #9772fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 8px rgba(10, 255, 241, 0.3));
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.brandAccent {
+  background: linear-gradient(135deg, #f4f6ff 0%, #e2e8f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .brandTagline {
   font-size: 0.7rem;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(226, 232, 240, 0.6);
+  font-weight: 600;
+  color: rgba(10, 255, 241, 0.7);
+  white-space: nowrap;
+  line-height: 1;
+  margin-top: 2px;
 }
 
-.controlRow {
+.statusContainer {
   display: flex;
   align-items: center;
-  gap: var(--mantine-spacing-sm);
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-  min-width: 0;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(10, 255, 241, 0.08);
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  border-radius: 999px;
+  transition: all 0.2s ease;
 }
 
-.environment {
+.statusContainer:hover {
   background: rgba(10, 255, 241, 0.12);
-  color: #0afff1;
-  border: 1px solid rgba(10, 255, 241, 0.3);
-  padding: 6px 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  border-radius: 999px;
-  box-shadow: 0 12px 24px rgba(10, 255, 241, 0.18);
+  border-color: rgba(10, 255, 241, 0.35);
 }
 
-.account {
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: linear-gradient(120deg, rgba(10, 255, 241, 0.18), rgba(151, 114, 251, 0.22));
-  border: 1px solid rgba(10, 255, 241, 0.25);
-  color: #e8f7ff;
+.statusDot {
+  width: 8px;
+  height: 8px;
+  background: #0afff1;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(10, 255, 241, 0.8);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+.statusText {
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
-  font-size: 0.72rem;
-  cursor: pointer;
-  transition: transform 120ms ease, box-shadow 120ms ease;
-  user-select: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  color: rgba(10, 255, 241, 0.9);
+  letter-spacing: 0.05em;
 }
 
-.account:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 16px 32px rgba(10, 255, 241, 0.25);
+.disconnectIcon {
+  margin-left: 4px;
+  transition: all 0.2s ease;
+  border-radius: 4px;
 }
 
-.account:focus-visible {
-  outline: 2px solid rgba(10, 255, 241, 0.6);
-  outline-offset: 2px;
+.disconnectIcon:hover {
+  background: rgba(10, 255, 241, 0.15);
+  transform: scale(1.1);
+}
+
+.brandTagline::before {
+  content: "";
+  display: none; /* Remove the dot from tagline */
+}
+
+.placeholder {
+  flex: 1;
 }
 
 .burger {
@@ -101,40 +210,110 @@
     display: block;
   }
 
+  .brandIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .logo {
+    width: 36px;
+    height: 36px;
+  }
+
   .brandName {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
+  }
+
+  .separator {
+    height: 18px;
   }
 
   .brandTagline {
-    letter-spacing: 0.16em;
+    font-size: 0.65rem;
   }
 }
 
 @media screen and (max-width: 768px) {
   .shell {
-    flex-direction: column;
-    align-items: stretch;
+    padding: 0 var(--mantine-spacing-sm);
   }
 
-  .controlRow {
-    width: 100%;
-    justify-content: flex-end;
-    gap: var(--mantine-spacing-xs);
+  .brandIcon {
+    width: 46px;
+    height: 46px;
+    border-radius: 16px;
+  }
+
+  .logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .brandName {
+    font-size: 1.2rem;
+  }
+
+  .separator {
+    height: 16px;
+  }
+
+  .brandTagline {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
   }
 }
 
 @media screen and (max-width: 640px) {
-  .controlRow {
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: var(--mantine-spacing-xs);
-    overflow-x: auto;
+  .shell {
+    padding: 0 var(--mantine-spacing-xs);
   }
 
-  .environment,
-  .account {
-    width: auto;
-    justify-content: center;
-    flex-shrink: 0;
+  .brandIcon {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+  }
+
+  .logo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .brandName {
+    font-size: 1rem;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .brandTagline {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+  }
+
+  .brandText {
+    gap: 4px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .brandIcon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+  }
+
+  .logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .brandName {
+    font-size: 0.9rem;
+  }
+
+  .brandTagline {
+    font-size: 0.5rem;
   }
 }

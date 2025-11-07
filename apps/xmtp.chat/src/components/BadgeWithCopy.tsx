@@ -1,5 +1,6 @@
 import { ActionIcon, Badge, Text, Tooltip } from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
+import { shortenAddress } from "@/helpers/address";
 import { IconCopy } from "@/icons/IconCopy";
 import classes from "./BadgeWithCopy.module.css";
 
@@ -47,9 +48,21 @@ const CopyIcon: React.FC<CopyIconProps> = ({ value }) => {
 
 export type BadgeWithCopyProps = {
   value: string;
+  shorten?: boolean;
+  startLength?: number;
+  endLength?: number;
 };
 
-export const BadgeWithCopy: React.FC<BadgeWithCopyProps> = ({ value }) => {
+export const BadgeWithCopy: React.FC<BadgeWithCopyProps> = ({
+  value,
+  shorten = true,
+  startLength = 6,
+  endLength = 4,
+}) => {
+  const displayValue = shorten
+    ? shortenAddress(value, startLength, endLength)
+    : value;
+
   return (
     <Badge
       variant="filled"
@@ -64,7 +77,7 @@ export const BadgeWithCopy: React.FC<BadgeWithCopyProps> = ({ value }) => {
         },
       }}
       rightSection={<CopyIcon value={value} />}>
-      {value}
+      {displayValue}
     </Badge>
   );
 };

@@ -46,7 +46,7 @@ export const useSettings = () => {
   });
   const [blockchain, setBlockchain] = useLocalStorage<number>({
     key: "XMTP_BLOCKCHAIN",
-    defaultValue: 1,
+    defaultValue: 1370, // Ramestta chain ID
     getInitialValueInEffect: false,
   });
   const [connector, setConnector] = useLocalStorage<ConnectorString>({

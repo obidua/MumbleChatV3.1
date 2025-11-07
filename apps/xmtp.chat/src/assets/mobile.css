@@ -121,3 +121,32 @@ body,
     animation: slideOutLeft 0.3s ease-out;
   }
 }
+
+/* Fix for modal footers being hidden by bottom navigation */
+@media screen and (max-width: 767px) {
+  /* Mantine Modal adjustments */
+  .mantine-Modal-content {
+    max-height: calc(
+      100vh - var(--bottom-nav-height) - var(--mobile-safe-area-bottom) - 40px
+    ) !important;
+  }
+
+  .mantine-Modal-body {
+    padding-bottom: 16px !important;
+  }
+
+  /* Ensure modals are scrollable when content is too tall */
+  .mantine-Modal-inner {
+    padding-bottom: calc(
+      var(--bottom-nav-height) + var(--mobile-safe-area-bottom) + 20px
+    ) !important;
+  }
+
+  /* Fix for full-screen modals */
+  .mantine-Modal-root[data-full-screen="true"] .mantine-Modal-content {
+    max-height: 100vh !important;
+    padding-bottom: calc(
+      var(--bottom-nav-height) + var(--mobile-safe-area-bottom)
+    ) !important;
+  }
+}

@@ -72,7 +72,15 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
       contentClassName={classes.content}
       title={
         <Group align="center" gap="sm">
-          <Text size="lg" fw={700} c="var(--mantine-color-gray-0)">
+          <Text
+            size="lg"
+            fw={700}
+            style={{
+              background: "linear-gradient(135deg, #0afff1, #9772fb)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
             Conversations
           </Text>
           <Badge
@@ -82,7 +90,8 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
             style={{
               background: "rgba(10, 255, 241, 0.16)",
               color: "#0afff1",
-              border: "1px solid rgba(10, 255, 241, 0.28)",
+              border: "1px solid rgba(10, 255, 241, 0.32)",
+              fontWeight: 700,
             }}>
             {conversations.length}
           </Badge>

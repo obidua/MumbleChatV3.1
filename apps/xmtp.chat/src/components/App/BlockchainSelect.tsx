@@ -5,19 +5,19 @@ import {
   arbitrum,
   base,
   linea,
-  mainnet,
   optimism,
   polygon,
   worldchain,
   zksync,
 } from "wagmi/chains";
+import { ramestta } from "@/chains/ramestta";
 import { useSettings } from "@/hooks/useSettings";
 
 const ALLOWED_CHAINS: number[] = [
   arbitrum.id,
   base.id,
   linea.id,
-  mainnet.id,
+  ramestta.id,
   optimism.id,
   polygon.id,
   worldchain.id,

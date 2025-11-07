@@ -1,7 +1,8 @@
-import { Button, Group } from "@mantine/core";
+import { Button, Group, Text } from "@mantine/core";
 import { GroupPermissionsOptions, Group as XmtpGroup } from "@xmtp/browser-sdk";
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router";
+import { AppHeader } from "@/components/App/AppHeader";
 import type { ConversationOutletContext } from "@/components/Conversation/ConversationOutletContext";
 import {
   defaultPolicySet,
@@ -9,6 +10,7 @@ import {
   processPermissionsUpdate,
 } from "@/components/Conversation/Permissions";
 import { Modal } from "@/components/Modal";
+import { useClient } from "@/contexts/XMTPContext";
 import { useCollapsedMediaQuery } from "@/hooks/useCollapsedMediaQuery";
 import { useConversation } from "@/hooks/useConversation";
 import { ContentLayout } from "@/layouts/ContentLayout";
@@ -23,6 +25,7 @@ export const ManagePermissionsModal: React.FC = () => {
   const { conversationId } = useOutletContext<ConversationOutletContext>();
   const { conversation } = useConversation(conversationId);
   const navigate = useNavigate();
+  const client = useClient();
 
   const fullScreen = useCollapsedMediaQuery();
   const contentHeight = fullScreen ? "auto" : 500;
@@ -76,8 +79,21 @@ export const ManagePermissionsModal: React.FC = () => {
       onClose={handleClose}
       size="auto"
       padding={0}>
+      <AppHeader client={client} />
       <ContentLayout
-        title="Manage permissions"
+        title={
+          <Text
+            size="lg"
+            fw={700}
+            style={{
+              background: "linear-gradient(135deg, #0afff1, #9772fb)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
+            Manage permissions
+          </Text>
+        }
         maxHeight={contentHeight}
         footer={footer}
         withScrollAreaPadding={false}>

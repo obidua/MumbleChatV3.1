@@ -1,0 +1,412 @@
+/* Welcome Page Styles */
+
+.container {
+  max-width: 940px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top, rgba(10, 255, 241, 0.08), transparent 50%),
+    radial-gradient(
+      ellipse at bottom,
+      rgba(151, 114, 251, 0.08),
+      transparent 50%
+    );
+  position: relative;
+}
+
+/* Back Button Styles */
+.backButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+}
+
+.backIcon {
+  color: rgba(10, 255, 241, 0.8);
+  transition: all 0.2s ease;
+}
+
+.backIcon:hover {
+  color: rgba(10, 255, 241, 1);
+  transform: translateX(-4px);
+}
+
+.backButtonDesktop {
+  color: rgba(10, 255, 241, 0.9);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.backButtonDesktop:hover {
+  color: rgba(10, 255, 241, 1);
+  background: rgba(10, 255, 241, 0.1);
+  transform: translateX(-4px);
+}
+
+.hero {
+  text-align: center;
+  padding: var(--mantine-spacing-xl) 0;
+}
+
+.heroDescription {
+  max-width: 500px;
+}
+
+.logoWrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  padding: var(--mantine-spacing-lg);
+  background: linear-gradient(
+    135deg,
+    rgba(10, 255, 241, 0.15),
+    rgba(151, 114, 251, 0.15)
+  );
+  border-radius: 50%;
+  border: 2px solid rgba(10, 255, 241, 0.3);
+  box-shadow:
+    0 20px 60px rgba(10, 255, 241, 0.2),
+    0 0 80px rgba(151, 114, 251, 0.15);
+  animation: float 6s ease-in-out infinite;
+}
+
+.logoWrapper::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 255, 241, 0.3),
+    rgba(151, 114, 251, 0.3)
+  );
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.logoWrapper:hover::before {
+  opacity: 1;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(10, 255, 241, 0.4));
+}
+
+.brandName {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #0afff1, #9772fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  margin-top: var(--mantine-spacing-md);
+}
+
+.tagline {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: rgba(226, 232, 240, 0.9);
+  letter-spacing: 0.02em;
+}
+
+.welcomeCard {
+  width: 100%;
+  max-width: 700px;
+  position: relative;
+  padding: var(--mantine-spacing-xl);
+  background: linear-gradient(
+    135deg,
+    rgba(6, 9, 20, 0.95),
+    rgba(8, 11, 22, 0.92)
+  );
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  border-radius: var(--mantine-spacing-xl);
+  box-shadow:
+    0 20px 60px rgba(4, 8, 20, 0.7),
+    0 0 100px rgba(10, 255, 241, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.welcomeCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(10, 255, 241, 0.12),
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.welcomeCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at bottom left,
+    rgba(151, 114, 251, 0.12),
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.welcomeCard:hover {
+  border-color: rgba(10, 255, 241, 0.35);
+  box-shadow:
+    0 24px 70px rgba(4, 8, 20, 0.8),
+    0 0 120px rgba(10, 255, 241, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(-4px);
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0afff1, #9772fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 1;
+}
+
+.cardDescription {
+  color: rgba(148, 163, 184, 0.9);
+  font-size: 0.95rem;
+  position: relative;
+  z-index: 1;
+}
+
+.disclaimer {
+  font-size: 0.75rem;
+  color: rgba(148, 163, 184, 0.7);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding-top: var(--mantine-spacing-sm);
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+/* Mobile Responsiveness - App-like Splash Screen */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 !important;
+    background:
+      linear-gradient(180deg, rgba(6, 9, 20, 0.98), rgba(8, 11, 22, 0.95)),
+      radial-gradient(
+        ellipse at top,
+        rgba(10, 255, 241, 0.12),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse at bottom,
+        rgba(151, 114, 251, 0.12),
+        transparent 60%
+      );
+  }
+
+  .backButton {
+    top: 16px;
+    left: 16px;
+  }
+
+  .hero {
+    padding: var(--mantine-spacing-lg) var(--mantine-spacing-md);
+    padding-top: 60px;
+  }
+
+  .logoWrapper {
+    width: 100px;
+    height: 100px;
+    box-shadow:
+      0 15px 50px rgba(10, 255, 241, 0.3),
+      0 0 100px rgba(151, 114, 251, 0.2);
+  }
+
+  .brandName {
+    font-size: 2rem;
+    text-shadow: 0 4px 20px rgba(10, 255, 241, 0.4);
+  }
+
+  .tagline {
+    font-size: 1rem;
+    text-shadow: 0 2px 10px rgba(10, 255, 241, 0.3);
+  }
+
+  .heroDescription {
+    font-size: 0.9rem;
+    padding: 0 var(--mantine-spacing-md);
+  }
+
+  .welcomeCard {
+    padding: var(--mantine-spacing-lg);
+    margin: 0 var(--mantine-spacing-md);
+    border-radius: 24px;
+    box-shadow:
+      0 20px 60px rgba(4, 8, 20, 0.9),
+      0 0 120px rgba(10, 255, 241, 0.15),
+      inset 0 2px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .cardTitle {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background:
+      linear-gradient(180deg, rgba(6, 9, 20, 1), rgba(8, 11, 22, 0.98)),
+      radial-gradient(
+        ellipse at center,
+        rgba(10, 255, 241, 0.15),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse at center bottom,
+        rgba(151, 114, 251, 0.15),
+        transparent 70%
+      );
+  }
+
+  .backButton {
+    top: max(16px, env(safe-area-inset-top, 0px));
+    left: 12px;
+  }
+
+  .hero {
+    padding: var(--mantine-spacing-md);
+    padding-top: max(50px, calc(env(safe-area-inset-top, 0px) + 50px));
+  }
+
+  .logoWrapper {
+    width: 90px;
+    height: 90px;
+    padding: var(--mantine-spacing-md);
+    box-shadow:
+      0 20px 60px rgba(10, 255, 241, 0.35),
+      0 0 120px rgba(151, 114, 251, 0.25),
+      inset 0 2px 8px rgba(255, 255, 255, 0.1);
+    border-width: 3px;
+  }
+
+  .brandName {
+    font-size: 1.85rem;
+    margin-top: var(--mantine-spacing-lg);
+    text-shadow:
+      0 4px 20px rgba(10, 255, 241, 0.5),
+      0 8px 40px rgba(151, 114, 251, 0.3);
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+    letter-spacing: 0.15em;
+  }
+
+  .heroDescription {
+    font-size: 0.85rem;
+    padding: 0 var(--mantine-spacing-sm);
+    line-height: 1.6;
+  }
+
+  .welcomeCard {
+    padding: var(--mantine-spacing-md);
+    border-radius: 20px;
+    margin: 0 var(--mantine-spacing-sm);
+    margin-bottom: max(
+      var(--mantine-spacing-md),
+      env(safe-area-inset-bottom, 0px)
+    );
+    background: linear-gradient(
+      135deg,
+      rgba(6, 9, 20, 0.98),
+      rgba(8, 11, 22, 0.95)
+    );
+    border-width: 2px;
+    box-shadow:
+      0 25px 70px rgba(4, 8, 20, 0.95),
+      0 0 140px rgba(10, 255, 241, 0.2),
+      inset 0 2px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .cardTitle {
+    font-size: 1.15rem;
+    text-shadow: 0 2px 10px rgba(10, 255, 241, 0.3);
+  }
+
+  .cardDescription {
+    font-size: 0.85rem;
+  }
+
+  .disclaimer {
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 375px) {
+  .logoWrapper {
+    width: 80px;
+    height: 80px;
+  }
+
+  .brandName {
+    font-size: 1.65rem;
+  }
+
+  .tagline {
+    font-size: 0.85rem;
+  }
+
+  .heroDescription {
+    font-size: 0.8rem;
+  }
+
+  .welcomeCard {
+    padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
+  }
+
+  .cardTitle {
+    font-size: 1.05rem;
+  }
+}

@@ -1,11 +1,23 @@
 .root {
   cursor: default;
+  position: relative;
+  transition: background-color 0.15s ease;
+  border-radius: 12px;
 }
 
 .root:hover {
-  background-color: transparent;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 255, 241, 0.02),
+    rgba(151, 114, 251, 0.02)
+  );
 }
 
 .root:focus {
   outline: none;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 255, 241, 0.04),
+    rgba(151, 114, 251, 0.04)
+  );
 }

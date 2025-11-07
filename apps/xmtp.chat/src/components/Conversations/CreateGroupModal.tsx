@@ -2,6 +2,7 @@ import { Accordion, Badge, Button, Group, Stack, Text } from "@mantine/core";
 import { GroupPermissionsOptions } from "@xmtp/browser-sdk";
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
+import { AppHeader } from "@/components/App/AppHeader";
 import type { PendingMember } from "@/components/Conversation/AddMembers";
 import { Members } from "@/components/Conversation/Members";
 import { Metadata } from "@/components/Conversation/Metadata";
@@ -10,6 +11,7 @@ import {
   Permissions,
 } from "@/components/Conversation/Permissions";
 import { Modal } from "@/components/Modal";
+import { useClient } from "@/contexts/XMTPContext";
 import { isValidEthereumAddress, isValidInboxId } from "@/helpers/strings";
 import { useCollapsedMediaQuery } from "@/hooks/useCollapsedMediaQuery";
 import { useConversations } from "@/hooks/useConversations";
@@ -42,6 +44,7 @@ export const CreateGroupModal: React.FC = () => {
   const navigate = useNavigate();
   const fullScreen = useCollapsedMediaQuery();
   const contentHeight = fullScreen ? "auto" : 500;
+  const client = useClient();
 
   const handleClose = useCallback(() => {
     void navigate(-1);
@@ -113,8 +116,21 @@ export const CreateGroupModal: React.FC = () => {
       onClose={handleClose}
       size="600"
       padding={0}>
+      <AppHeader client={client} />
       <ContentLayout
-        title="Create group"
+        title={
+          <Text
+            size="lg"
+            fw={700}
+            style={{
+              background: "linear-gradient(135deg, #0afff1, #9772fb)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
+            Create group
+          </Text>
+        }
         maxHeight={contentHeight}
         footer={footer}
         withScrollAreaPadding={false}>
