@@ -117,54 +117,122 @@ const allocations = [
 
 const faqItems = [
   {
-    question: "Do I need a specific wallet to use MumbleChat?",
+    question: "Who is MumbleChat built for?",
     answer:
-      "Any wallet supported on Ramestta works. Connect, approve the session, and your encrypted inbox syncs immediately.",
+      "Wallet-native communities, ecosystem projects, and institutions that need private, verifiable messaging. If your members live onchain, MumbleChat gives them a familiar chat surface secured by Ramestta + XMTP.",
   },
   {
-    question: "How is my data stored?",
+    question: "How does Ramestta Layer-3 improve messaging?",
     answer:
-      "Messages are sealed with XMTP encryption and anchored to Ramestta storage. Only the intended participants can decrypt them.",
+      "Ramestta delivers sub-2 second finality, deterministic micro-fees, and Ethereum-grade security. Messages settle on XMTP while Ramestta handles identity proofs, device attestations, and programmable automations.",
   },
   {
-    question: "Can communities customize the chat experience?",
+    question: "Which wallets and devices are supported?",
     answer:
-      "Yes. Roles, channel permissions, and bot automations are all configurable so DAOs can tailor their workspace.",
+      "Any XMTP-compatible wallet works: MetaMask, Coinbase Wallet, Trust Wallet, Rainbow, Ledger + WalletConnect, and 300+ others. Install the PWA on desktop or mobile, connect your wallet, and your inbox syncs instantly.",
   },
   {
-    question: "Is there a cost to send messages?",
+    question: "How are conversations kept private?",
     answer:
-      "Ramestta keeps fees minimal. MumbleChat batches writes where possible so everyday messaging stays affordable.",
+      "Every DM and group thread is encrypted end-to-end (Signal-style double ratchet). Keys live on each device installation. Neither MumbleChat nor Ramestta nodes can read message content—only intended participants can decrypt.",
   },
   {
-    question: "What is the 3-month device access expiry?",
+    question: "What is the 90-day installation expiry?",
     answer:
-      "For security, each device installation expires after 90 days (3 months). This protects your account from compromised devices and forces periodic wallet verification. Simply reconnect your wallet to continue—your message history remains intact.",
+      "Each connected device receives an Installation ID that automatically expires after 90 days. Re-authenticating with your wallet renews access and rotates keys, preventing forgotten laptops or compromised devices from lingering.",
   },
   {
-    question: "Which mobile wallets are supported?",
+    question: "Can I run MumbleChat across multiple devices?",
     answer:
-      "MumbleChat works with MetaMask Mobile, Trust Wallet, Coinbase Wallet, and 300+ other wallets via WalletConnect. Simply open the PWA on your mobile browser, connect your installed wallet, and start chatting.",
+      "Yes. Connect on as many devices as you need—each gets its own Installation ID and independent key material. Messages, reactions, and files stay in sync via the XMTP network.",
   },
   {
-    question: "Can I use MumbleChat on multiple devices?",
+    question: "How much does it cost to send messages?",
     answer:
-      "Yes! Connect your wallet on each device (phone, laptop, tablet). Each device gets its own Installation ID and expires independently after 90 days. Messages sync across all connected devices automatically.",
+      "Typical fees range between $0.0002 and $0.001 thanks to Ramestta’s deterministic gas schedule. Reads are free, writes are batched, and you only pay network fees when automations or bots interact with smart contracts.",
   },
   {
-    question: "How do I add a custom network like Rametta?",
+    question: "Can teams customize permissions and workflows?",
     answer:
-      "MumbleChat supports all EVM-compatible networks. You can manually add networks in your wallet settings, or use the app's network switcher. Compatible with Polygon, Ethereum, Arbitrum, Base, Optimism, and more.",
+      "Group owners can gate membership, assign admins, pin metadata, and wire up bots or webhooks. The same XMTP conversation can be surfaced inside your internal tools via the SDKs.",
   },
   {
-    question: "What happens if my device expires?",
+    question: "How do I migrate an existing community?",
     answer:
-      "After 90 days, the device loses access to send/receive messages. Simply reconnect your wallet to create a new installation. All your previous conversations, groups, and contacts remain—messages are stored on XMTP network, not your device.",
+      "Spin up a group, invite members via wallet address/ENS/Base name, and drop a deep link in your current channels. Because identity is wallet-based, no emails or phone numbers are required.",
   },
   {
-    question: "Is my message history stored on my device?",
+    question: "Where can I get help or build integrations?",
     answer:
-      "No. Messages are stored on the XMTP network and encrypted. Your device caches messages for faster access, but everything syncs from the network when you reconnect, even on a new device.",
+      "Visit the Support section below for docs, community, and GitHub links. Developers can fork the open-source client, extend XMTP bots, or embed MumbleChat components inside existing dashboards.",
+  },
+];
+
+const footerMenus = [
+  {
+    heading: "Product",
+    links: [
+      { label: "Features", href: "#features" },
+      { label: "Security", href: "#security" },
+      { label: "Roadmap", href: "#roadmap" },
+      { label: "Comparison", href: "#comparison" },
+    ],
+  },
+  {
+    heading: "Platform",
+    links: [
+      { label: "How It Works", href: "#how-it-works" },
+      { label: "Device Management", href: "#device-management" },
+      { label: "Mobile Support", href: "#mobile-support" },
+      { label: "FAQs", href: "#faqs" },
+    ],
+  },
+  {
+    heading: "Developers",
+    links: [
+      {
+        label: "XMTP Docs",
+        href: "https://docs.xmtp.org/",
+        external: true,
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/xmtp/xmtp-inbox-web/",
+        external: true,
+      },
+      {
+        label: "API Reference",
+        href: "https://docs.xmtp.org/client-sdk/",
+        external: true,
+      },
+      {
+        label: "Brand Assets",
+        href: "#powered-by",
+      },
+    ],
+  },
+  {
+    heading: "Community",
+    links: [
+      {
+        label: "Support Center",
+        href: "#support",
+      },
+      {
+        label: "XMTP Community",
+        href: "https://community.xmtp.org/",
+        external: true,
+      },
+      {
+        label: "Ramestta",
+        href: "https://www.ramestta.com/",
+        external: true,
+      },
+      {
+        label: "Status",
+        href: "#powered-by",
+      },
+    ],
   },
 ];
 
@@ -205,7 +273,14 @@ export const MumbleLanding: FC = () => {
             <div className={classes.brandIcon}>
               <MumbleChatLogo className={classes.brandLogo} />
             </div>
-            <span className={classes.brandLabel}>MumbleChat</span>
+            <div className={classes.brandText}>
+              <span className={classes.brandLabel}>
+                Mumble<span className={classes.brandAccent}>Chat</span>
+              </span>
+              <span className={classes.brandSlogan}>
+                ⚡ Decentralized Messaging
+              </span>
+            </div>
           </a>
           <nav className={classes.navLinks} aria-label="Primary">
             {navLinks.map(({ label, href }) => (
@@ -218,7 +293,7 @@ export const MumbleLanding: FC = () => {
             <a
               className={classes.primaryButton}
               href="http://localhost:5189/welcome">
-              Connect Wallet
+              Launch App
             </a>
             <button
               type="button"
@@ -256,7 +331,7 @@ export const MumbleLanding: FC = () => {
               onClick={() => {
                 setMenuOpen(false);
               }}>
-              Connect Wallet
+              Launch App
             </a>
           </nav>
         )}
@@ -294,7 +369,7 @@ export const MumbleLanding: FC = () => {
             <a
               className={classes.primaryButton}
               href="http://localhost:5189/welcome">
-              Connect Wallet
+              Launch App
             </a>
             <a className={classes.secondaryButton} href="#powered-by">
               Learn More About Ramestta
@@ -1470,7 +1545,7 @@ export const MumbleLanding: FC = () => {
             <a
               className={classes.primaryButton}
               href="http://localhost:5189/welcome">
-              Connect Wallet
+              Launch App
             </a>
             <a className={classes.secondaryButton} href="#powered-by">
               Learn more
@@ -1574,25 +1649,20 @@ export const MumbleLanding: FC = () => {
           </div>
         </div>
         <div className={classes.footerLinks}>
-          <div>
-            <h3>Product</h3>
-            <a href="#features">Features</a>
-            <a href="#roadmap">Roadmap</a>
-            <a href="#tokenomics">Tokenomics</a>
-          </div>
-          <div>
-            <h3>Resources</h3>
-            <a href="https://docs.xmtp.org/" target="_blank" rel="noreferrer">
-              Documentation
-            </a>
-            <a
-              href="https://community.xmtp.org/"
-              target="_blank"
-              rel="noreferrer">
-              Community
-            </a>
-            <a href="#faqs">FAQs</a>
-          </div>
+          {footerMenus.map((menu) => (
+            <div key={menu.heading}>
+              <h3>{menu.heading}</h3>
+              {menu.links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noreferrer noopener" : undefined}>
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          ))}
         </div>
         <div className={classes.footerMeta}>
           <span>
@@ -1600,8 +1670,9 @@ export const MumbleLanding: FC = () => {
           </span>
           <div>
             <a href="#powered-by">Terms</a>
-            <a href="#powered-by">Privacy</a>
-            <a href="#powered-by">Cookies</a>
+            <a href="#security">Privacy</a>
+            <a href="#support">Support</a>
+            <a href="mailto:security@mumblechat.com">Security</a>
           </div>
         </div>
       </footer>

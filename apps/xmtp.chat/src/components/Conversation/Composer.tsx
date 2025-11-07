@@ -1,13 +1,4 @@
-import {
-  ActionIcon,
-  Box,
-  Button,
-  Group,
-  Menu,
-  Stack,
-  Text,
-  TextInput,
-} from "@mantine/core";
+import { Box, Button, Group, Stack, Text, TextInput } from "@mantine/core";
 import {
   ContentTypeRemoteAttachment,
   type RemoteAttachment,
@@ -17,12 +8,12 @@ import { ContentTypeText } from "@xmtp/content-type-text";
 import { useCallback, useRef, useState } from "react";
 import { Modal } from "@/components/Modal";
 import { useConversationContext } from "@/contexts/ConversationContext";
-import { uploadAttachment, validateFile } from "@/helpers/attachment";
+import { uploadAttachment } from "@/helpers/attachment"; // validateFile disabled for Phase 1
 import { useConversation } from "@/hooks/useConversation";
-import { IconPlus } from "@/icons/IconPlus";
+// import { IconPlus } from "@/icons/IconPlus"; // Disabled for Phase 1
 import { AttachmentPreview } from "./AttachmentPreview";
-import { ReplyPreview } from "./ReplyPreview";
 import classes from "./Composer.module.css";
+import { ReplyPreview } from "./ReplyPreview";
 
 export type ComposerProps = {
   conversationId: string;
@@ -36,28 +27,29 @@ export const Composer: React.FC<ComposerProps> = ({ conversationId }) => {
   const [attachment, setAttachment] = useState<File | null>(null);
   const [uploadingAttachment, setUploadingAttachment] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  // const fileInputRef = useRef<HTMLInputElement>(null); // Disabled for Phase 1
   const remoteAttachmentRef = useRef<RemoteAttachment | null>(null);
   const isSending = sending || uploadingAttachment;
   const hasContent = message.trim() !== "" || attachment;
 
-  const handleFileSelect = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0];
-      if (file) {
-        const validation = validateFile(file);
-        if (validation.valid) {
-          setAttachment(file);
-        } else {
-          setError(validation.error);
-        }
-      }
-      if (fileInputRef.current) {
-        fileInputRef.current.value = "";
-      }
-    },
-    [],
-  );
+  // File attachment handler - Disabled for Phase 1
+  // const handleFileSelect = useCallback(
+  //   (event: React.ChangeEvent<HTMLInputElement>) => {
+  //     const file = event.target.files?.[0];
+  //     if (file) {
+  //       const validation = validateFile(file);
+  //       if (validation.valid) {
+  //         setAttachment(file);
+  //       } else {
+  //         setError(validation.error);
+  //       }
+  //     }
+  //     if (fileInputRef.current) {
+  //       fileInputRef.current.value = "";
+  //     }
+  //   },
+  //   [],
+  // );
 
   const handleSend = useCallback(async () => {
     if (!hasContent || isSending) return;
@@ -154,7 +146,8 @@ export const Composer: React.FC<ComposerProps> = ({ conversationId }) => {
             />
           )}
           <div className={classes.composer}>
-            <Menu shadow="md" position="top-start">
+            {/* File attachments disabled - will be enabled in Phase 2 */}
+            {/* <Menu shadow="md" position="top-start">
               <Menu.Target>
                 <ActionIcon
                   className={classes.actionButton}
@@ -185,7 +178,7 @@ export const Composer: React.FC<ComposerProps> = ({ conversationId }) => {
               accept="image/*,video/*,audio/*"
               onChange={handleFileSelect}
               style={{ display: "none" }}
-            />
+            /> */}
             <TextInput
               ref={inputRef}
               disabled={isSending}

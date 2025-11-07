@@ -130,6 +130,13 @@
   color: inherit;
 }
 
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  gap: 4px;
+}
+
 .brandIcon {
   display: inline-flex;
   align-items: center;
@@ -194,6 +201,20 @@
   font-size: 1.125rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+}
+
+.brandAccent {
+  background: linear-gradient(135deg, #0afff1, #9772fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brandSlogan {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.85);
 }
 
 .navLinks {
@@ -1211,6 +1232,10 @@
 
   .primaryButton {
     padding: 12px 20px;
+  }
+
+  .navActions .primaryButton {
+    display: none;
   }
 
   .mockupBody {

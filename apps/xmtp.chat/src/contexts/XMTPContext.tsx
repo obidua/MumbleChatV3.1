@@ -159,6 +159,26 @@ export const XMTPProvider: React.FC<XMTPProviderProps> = ({
             }
           }
 
+          // Handle installation limit error
+          if (
+            error.message.includes("already registered 10/10 installations")
+          ) {
+            console.error(
+              "XMTP: Maximum installations reached (10/10). You need to revoke old installations.",
+            );
+
+            // Create a user-friendly error
+            const installError = new Error(
+              "Maximum XMTP installations (10/10) reached. Please revoke old installations before connecting again. Visit https://xmtp.chat to manage your installations.",
+            );
+
+            setClient(undefined);
+            setError(installError);
+            initializingRef.current = false;
+            setInitializing(false);
+            throw installError;
+          }
+
           setClient(undefined);
           setError(error);
           // re-throw error for upstream consumption

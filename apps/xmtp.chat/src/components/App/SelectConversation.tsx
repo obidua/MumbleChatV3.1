@@ -2,7 +2,9 @@ import { Button, Divider, Stack, Text } from "@mantine/core";
 import { useNavigate } from "react-router";
 import { ConversationsNavbar } from "@/components/Conversations/ConversationsNavbar";
 import { useMobile } from "@/hooks/useMobile";
+import { MumbleChatLogo } from "@/icons/MumbleChatLogo";
 import { ContentLayout } from "@/layouts/ContentLayout";
+import classes from "./SelectConversation.module.css";
 
 export const SelectConversation = () => {
   const navigate = useNavigate();
@@ -16,6 +18,9 @@ export const SelectConversation = () => {
   return (
     <ContentLayout title="No conversation selected">
       <Stack gap="lg" align="center" py="xl">
+        <div className={classes.logoWrapper}>
+          <MumbleChatLogo className={classes.logo} />
+        </div>
         <Text>
           Select a conversation in the left sidebar to display its messages.
         </Text>

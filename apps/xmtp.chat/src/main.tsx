@@ -219,7 +219,7 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
           registration.scope,
         );
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         console.error("[xmtp.chat] Service worker registration failed:", error);
       });
   });

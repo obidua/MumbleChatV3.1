@@ -1,9 +1,12 @@
-import { Badge, Box, Group, Text } from "@mantine/core";
-import { useCallback, useEffect, useRef } from "react";
+import { Badge, Box, Group, Text, TextInput } from "@mantine/core";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ConversationsList } from "@/components/Conversations/ConversationList";
 import { ConversationsMenu } from "@/components/Conversations/ConversationsMenu";
+import { useClient } from "@/contexts/XMTPContext";
+import { getMemberAddress } from "@/helpers/xmtp";
 import { useConversations } from "@/hooks/useConversations";
 import { ContentLayout } from "@/layouts/ContentLayout";
+import { inboxStore } from "@/stores/inbox/store";
 import classes from "./ConversationsNavbar.module.css";
 
 export type ConversationsNavbarProps = {
@@ -24,6 +27,44 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
   } = useConversations();
   const stopConversationStreamRef = useRef<(() => void) | null>(null);
   const stopAllMessagesStreamRef = useRef<(() => void) | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const client = useClient();
+
+  // Filter conversations based on search query
+  const filteredConversations = useMemo(() => {
+    if (!searchQuery.trim()) return conversations;
+
+    const query = searchQuery.toLowerCase().trim();
+    const state = inboxStore.getState();
+
+    return conversations.filter((conv) => {
+      // Search in conversation ID
+      if (conv.id.toLowerCase().includes(query)) {
+        return true;
+      }
+
+      // Get members for this conversation from the store
+      const members = state.members.get(conv.id);
+      if (members) {
+        const membersList = Array.from(members.values());
+
+        // Search in member addresses
+        for (const member of membersList) {
+          // Skip the client's own inbox
+          if (member.inboxId === client.inboxId) {
+            continue;
+          }
+
+          const address = getMemberAddress(member);
+          if (address && address.toLowerCase().includes(query)) {
+            return true;
+          }
+        }
+      }
+
+      return false;
+    });
+  }, [conversations, searchQuery, client.inboxId]);
 
   const startStreams = useCallback(async () => {
     stopConversationStreamRef.current = await stream();
@@ -107,6 +148,33 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
         />
       }
       withScrollArea={false}>
+      {/* Search Bar */}
+      <Box px="md" pt="xs" pb="sm">
+        <TextInput
+          placeholder="Search conversations..."
+          value={searchQuery}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+          }}
+          leftSection={
+            <Text size="sm" c="dimmed">
+              🔍
+            </Text>
+          }
+          styles={{
+            input: {
+              backgroundColor: "rgba(10, 255, 241, 0.05)",
+              border: "1px solid rgba(10, 255, 241, 0.2)",
+              color: "var(--mantine-color-text)",
+              "&:focus": {
+                borderColor: "rgba(10, 255, 241, 0.5)",
+              },
+            },
+          }}
+          radius="md"
+        />
+      </Box>
+
       {conversations.length === 0 ? (
         <Box
           display="flex"
@@ -118,9 +186,20 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
           className={classes.empty}>
           <Text>No conversations found</Text>
         </Box>
+      ) : filteredConversations.length === 0 ? (
+        <Box
+          display="flex"
+          style={{
+            flexGrow: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          className={classes.empty}>
+          <Text>No conversations match your search</Text>
+        </Box>
       ) : (
         <ConversationsList
-          conversations={conversations}
+          conversations={filteredConversations}
           onConversationSelected={onConversationSelected}
         />
       )}

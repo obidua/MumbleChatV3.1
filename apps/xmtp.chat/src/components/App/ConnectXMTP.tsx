@@ -1,8 +1,9 @@
-import { Button, Group, Paper, Stack } from "@mantine/core";
+import { Button, Group, Paper, Stack, Text } from "@mantine/core";
 import { useCallback } from "react";
 import { ConnectedAddress } from "@/components/App/ConnectedAddress";
 import { LoggingSelect } from "@/components/App/LoggingSelect";
 import { NetworkSelect } from "@/components/App/NetworkSelect";
+import { useXMTP } from "@/contexts/XMTPContext";
 import { useConnectWallet } from "@/hooks/useConnectWallet";
 import { useConnectXmtp } from "@/hooks/useConnectXmtp";
 import { useEphemeralSigner } from "@/hooks/useEphemeralSigner";
@@ -17,6 +18,7 @@ export const ConnectXMTP = ({ onDisconnectWallet }: ConnectXMTPProps) => {
   const { isConnected, address } = useConnectWallet();
   const { address: ephemeralAddress } = useEphemeralSigner();
   const { connect, loading } = useConnectXmtp();
+  const { error } = useXMTP();
   const { ephemeralAccountEnabled } = useSettings();
 
   const handleConnectClick = useCallback(() => {
@@ -26,6 +28,16 @@ export const ConnectXMTP = ({ onDisconnectWallet }: ConnectXMTPProps) => {
   return (
     <Paper className={classes.xmtpCard}>
       <Stack gap="xs">
+        {error && (
+          <Text size="sm" c="red" ta="center">
+            {error.message.includes("already registered 10/10 installations") ||
+            error.message.includes("Maximum XMTP installations")
+              ? "Maximum installations (10/10) reached. Please revoke old installations to continue. Visit the XMTP dashboard to manage installations."
+              : error.message.includes("Multiple create operations detected")
+                ? "Identity already exists. Database cleared. Please try again."
+                : `Error: ${error.message}`}
+          </Text>
+        )}
         <Stack gap="md" className={classes.settingsSection}>
           <NetworkSelect />
           <LoggingSelect />

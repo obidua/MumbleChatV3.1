@@ -77,8 +77,16 @@ export const Connect = () => {
         separator: classes.separator,
       }}>
       <Stepper.Step
-        label="Connect Wallet"
-        description="Choose your wallet provider"
+        label={
+          isConnected || ephemeralAccountEnabled
+            ? "Wallet Connected ✓"
+            : "Connect Wallet"
+        }
+        description={
+          isConnected || ephemeralAccountEnabled
+            ? "Wallet successfully connected"
+            : "Choose your wallet provider"
+        }
         allowStepSelect={false}
         loading={loading}>
         <WalletConnect />
