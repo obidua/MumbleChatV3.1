@@ -1,0 +1,123 @@
+/* Mobile-specific styles for PWA */
+
+/* Ensure full viewport height on mobile */
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS Safe Area Support */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Prevent pull-to-refresh on mobile */
+@media screen and (max-width: 768px) {
+  body {
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
+  }
+
+  /* Better scrolling on mobile */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Disable text selection on buttons and navigation */
+  button,
+  nav,
+  [role="button"] {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Better tap targets on mobile */
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Improve input behavior on mobile */
+  input,
+  textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  /* Hide scrollbars but maintain scrolling */
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  * {
+    scrollbar-width: none;
+  }
+}
+
+/* Fix for notch devices */
+@supports (padding: max(0px)) {
+  @media screen and (max-width: 768px) {
+    .header,
+    .footer {
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
+  }
+}
+
+/* Landscape orientation adjustments */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  :root {
+    --bottom-nav-height: 56px;
+  }
+}
+
+/* Animation for page transitions on mobile */
+@media screen and (max-width: 768px) {
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideOutLeft {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+
+  .page-enter {
+    animation: slideInRight 0.3s ease-out;
+  }
+
+  .page-exit {
+    animation: slideOutLeft 0.3s ease-out;
+  }
+}

@@ -1,9 +1,18 @@
 import { Button, Divider, Stack, Text } from "@mantine/core";
 import { useNavigate } from "react-router";
+import { ConversationsNavbar } from "@/components/Conversations/ConversationsNavbar";
+import { useMobile } from "@/hooks/useMobile";
 import { ContentLayout } from "@/layouts/ContentLayout";
 
 export const SelectConversation = () => {
   const navigate = useNavigate();
+  const isMobile = useMobile();
+
+  // On mobile, show the conversations list instead of the "select conversation" message
+  if (isMobile) {
+    return <ConversationsNavbar />;
+  }
+
   return (
     <ContentLayout title="No conversation selected">
       <Stack gap="lg" align="center" py="xl">

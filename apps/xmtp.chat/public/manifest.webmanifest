@@ -5,11 +5,31 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "orientation": "any",
+  "orientation": "portrait-primary",
   "background_color": "#05060f",
   "theme_color": "#0afff1",
   "id": "/",
   "categories": ["social", "productivity", "communication"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
+  "screenshots": [
+    {
+      "src": "/Screenshots/chat-screen.png",
+      "type": "image/png",
+      "sizes": "1170x2532",
+      "form_factor": "narrow",
+      "label": "Chat interface"
+    },
+    {
+      "src": "/Screenshots/contacts-screen.png",
+      "type": "image/png",
+      "sizes": "1170x2532",
+      "form_factor": "narrow",
+      "label": "Contacts list"
+    }
+  ],
   "icons": [
     {
       "src": "/icons/icon-192x192.png",
@@ -45,6 +65,32 @@
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Chat",
+      "short_name": "New Chat",
+      "description": "Start a new direct message",
+      "url": "/conversations/new-dm",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "New Group",
+      "short_name": "New Group",
+      "description": "Create a new group chat",
+      "url": "/conversations/new-group",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

@@ -1,4 +1,5 @@
 import "@mantine/core/styles.css";
+import "@/assets/mobile.css";
 import { createTheme, MantineProvider } from "@mantine/core";
 import { QueryClientProvider } from "@tanstack/react-query";
 import pkg from "@xmtp/browser-sdk/package.json";
@@ -120,7 +121,10 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
     navigator.serviceWorker
       .register("/sw.js")
       .then((registration) => {
-        console.log("[xmtp.chat] Service worker registered:", registration.scope);
+        console.log(
+          "[xmtp.chat] Service worker registered:",
+          registration.scope,
+        );
       })
       .catch((error) => {
         console.error("[xmtp.chat] Service worker registration failed:", error);

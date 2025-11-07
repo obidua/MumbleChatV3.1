@@ -2,7 +2,7 @@ import { ActionIcon, Group, Text, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Dm, Group as XmtpGroup } from "@xmtp/browser-sdk";
 import { useCallback, useEffect, useMemo } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import { ConversationMenu } from "@/components/Conversation/ConversationMenu";
 import { MembersList } from "@/components/Conversation/MembersList";
 import { Messages } from "@/components/Messages/Messages";
@@ -12,6 +12,8 @@ import { resolveAddresses } from "@/helpers/profiles";
 import { isValidInboxId, shortAddress } from "@/helpers/strings";
 import { getMemberAddress } from "@/helpers/xmtp";
 import { useConversation } from "@/hooks/useConversation";
+import { useMobile } from "@/hooks/useMobile";
+import { IconBack } from "@/icons/IconBack";
 import { IconUsers } from "@/icons/IconUsers";
 import { ContentLayout } from "@/layouts/ContentLayout";
 import { Composer } from "./Composer";
@@ -26,6 +28,8 @@ export const Conversation: React.FC<ConversationProps> = ({
 }) => {
   const [opened, { toggle }] = useDisclosure();
   const client = useClient();
+  const navigate = useNavigate();
+  const isMobile = useMobile();
   const {
     conversation,
     name,
@@ -52,6 +56,10 @@ export const Conversation: React.FC<ConversationProps> = ({
   const handleSync = useCallback(async () => {
     await sync(true);
   }, [sync, conversationId]);
+
+  const handleBack = () => {
+    void navigate("/conversations");
+  };
 
   const otherMemberAddress = useMemo(() => {
     if (!(conversation instanceof Dm)) {
@@ -91,7 +99,19 @@ export const Conversation: React.FC<ConversationProps> = ({
           contentClassName={classes.content}
           footerClassName={classes.footer}
           asideClassName={classes.membersAside}
-          title={displayTitle}
+          title={
+            <Group gap="xs">
+              {isMobile && (
+                <ActionIcon
+                  variant="subtle"
+                  onClick={handleBack}
+                  aria-label="Back to conversations">
+                  <IconBack />
+                </ActionIcon>
+              )}
+              <Text>{displayTitle}</Text>
+            </Group>
+          }
           loading={messages.length === 0 && conversationLoading}
           headerActions={
             <Group gap="xxs">
@@ -101,22 +121,24 @@ export const Conversation: React.FC<ConversationProps> = ({
                 onSync={() => void handleSync()}
                 disabled={conversationSyncing}
               />
-              <Tooltip
-                label={
-                  opened ? (
-                    <Text size="xs">Hide members</Text>
-                  ) : (
-                    <Text size="xs">Show members</Text>
-                  )
-                }>
-                <ActionIcon
-                  variant="default"
-                  onClick={() => {
-                    toggle();
-                  }}>
-                  <IconUsers />
-                </ActionIcon>
-              </Tooltip>
+              {!isMobile && (
+                <Tooltip
+                  label={
+                    opened ? (
+                      <Text size="xs">Hide members</Text>
+                    ) : (
+                      <Text size="xs">Show members</Text>
+                    )
+                  }>
+                  <ActionIcon
+                    variant="default"
+                    onClick={() => {
+                      toggle();
+                    }}>
+                    <IconUsers />
+                  </ActionIcon>
+                </Tooltip>
+              )}
             </Group>
           }
           aside={

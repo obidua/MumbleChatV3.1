@@ -4,8 +4,10 @@ import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import { AppHeader } from "@/components/App/AppHeader";
 import { ConversationsNavbar } from "@/components/Conversations/ConversationsNavbar";
+import { BottomNav } from "@/components/Navigation/BottomNav";
 import { useXMTP } from "@/contexts/XMTPContext";
 import { useCollapsedMediaQuery } from "@/hooks/useCollapsedMediaQuery";
+import { useMobile } from "@/hooks/useMobile";
 import { useRedirect } from "@/hooks/useRedirect";
 import { CenteredLayout } from "@/layouts/CenteredLayout";
 import {
@@ -22,6 +24,7 @@ export const AppLayout: React.FC = () => {
   const { setRedirectUrl } = useRedirect();
   const [opened, { toggle, close }] = useDisclosure();
   const isCollapsed = useCollapsedMediaQuery();
+  const isMobile = useMobile();
 
   const handleConversationSelected = () => {
     if (isCollapsed) {
@@ -42,23 +45,35 @@ export const AppLayout: React.FC = () => {
     }
   }, [client]);
 
+  // Check if we're in a conversation view (for mobile full-screen behavior)
+  const isInConversation =
+    location.pathname.startsWith("/conversations/") &&
+    location.pathname !== "/conversations/new-dm" &&
+    location.pathname !== "/conversations/new-group" &&
+    location.pathname !== "/conversations/identity";
+
   return !client ? (
     <CenteredLayout fullScreen>
       <LoadingOverlay visible />
     </CenteredLayout>
   ) : (
     <MainLayout>
-      <MainLayoutHeader>
-        <AppHeader client={client} opened={opened} toggle={toggle} />
-      </MainLayoutHeader>
-      <MainLayoutNav opened={opened} toggle={toggle}>
-        <ConversationsNavbar
-          onConversationSelected={handleConversationSelected}
-        />
-      </MainLayoutNav>
+      {(!isMobile || !isInConversation) && (
+        <MainLayoutHeader>
+          <AppHeader client={client} opened={opened} toggle={toggle} />
+        </MainLayoutHeader>
+      )}
+      {!isMobile && (
+        <MainLayoutNav opened={opened} toggle={toggle}>
+          <ConversationsNavbar
+            onConversationSelected={handleConversationSelected}
+          />
+        </MainLayoutNav>
+      )}
       <MainLayoutContent>
         <Outlet />
       </MainLayoutContent>
+      {isMobile && <BottomNav />}
     </MainLayout>
   );
 };

@@ -9,6 +9,8 @@
       var(--main-border-width)
   );
   --nav-width: clamp(260px, 22vw, 340px);
+  --bottom-nav-height: 65px;
+  --mobile-safe-area-bottom: env(safe-area-inset-bottom, 0);
 }
 
 .root {
@@ -20,10 +22,28 @@
   flex-direction: column;
   gap: var(--shell-gap);
   background:
-    radial-gradient(circle at top left, rgba(10, 255, 241, 0.2), transparent 55%),
-    radial-gradient(circle at bottom right, rgba(151, 114, 251, 0.2), transparent 60%),
+    radial-gradient(
+      circle at top left,
+      rgba(10, 255, 241, 0.2),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(151, 114, 251, 0.2),
+      transparent 60%
+    ),
     #04060f;
   box-sizing: border-box;
+}
+
+/* Mobile: Add padding at bottom for bottom navigation */
+@media screen and (max-width: 767px) {
+  .root {
+    padding-bottom: calc(
+      var(--bottom-nav-height) + var(--mobile-safe-area-bottom) +
+        var(--shell-gap)
+    );
+  }
 }
 
 .header {
@@ -54,8 +74,16 @@
   flex-direction: column;
   background:
     linear-gradient(160deg, rgba(6, 9, 20, 0.9), rgba(6, 9, 20, 0.76)),
-    radial-gradient(circle at top right, rgba(10, 255, 241, 0.08), transparent 45%),
-    radial-gradient(circle at bottom left, rgba(151, 114, 251, 0.1), transparent 60%);
+    radial-gradient(
+      circle at top right,
+      rgba(10, 255, 241, 0.08),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(151, 114, 251, 0.1),
+      transparent 60%
+    );
   border: 1px solid rgba(10, 255, 241, 0.12);
   border-radius: 28px;
   box-shadow: 0 36px 60px rgba(4, 8, 20, 0.5);
@@ -144,6 +172,11 @@
 
   .main {
     border-radius: 20px;
+  }
+
+  /* Hide sidebar on mobile by default */
+  .aside {
+    display: none;
   }
 }
 

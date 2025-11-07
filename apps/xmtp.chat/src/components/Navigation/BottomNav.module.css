@@ -1,0 +1,96 @@
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 65px;
+  background: linear-gradient(
+    165deg,
+    rgba(6, 9, 20, 0.98),
+    rgba(6, 9, 20, 0.95)
+  );
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(10, 255, 241, 0.15);
+  box-shadow: 0 -8px 24px rgba(4, 8, 20, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: rgba(255, 255, 255, 0.6);
+  position: relative;
+  background: transparent;
+  border: none;
+  min-width: 64px;
+}
+
+.navItem:hover {
+  color: rgba(10, 255, 241, 0.8);
+  background: rgba(10, 255, 241, 0.08);
+}
+
+.navItem.active {
+  color: #0afff1;
+  background: rgba(10, 255, 241, 0.12);
+}
+
+.navItem.active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 3px;
+  background: #0afff1;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 2px 8px rgba(10, 255, 241, 0.5);
+}
+
+.navIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.navLabel {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.badge {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background: #ff3b30;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  box-shadow: 0 2px 6px rgba(255, 59, 48, 0.5);
+}
+
+@media screen and (min-width: 768px) {
+  .bottomNav {
+    display: none;
+  }
+}
