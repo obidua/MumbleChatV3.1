@@ -6,7 +6,13 @@ import { useConversations } from "@/hooks/useConversations";
 import { ContentLayout } from "@/layouts/ContentLayout";
 import classes from "./ConversationsNavbar.module.css";
 
-export const ConversationsNavbar: React.FC = () => {
+export type ConversationsNavbarProps = {
+  onConversationSelected?: () => void;
+};
+
+export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
+  onConversationSelected,
+}) => {
   const {
     sync,
     loading,
@@ -104,7 +110,10 @@ export const ConversationsNavbar: React.FC = () => {
           <Text>No conversations found</Text>
         </Box>
       ) : (
-        <ConversationsList conversations={conversations} />
+        <ConversationsList
+          conversations={conversations}
+          onConversationSelected={onConversationSelected}
+        />
       )}
     </ContentLayout>
   );

@@ -12,10 +12,12 @@ const List = (props: ComponentProps<"div">) => {
 
 export type ConversationsListProps = {
   conversations: Conversation<ContentTypes>[];
+  onConversationSelected?: () => void;
 };
 
 export const ConversationsList: React.FC<ConversationsListProps> = ({
   conversations,
+  onConversationSelected,
 }) => {
   const { conversationId } = useParams();
   const selectedConversationIndex = useMemo(
@@ -37,6 +39,7 @@ export const ConversationsList: React.FC<ConversationsListProps> = ({
         <ConversationCard
           key={conversation.id}
           conversationId={conversation.id}
+          onSelect={onConversationSelected}
         />
       )}
     />

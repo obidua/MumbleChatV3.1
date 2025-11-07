@@ -1,12 +1,4 @@
-import {
-  Badge,
-  Box,
-  Burger,
-  Flex,
-  Group,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Badge, Box, Burger, Flex, Group, Stack, Text } from "@mantine/core";
 import type { Client } from "@xmtp/browser-sdk";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
@@ -71,12 +63,14 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
           </Stack>
         </Group>
       </Flex>
-      <Group align="center" gap="sm" className={classes.controls}>
-        <Badge className={classes.environment} radius="lg" variant="light">
+      <Group align="center" gap="sm" className={classes.controlRow}>
+        <Badge
+          className={classes.environment}
+          radius="lg"
+          variant="light"
+          aria-label={environment || "environment"}
+          title={environment || undefined}>
           <GlowingCircle />
-          <Text size="xs" fw={600}>
-            {environment}
-          </Text>
         </Badge>
         <Box
           className={classes.account}

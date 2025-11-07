@@ -5,6 +5,7 @@ import { Outlet, useLocation, useNavigate } from "react-router";
 import { AppHeader } from "@/components/App/AppHeader";
 import { ConversationsNavbar } from "@/components/Conversations/ConversationsNavbar";
 import { useXMTP } from "@/contexts/XMTPContext";
+import { useCollapsedMediaQuery } from "@/hooks/useCollapsedMediaQuery";
 import { useRedirect } from "@/hooks/useRedirect";
 import { CenteredLayout } from "@/layouts/CenteredLayout";
 import {
@@ -19,7 +20,14 @@ export const AppLayout: React.FC = () => {
   const location = useLocation();
   const { client } = useXMTP();
   const { setRedirectUrl } = useRedirect();
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, { toggle, close }] = useDisclosure();
+  const isCollapsed = useCollapsedMediaQuery();
+
+  const handleConversationSelected = () => {
+    if (isCollapsed) {
+      close();
+    }
+  };
 
   useEffect(() => {
     if (!client) {
@@ -44,7 +52,9 @@ export const AppLayout: React.FC = () => {
         <AppHeader client={client} opened={opened} toggle={toggle} />
       </MainLayoutHeader>
       <MainLayoutNav opened={opened} toggle={toggle}>
-        <ConversationsNavbar />
+        <ConversationsNavbar
+          onConversationSelected={handleConversationSelected}
+        />
       </MainLayoutNav>
       <MainLayoutContent>
         <Outlet />

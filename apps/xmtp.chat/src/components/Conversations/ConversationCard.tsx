@@ -1,5 +1,5 @@
 import { Box, Card, Flex, Stack, Text } from "@mantine/core";
-import type { DecodedMessage } from "@xmtp/browser-sdk";
+import { Dm, type DecodedMessage } from "@xmtp/browser-sdk";
 import { ContentTypeGroupUpdated } from "@xmtp/content-type-group-updated";
 import { ContentTypeReadReceipt } from "@xmtp/content-type-read-receipt";
 import { ContentTypeRemoteAttachment } from "@xmtp/content-type-remote-attachment";
@@ -7,24 +7,56 @@ import { ContentTypeReply } from "@xmtp/content-type-reply";
 import { differenceInCalendarDays, format, isToday } from "date-fns";
 import { useMemo } from "react";
 import { useNavigate, useParams } from "react-router";
-import { useConversation } from "@/hooks/useConversation";
+import { useClient } from "@/contexts/XMTPContext";
 import { nsToDate } from "@/helpers/date";
+import { isValidInboxId, shortAddress } from "@/helpers/strings";
+import { getMemberAddress } from "@/helpers/xmtp";
+import { useConversation } from "@/hooks/useConversation";
 import styles from "./ConversationCard.module.css";
 
 export type ConversationCardProps = {
   conversationId: string;
+  onSelect?: () => void;
 };
 
 export const ConversationCard: React.FC<ConversationCardProps> = ({
   conversationId,
+  onSelect,
 }) => {
-  const { name, members, messages } = useConversation(conversationId);
+  const { conversation, name, members, messages } =
+    useConversation(conversationId);
   const navigate = useNavigate();
   const { conversationId: paramsConversationId } = useParams();
+  const client = useClient();
 
-  const memberCount = useMemo(() => {
-    return members.size;
-  }, [members]);
+  const memberCount = useMemo(() => members.size, [members]);
+
+  const otherMemberAddress = useMemo(() => {
+    if (!(conversation instanceof Dm)) {
+      return null;
+    }
+    const clientInboxId = client.inboxId;
+    if (!clientInboxId) {
+      return null;
+    }
+    const otherMember = Array.from(members.values()).find(
+      (member) => member.inboxId !== clientInboxId,
+    );
+    return otherMember ? getMemberAddress(otherMember) : null;
+  }, [conversation, members, client.inboxId]);
+
+  const displayName = useMemo(() => {
+    if (name && !isValidInboxId(name)) {
+      return name;
+    }
+    if (otherMemberAddress) {
+      return shortAddress(otherMemberAddress, 4);
+    }
+    if (name) {
+      return shortAddress(name, 4);
+    }
+    return "Untitled";
+  }, [name, otherMemberAddress]);
 
   const { previewText, sentAtLabel } = useMemo(() => {
     const latest = messages[messages.length - 1];
@@ -83,9 +115,13 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             void navigate(`/conversations/${conversationId}`);
+            onSelect?.();
           }
         }}
-        onClick={() => void navigate(`/conversations/${conversationId}`)}
+        onClick={() => {
+          void navigate(`/conversations/${conversationId}`);
+          onSelect?.();
+        }}
         className={[
           styles.root,
           conversationId === paramsConversationId && styles.selected,
@@ -93,7 +129,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
         <Stack gap="xs">
           <Flex align="flex-start" justify="space-between" gap="xs">
             <Text fw={700} className={styles.title} lineClamp={1}>
-              {name || "Untitled"}
+              {displayName}
             </Text>
             {sentAtLabel && (
               <Text size="xs" c="dimmed" className={styles.time}>
