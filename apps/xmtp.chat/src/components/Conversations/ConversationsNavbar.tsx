@@ -97,7 +97,7 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
       await startStreams();
     };
     void loadConversations();
-  }, [client]);
+  }, [client]); // Intentionally only client - we want fresh sync on reconnect
 
   // stop streaming on unmount
   useEffect(() => {
