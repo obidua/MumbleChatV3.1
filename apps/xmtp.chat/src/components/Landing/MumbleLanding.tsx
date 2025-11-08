@@ -292,7 +292,7 @@ export const MumbleLanding: FC = () => {
           <div className={classes.navActions}>
             <a
               className={classes.primaryButton}
-              href="http://localhost:5189/welcome">
+              href="/welcome">
               Launch App
             </a>
             <button
@@ -327,7 +327,7 @@ export const MumbleLanding: FC = () => {
             ))}
             <a
               className={classes.mobilePrimaryButton}
-              href="http://localhost:5189/welcome"
+              href="/welcome"
               onClick={() => {
                 setMenuOpen(false);
               }}>
@@ -366,9 +366,7 @@ export const MumbleLanding: FC = () => {
             <li>Production-ready for payments, gaming, DeFi, and more</li>
           </ul>
           <div className={classes.heroActions}>
-            <a
-              className={classes.primaryButton}
-              href="http://localhost:5189/welcome">
+            <a className={classes.primaryButton} href="/welcome">
               Launch App
             </a>
             <a className={classes.secondaryButton} href="#powered-by">
@@ -1542,9 +1540,7 @@ export const MumbleLanding: FC = () => {
             No emails. No phone numbers. Just you and your community.
           </p>
           <div className={classes.ctaActions}>
-            <a
-              className={classes.primaryButton}
-              href="http://localhost:5189/welcome">
+            <a className={classes.primaryButton} href="/welcome">
               Launch App
             </a>
             <a className={classes.secondaryButton} href="#powered-by">
