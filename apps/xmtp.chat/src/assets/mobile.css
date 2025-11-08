@@ -150,3 +150,142 @@ body,
     ) !important;
   }
 }
+
+/* Dark mode text visibility fixes for Android and iOS */
+@media (prefers-color-scheme: dark) {
+  /* Ensure all text elements have proper contrast in dark mode */
+  body,
+  p,
+  span,
+  div,
+  label,
+  button,
+  input,
+  textarea,
+  select {
+    color: rgba(226, 232, 240, 0.95);
+  }
+
+  /* Ensure headings are visible */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: rgba(241, 245, 249, 0.98);
+  }
+
+  /* Fix for Mantine components */
+  .mantine-Text-root {
+    color: rgba(226, 232, 240, 0.95);
+  }
+
+  .mantine-Title-root {
+    color: rgba(241, 245, 249, 0.98);
+  }
+
+  .mantine-TextInput-label,
+  .mantine-Textarea-label,
+  .mantine-Select-label,
+  .mantine-Checkbox-label {
+    color: rgba(226, 232, 240, 0.9);
+  }
+
+  .mantine-TextInput-input,
+  .mantine-Textarea-input,
+  .mantine-Select-input {
+    color: rgba(241, 245, 249, 0.95);
+    background: rgba(15, 23, 42, 0.6);
+    border-color: rgba(10, 255, 241, 0.2);
+  }
+
+  .mantine-TextInput-input::placeholder,
+  .mantine-Textarea-input::placeholder,
+  .mantine-Select-input::placeholder {
+    color: rgba(148, 163, 184, 0.6);
+  }
+
+  /* Accordion text visibility */
+  .mantine-Accordion-label,
+  .mantine-Accordion-control {
+    color: rgba(241, 245, 249, 0.95);
+  }
+
+  .mantine-Accordion-content {
+    color: rgba(226, 232, 240, 0.9);
+  }
+
+  /* Button text visibility */
+  .mantine-Button-root {
+    color: rgba(241, 245, 249, 0.95);
+  }
+
+  /* Badge text visibility */
+  .mantine-Badge-root {
+    color: rgba(241, 245, 249, 0.95);
+  }
+
+  /* Menu and dropdown text */
+  .mantine-Menu-item,
+  .mantine-Menu-label {
+    color: rgba(226, 232, 240, 0.95);
+  }
+
+  /* Modal and dialog text */
+  .mantine-Modal-title {
+    color: rgba(241, 245, 249, 0.98);
+  }
+
+  .mantine-Modal-body {
+    color: rgba(226, 232, 240, 0.95);
+  }
+
+  /* Stack and Group children */
+  .mantine-Stack-root,
+  .mantine-Group-root {
+    color: rgba(226, 232, 240, 0.95);
+  }
+
+  /* Ensure links are visible */
+  a {
+    color: rgba(10, 255, 241, 0.9);
+  }
+
+  a:hover {
+    color: rgba(10, 255, 241, 1);
+  }
+
+  /* Fix for dimmed text */
+  [data-dimmed="true"],
+  .mantine-Text-root[data-c="dimmed"] {
+    color: rgba(148, 163, 184, 0.8) !important;
+  }
+
+  /* Specific fixes for identity and profile pages */
+  .mantine-Stack-root .mantine-Text-root,
+  .mantine-Group-root .mantine-Text-root {
+    color: rgba(226, 232, 240, 0.95) !important;
+  }
+
+  /* Fix for code and pre elements */
+  code,
+  pre {
+    color: rgba(241, 245, 249, 0.95);
+    background: rgba(15, 23, 42, 0.6);
+  }
+
+  /* Notification text */
+  .mantine-Notification-root {
+    color: rgba(226, 232, 240, 0.95);
+  }
+
+  /* Tab text */
+  .mantine-Tabs-tab {
+    color: rgba(148, 163, 184, 0.8);
+  }
+
+  .mantine-Tabs-tab[data-active="true"] {
+    color: rgba(10, 255, 241, 0.95);
+  }
+}

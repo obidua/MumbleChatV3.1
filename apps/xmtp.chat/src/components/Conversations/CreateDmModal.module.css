@@ -1,0 +1,220 @@
+/* Create DM Modal Styles */
+
+.headerCard {
+  position: relative;
+  padding: var(--mantine-spacing-lg);
+  background: linear-gradient(
+    135deg,
+    rgba(10, 255, 241, 0.12),
+    rgba(151, 114, 251, 0.12)
+  );
+  border-radius: var(--mantine-spacing-md);
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  overflow: hidden;
+}
+
+.headerCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(10, 255, 241, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 50%,
+      rgba(151, 114, 251, 0.15) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.cardContent {
+  position: relative;
+  z-index: 1;
+}
+
+.iconWrapper {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 255, 241, 0.15),
+    rgba(151, 114, 251, 0.15)
+  );
+  border-radius: 16px;
+  border: 1px solid rgba(10, 255, 241, 0.3);
+  flex-shrink: 0;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  color: #0afff1;
+}
+
+.headerTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0afff1, #9772fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.headerSubtitle {
+  font-size: 0.85rem;
+  color: rgba(148, 163, 184, 0.8);
+  margin-top: 4px;
+}
+
+.recipientCard {
+  position: relative;
+  padding: var(--mantine-spacing-lg);
+  background: linear-gradient(
+    135deg,
+    rgba(6, 9, 20, 0.95),
+    rgba(8, 11, 22, 0.92)
+  );
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  border-radius: var(--mantine-spacing-md);
+  box-shadow:
+    0 12px 32px rgba(4, 8, 20, 0.5),
+    0 0 60px rgba(10, 255, 241, 0.08);
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+}
+
+.recipientCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(10, 255, 241, 0.08),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0afff1, #9772fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--mantine-spacing-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--mantine-spacing-sm);
+}
+
+.sectionIcon {
+  width: 20px;
+  height: 20px;
+  color: #0afff1;
+}
+
+.validIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: rgba(10, 255, 241, 0.1);
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  border-radius: 8px;
+  color: #0afff1;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.validIndicator svg {
+  color: #0afff1;
+}
+
+.infoCard {
+  position: relative;
+  padding: var(--mantine-spacing-md);
+  background: linear-gradient(
+    135deg,
+    rgba(6, 9, 20, 0.8),
+    rgba(8, 11, 22, 0.75)
+  );
+  border: 1px solid rgba(10, 255, 241, 0.15);
+  border-radius: var(--mantine-spacing-md);
+  overflow: hidden;
+}
+
+.infoCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at bottom left,
+    rgba(10, 255, 241, 0.06),
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .headerCard,
+  .recipientCard,
+  .infoCard {
+    padding: var(--mantine-spacing-md);
+  }
+
+  .iconWrapper {
+    width: 48px;
+    height: 48px;
+  }
+
+  .icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .headerTitle {
+    font-size: 1.1rem;
+  }
+
+  .headerSubtitle {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerCard,
+  .recipientCard,
+  .infoCard {
+    padding: var(--mantine-spacing-sm);
+    border-radius: var(--mantine-spacing-sm);
+  }
+
+  .iconWrapper {
+    width: 44px;
+    height: 44px;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .headerTitle {
+    font-size: 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 0.9rem;
+  }
+}

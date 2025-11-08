@@ -8,8 +8,9 @@ import {
   Text,
   Tooltip,
 } from "@mantine/core";
+import { useClipboard } from "@mantine/hooks";
 import { formatDistanceToNow } from "date-fns";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Outlet, useNavigate } from "react-router";
 import { AppHeader } from "@/components/App/AppHeader";
 import { BadgeWithCopy } from "@/components/BadgeWithCopy";
@@ -53,6 +54,37 @@ export const IdentityModal: React.FC = () => {
   const handleClose = useCallback(() => {
     void navigate(-1);
   }, [navigate]);
+
+  // Generate shareable message link
+  const shareableLink = useMemo(() => {
+    if (!accountIdentifier) return "";
+    const baseUrl = window.location.origin;
+    return `${baseUrl}/dm/${accountIdentifier}`;
+  }, [accountIdentifier]);
+
+  const clipboard = useClipboard({ timeout: 2000 });
+
+  const handleCopyLink = () => {
+    clipboard.copy(shareableLink);
+  };
+
+  const handleShareLink = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Message me on MumbleChat",
+          text: "Send me a secure, encrypted message on MumbleChat",
+          url: shareableLink,
+        });
+      } catch {
+        // User cancelled share or share failed, fallback to copy
+        handleCopyLink();
+      }
+    } else {
+      handleCopyLink();
+    }
+  };
 
   return (
     <>
@@ -198,6 +230,116 @@ export const IdentityModal: React.FC = () => {
                     </div>
                   </div>
                 </Stack>
+              </div>
+            </div>
+
+            {/* Shareable Message Link Card */}
+            <div className={classes.shareCard}>
+              <div className={classes.cardContent}>
+                <div className={classes.sectionTitle}>
+                  <svg
+                    className={classes.sectionIcon}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                    />
+                  </svg>
+                  Share Your Profile
+                </div>
+
+                <Text size="sm" c="dimmed" mb="md" mt="xs">
+                  Share this link with anyone to let them send you encrypted
+                  messages on MumbleChat.
+                </Text>
+
+                <div className={classes.linkDisplay}>
+                  <Text size="xs" className={classes.linkText}>
+                    {shareableLink}
+                  </Text>
+                </div>
+
+                <Group gap="sm" mt="md">
+                  <Button
+                    fullWidth
+                    variant="gradient"
+                    gradient={{ from: "#0afff1", to: "#9772fb" }}
+                    onClick={handleCopyLink}
+                    leftSection={
+                      clipboard.copied ? (
+                        <svg
+                          width="18"
+                          height="18"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          width="18"
+                          height="18"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                          />
+                        </svg>
+                      )
+                    }
+                    styles={{
+                      root: {
+                        fontWeight: 700,
+                      },
+                    }}>
+                    {clipboard.copied ? "Copied!" : "Copy Link"}
+                  </Button>
+
+                  {"share" in navigator && (
+                    <Button
+                      fullWidth
+                      variant="light"
+                      onClick={() => void handleShareLink()}
+                      leftSection={
+                        <svg
+                          width="18"
+                          height="18"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                          />
+                        </svg>
+                      }
+                      styles={{
+                        root: {
+                          background: "rgba(10, 255, 241, 0.1)",
+                          border: "1px solid rgba(10, 255, 241, 0.2)",
+                          color: "#0afff1",
+                          fontWeight: 700,
+                        },
+                      }}>
+                      Share
+                    </Button>
+                  )}
+                </Group>
               </div>
             </div>
 

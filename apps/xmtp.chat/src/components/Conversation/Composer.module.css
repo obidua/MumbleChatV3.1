@@ -4,7 +4,7 @@
 
 .composer {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: var(--mantine-spacing-sm);
   padding: 10px 14px;
@@ -52,29 +52,35 @@
 }
 
 .sendButton {
-  padding-inline: 18px;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  padding: 0;
   background: linear-gradient(135deg, #0afff1, rgba(10, 255, 241, 0.85));
   color: #04060f;
-  font-weight: 600;
   border: none;
   box-shadow:
-    0 12px 28px rgba(10, 255, 241, 0.28),
+    0 6px 18px rgba(10, 255, 241, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sendButton:hover:not(:disabled) {
   background: linear-gradient(135deg, #0afff1, #0de6d8);
-  transform: translateY(-2px);
+  transform: scale(1.05);
   box-shadow:
-    0 16px 36px rgba(10, 255, 241, 0.36),
+    0 8px 24px rgba(10, 255, 241, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .sendButton:active:not(:disabled) {
-  transform: translateY(0);
+  transform: scale(0.95);
   box-shadow:
-    0 8px 20px rgba(10, 255, 241, 0.24),
+    0 4px 12px rgba(10, 255, 241, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
@@ -83,18 +89,22 @@
   color: rgba(148, 163, 184, 0.5);
   box-shadow: none;
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
 @media (max-width: 640px) {
   .composer {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr auto;
     gap: var(--mantine-spacing-xs);
     padding: 8px 12px;
     border-radius: 28px;
   }
 
   .sendButton {
-    padding-inline: 14px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
   }
 }
 
@@ -105,8 +115,10 @@
   }
 
   .sendButton {
-    padding-inline: 12px;
-    font-size: 0.9rem;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    min-height: 34px;
   }
 
   .input {

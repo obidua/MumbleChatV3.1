@@ -5,15 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="description" content="MumbleChat delivers decentralized, encrypted messaging on Ramestta with a wallet-native experience." />
     <meta name="theme-color" content="#0afff1" />
+    
+    <!-- iOS PWA Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="MumbleChat" />
+    
+    <!-- Android PWA Meta Tags -->
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="format-detection" content="telephone=no" />
+    
+    <!-- Prevent auto-zoom on iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no" />
+    
+    <!-- Disable tap highlight -->
+    <meta name="msapplication-tap-highlight" content="no" />
+    
+    <!-- Status bar appearance -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- Icons and Manifest -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
     <title>MumbleChat - Decentralized Messaging</title>
+    
+    <!-- Prevent bounce scrolling on iOS -->
+    <style>
+      html, body {
+        overscroll-behavior-y: none;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
+      }
+      
+      /* Prevent pull-to-refresh */
+      body {
+        overflow: hidden;
+      }
+      
+      #root {
+        overflow: auto;
+        height: 100vh;
+        height: 100dvh;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

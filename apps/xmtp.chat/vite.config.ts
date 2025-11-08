@@ -9,38 +9,10 @@ export default defineConfig({
     tsconfigPaths(),
     react(),
     VitePWA({
-      registerType: "autoUpdate",
+      registerType: "prompt",
+      injectRegister: "auto",
       includeAssets: ["favicon.svg", "apple-touch-icon.png", "icons/*.png"],
-      manifest: {
-        name: "MumbleChat",
-        short_name: "MumbleChat",
-        description:
-          "Decentralized messaging on Ramestta with XMTP—secure, fast, and community owned.",
-        theme_color: "#0afff1",
-        background_color: "#05060f",
-        display: "standalone",
-        orientation: "portrait-primary",
-        icons: [
-          {
-            src: "/icons/icon-192x192.png",
-            sizes: "192x192",
-            type: "image/png",
-            purpose: "any",
-          },
-          {
-            src: "/icons/icon-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "any",
-          },
-          {
-            src: "/icons/icon-512x512-maskable.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "maskable",
-          },
-        ],
-      },
+      manifest: false, // Use external manifest file
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         runtimeCaching: [

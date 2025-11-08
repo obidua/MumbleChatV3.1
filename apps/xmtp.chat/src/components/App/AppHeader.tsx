@@ -51,7 +51,6 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ opened, toggle }) => {
       </Flex>
       <div className={classes.statusContainer}>
         <div className={classes.statusDot} />
-        <Text className={classes.statusText}>Online</Text>
         <Tooltip label="Disconnect wallet">
           <ActionIcon
             variant="subtle"

@@ -19,6 +19,8 @@ import { InboxTools } from "@/components/InboxTools/InboxTools";
 import { InboxToolsLayout } from "@/components/InboxTools/InboxToolsLayout";
 import { MumbleLanding } from "@/components/Landing/MumbleLanding";
 import { MessageModal } from "@/components/Messages/MessageModal";
+import { InstallPrompt } from "@/components/PWA/InstallPrompt";
+import { IOSInstallPrompt } from "@/components/PWA/IOSInstallPrompt";
 import { useAnalytics } from "@/hooks/useAnalytics";
 
 export const App: React.FC = () => {
@@ -27,6 +29,8 @@ export const App: React.FC = () => {
   return (
     <>
       <ErrorModal />
+      <InstallPrompt />
+      <IOSInstallPrompt />
       <Routes>
         <Route path="/" element={<MumbleLanding />} />
         <Route path="/welcome/*" element={<BasicLayout />}>

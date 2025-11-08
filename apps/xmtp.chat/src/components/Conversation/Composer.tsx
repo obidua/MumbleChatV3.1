@@ -1,4 +1,12 @@
-import { Box, Button, Group, Stack, Text, TextInput } from "@mantine/core";
+import {
+  ActionIcon,
+  Box,
+  Button,
+  Group,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
 import {
   ContentTypeRemoteAttachment,
   type RemoteAttachment,
@@ -10,6 +18,7 @@ import { Modal } from "@/components/Modal";
 import { useConversationContext } from "@/contexts/ConversationContext";
 import { uploadAttachment } from "@/helpers/attachment"; // validateFile disabled for Phase 1
 import { useConversation } from "@/hooks/useConversation";
+import { IconSend } from "@/icons/IconSend";
 // import { IconPlus } from "@/icons/IconPlus"; // Disabled for Phase 1
 import { AttachmentPreview } from "./AttachmentPreview";
 import classes from "./Composer.module.css";
@@ -193,17 +202,18 @@ export const Composer: React.FC<ComposerProps> = ({ conversationId }) => {
               }}
               classNames={{ input: classes.input }}
             />
-            <Button
+            <ActionIcon
               disabled={!hasContent}
               loading={isSending}
-              size="md"
+              size="lg"
               radius="xl"
               className={classes.sendButton}
               variant="gradient"
               gradient={{ from: "#0afff1", to: "#9772fb" }}
-              onClick={() => void handleSend()}>
-              Send
-            </Button>
+              onClick={() => void handleSend()}
+              aria-label="Send message">
+              <IconSend size={20} />
+            </ActionIcon>
           </div>
         </Stack>
       </Box>

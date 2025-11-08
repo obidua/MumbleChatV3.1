@@ -209,18 +209,48 @@ createRoot(document.getElementById("root") as HTMLElement).render(
 
 console.log("[xmtp.chat] XMTP Browser SDK version:", pkg.version);
 
-if ("serviceWorker" in navigator && import.meta.env.PROD) {
+// Register service worker for PWA
+if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("/sw.js")
-      .then((registration) => {
-        console.log(
-          "[xmtp.chat] Service worker registered:",
-          registration.scope,
-        );
-      })
-      .catch((error: unknown) => {
-        console.error("[xmtp.chat] Service worker registration failed:", error);
-      });
+    if (import.meta.env.PROD) {
+      navigator.serviceWorker
+        .register("/sw.js", { scope: "/" })
+        .then((registration) => {
+          console.log(
+            "[xmtp.chat] Service worker registered:",
+            registration.scope,
+          );
+
+          // Check for updates periodically
+          setInterval(
+            () => {
+              registration.update();
+            },
+            60 * 60 * 1000,
+          ); // Check every hour
+        })
+        .catch((error: unknown) => {
+          console.error(
+            "[xmtp.chat] Service worker registration failed:",
+            error,
+          );
+        });
+    } else {
+      // Development mode - still register for testing
+      navigator.serviceWorker
+        .register("/dev-sw.js?dev-sw", { type: "module", scope: "/" })
+        .then((registration) => {
+          console.log(
+            "[xmtp.chat] Dev service worker registered:",
+            registration.scope,
+          );
+        })
+        .catch((error: unknown) => {
+          console.log(
+            "[xmtp.chat] Dev service worker registration skipped:",
+            error,
+          );
+        });
+    }
   });
 }

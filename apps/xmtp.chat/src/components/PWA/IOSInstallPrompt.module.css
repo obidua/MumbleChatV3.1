@@ -1,0 +1,121 @@
+.iosInstallPrompt {
+  position: fixed;
+  bottom: calc(
+    var(--bottom-nav-height, 0px) + env(safe-area-inset-bottom, 0px) + 16px
+  );
+  left: 16px;
+  right: 16px;
+  z-index: 9999;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.content {
+  background: linear-gradient(
+    135deg,
+    rgba(6, 9, 20, 0.98),
+    rgba(10, 13, 25, 0.98)
+  );
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(10, 255, 241, 0.3);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow:
+    0 12px 32px rgba(4, 8, 20, 0.6),
+    0 0 60px rgba(10, 255, 241, 0.15),
+    0 0 0 1px rgba(10, 255, 241, 0.1) inset;
+}
+
+.title {
+  color: rgba(255, 255, 255, 0.95);
+  flex: 1;
+}
+
+.description {
+  color: rgba(148, 163, 184, 0.8);
+  margin-bottom: 4px;
+}
+
+.steps {
+  padding: 12px;
+  background: rgba(10, 255, 241, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(10, 255, 241, 0.1);
+}
+
+.stepIcon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 255, 241, 0.15),
+    rgba(151, 114, 251, 0.15)
+  );
+  border-radius: 8px;
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  color: #0afff1;
+}
+
+.stepText {
+  color: rgba(226, 232, 240, 0.9);
+  flex: 1;
+}
+
+.stepText strong {
+  color: #0afff1;
+  font-weight: 700;
+}
+
+.closeButton {
+  color: rgba(148, 163, 184, 0.7);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.closeButton:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(10, 255, 241, 0.1);
+}
+
+/* Desktop - hide on desktop */
+@media screen and (min-width: 768px) {
+  .iosInstallPrompt {
+    display: none;
+  }
+}
+
+/* Mobile landscape */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .iosInstallPrompt {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .content {
+    padding: 12px;
+  }
+
+  .steps {
+    padding: 8px;
+  }
+
+  .stepIcon {
+    width: 28px;
+    height: 28px;
+  }
+}

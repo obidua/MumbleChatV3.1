@@ -10,7 +10,7 @@
   );
   --nav-width: clamp(260px, 22vw, 340px);
   --bottom-nav-height: 65px;
-  --mobile-safe-area-bottom: env(safe-area-inset-bottom, 0);
+  --mobile-safe-area-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .root {

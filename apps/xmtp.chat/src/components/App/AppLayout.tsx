@@ -50,7 +50,8 @@ export const AppLayout: React.FC = () => {
     location.pathname.startsWith("/conversations/") &&
     location.pathname !== "/conversations/new-dm" &&
     location.pathname !== "/conversations/new-group" &&
-    location.pathname !== "/conversations/identity";
+    location.pathname !== "/conversations/identity" &&
+    !location.pathname.includes("/conversations/identity/");
 
   return !client ? (
     <CenteredLayout fullScreen>
