@@ -90,14 +90,14 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
     await startStreams();
   }, [syncAll, startStreams, stopStreams]);
 
-  // loading conversations on mount, and start streaming
+  // loading conversations on mount and when client changes, and start streaming
   useEffect(() => {
     const loadConversations = async () => {
       await sync(true);
       await startStreams();
     };
     void loadConversations();
-  }, []);
+  }, [client]);
 
   // stop streaming on unmount
   useEffect(() => {

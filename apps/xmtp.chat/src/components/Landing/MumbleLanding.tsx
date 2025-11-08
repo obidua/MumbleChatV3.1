@@ -290,9 +290,7 @@ export const MumbleLanding: FC = () => {
             ))}
           </nav>
           <div className={classes.navActions}>
-            <a
-              className={classes.primaryButton}
-              href="/welcome">
+            <a className={classes.primaryButton} href="/welcome">
               Launch App
             </a>
             <button

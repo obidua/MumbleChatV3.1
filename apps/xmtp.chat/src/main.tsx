@@ -224,7 +224,7 @@ if ("serviceWorker" in navigator) {
           // Check for updates periodically
           setInterval(
             () => {
-              registration.update();
+              void registration.update();
             },
             60 * 60 * 1000,
           ); // Check every hour
