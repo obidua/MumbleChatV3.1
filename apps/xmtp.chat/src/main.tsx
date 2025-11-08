@@ -35,6 +35,7 @@ import { ramestta } from "@/chains/ramestta";
 import { App } from "@/components/App/App";
 import { XMTPProvider } from "@/contexts/XMTPContext";
 import { queryClient } from "@/helpers/queries";
+import { registerSW } from "virtual:pwa-register";
 
 export const config = createConfig({
   connectors: [
@@ -209,48 +210,24 @@ createRoot(document.getElementById("root") as HTMLElement).render(
 
 console.log("[xmtp.chat] XMTP Browser SDK version:", pkg.version);
 
-// Register service worker for PWA
+// Register service worker for PWA (handled by vite-plugin-pwa helper)
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    if (import.meta.env.PROD) {
-      navigator.serviceWorker
-        .register("/sw.js", { scope: "/" })
-        .then((registration) => {
-          console.log(
-            "[xmtp.chat] Service worker registered:",
-            registration.scope,
-          );
-
-          // Check for updates periodically
-          setInterval(
-            () => {
-              void registration.update();
-            },
-            60 * 60 * 1000,
-          ); // Check every hour
-        })
-        .catch((error: unknown) => {
-          console.error(
-            "[xmtp.chat] Service worker registration failed:",
-            error,
-          );
-        });
-    } else {
-      // Development mode - still register for testing
-      navigator.serviceWorker
-        .register("/dev-sw.js?dev-sw", { type: "module", scope: "/" })
-        .then((registration) => {
-          console.log(
-            "[xmtp.chat] Dev service worker registered:",
-            registration.scope,
-          );
-        })
-        .catch((error: unknown) => {
-          console.log(
-            "[xmtp.chat] Dev service worker registration skipped:",
-            error,
-          );
-        });
-    }
+  registerSW({
+    immediate: true,
+    onRegisteredSW(swUrl, registration) {
+      if (registration) {
+        console.log(
+          "[xmtp.chat] Service worker registered:",
+          swUrl ?? registration.scope,
+        );
+        // keep the worker fresh without waiting for a reload
+        setInterval(() => {
+          void registration.update();
+        }, 60 * 60 * 1000);
+      }
+    },
+    onRegisterError(error) {
+      console.error("[xmtp.chat] Service worker registration failed:", error);
+    },
   });
 }

@@ -7,6 +7,7 @@ import type {
 import { useState } from "react";
 import { useClient, type ContentTypes } from "@/contexts/XMTPContext";
 import { dateToNs } from "@/helpers/date";
+import { notificationService } from "@/services/notificationService";
 import {
   useActions,
   useConversations as useConversationsState,
@@ -39,11 +40,11 @@ export const useConversations = () => {
       // When syncing from network or on initial load, fetch ALL conversations
       // from the XMTP client's IndexedDB storage (it persists across reconnects)
       // Only use incremental sync (createdAfterNs) when we already have conversations loaded
-      const shouldFetchAll = fromNetwork || conversations.length === 0;
+      // IMPORTANT: Always fetch all when conversations.length === 0 (e.g., after disconnect/reconnect)
+      const shouldFetchAll =
+        fromNetwork || conversations.length === 0 || !lastCreatedAt;
       const convos = await client.conversations.list(
-        shouldFetchAll || !lastCreatedAt
-          ? {}
-          : { createdAfterNs: lastCreatedAt },
+        shouldFetchAll ? {} : { createdAfterNs: lastCreatedAt },
       );
       await addConversations(convos);
       setLastSyncedAt(dateToNs(new Date()));
@@ -180,6 +181,38 @@ export const useConversations = () => {
   const streamAllMessages = async () => {
     const onValue = (message: DecodedMessage<ContentTypes>) => {
       void addMessage(message.conversationId, message);
+
+      // Show notification for new messages (non-blocking)
+      if (message.senderInboxId !== client.inboxId) {
+        try {
+          let senderName = "Someone";
+          const conversationName = "Chat";
+
+          // Get sender's inbox ID for display
+          if (message.senderInboxId) {
+            senderName = message.senderInboxId.slice(0, 10) + "...";
+          }
+
+          const messagePreview =
+            typeof message.content === "string"
+              ? message.content.slice(0, 100)
+              : "New message";
+
+          notificationService.showMessageNotification({
+            title: `${senderName} • ${conversationName}`,
+            body: messagePreview,
+            tag: `message-${message.id}`,
+            conversationId: message.conversationId,
+            onClick: () => {
+              // Navigate to conversation
+              const url = `/dm/${message.conversationId}`;
+              window.location.href = url;
+            },
+          });
+        } catch (error) {
+          console.error("Error showing notification:", error);
+        }
+      }
     };
 
     const stream = await client.conversations.streamAllMessages({

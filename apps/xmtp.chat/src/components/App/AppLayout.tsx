@@ -26,6 +26,14 @@ export const AppLayout: React.FC = () => {
   const isCollapsed = useCollapsedMediaQuery();
   const isMobile = useMobile();
 
+  // Debug log for mobile detection
+  useEffect(() => {
+    console.log("[AppLayout] isMobile:", isMobile);
+    console.log("[AppLayout] isCollapsed:", isCollapsed);
+    console.log("[AppLayout] window.innerWidth:", window.innerWidth);
+    console.log("[AppLayout] location.pathname:", location.pathname);
+  }, [isMobile, isCollapsed, location.pathname]);
+
   const handleConversationSelected = () => {
     if (isCollapsed) {
       close();

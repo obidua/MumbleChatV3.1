@@ -64,6 +64,7 @@ export type InboxActions = {
   ) => Promise<void>;
   getConversation: (id: string) => Conversation<ContentTypes> | undefined;
   hasConversation: (id: string) => boolean;
+  removeConversation: (conversationId: string) => void;
   addMessage: (
     conversationId: string,
     message: DecodedMessage<ContentTypes>,
@@ -252,6 +253,42 @@ export const inboxStore = createStore<InboxState & InboxActions>()(
     },
     hasConversation: (id: string) => {
       return get().conversations.has(id);
+    },
+    removeConversation: (conversationId: string) => {
+      const state = get();
+      const newConversations = new Map(state.conversations);
+      const newMembers = new Map(state.members);
+      const newMessages = new Map(state.messages);
+      const newMetadata = new Map(state.metadata);
+      const newPermissions = new Map(state.permissions);
+      const newLastMessages = new Map(state.lastMessages);
+      const newLastSentAt = new Map(state.lastSentAt);
+      const newSortedMessages = new Map(state.sortedMessages);
+
+      // Remove all data associated with this conversation
+      newConversations.delete(conversationId);
+      newMembers.delete(conversationId);
+      newMessages.delete(conversationId);
+      newMetadata.delete(conversationId);
+      newPermissions.delete(conversationId);
+      newLastMessages.delete(conversationId);
+      newLastSentAt.delete(conversationId);
+      newSortedMessages.delete(conversationId);
+
+      set({
+        conversations: newConversations,
+        members: newMembers,
+        messages: newMessages,
+        metadata: newMetadata,
+        permissions: newPermissions,
+        lastMessages: newLastMessages,
+        lastSentAt: newLastSentAt,
+        sortedMessages: newSortedMessages,
+        sortedConversations: sortConversations(
+          newConversations,
+          newLastMessages,
+        ),
+      });
     },
     addMessage: async (
       conversationId: string,

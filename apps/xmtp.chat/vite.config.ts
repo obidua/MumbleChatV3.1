@@ -9,13 +9,91 @@ export default defineConfig({
     tsconfigPaths(),
     react(),
     VitePWA({
-      registerType: "prompt",
-      injectRegister: "auto",
+      registerType: "autoUpdate",
+      injectRegister: null,
       includeAssets: ["favicon.svg", "apple-touch-icon.png", "icons/*.png"],
-      manifest: false, // Use external manifest file
+      manifest: {
+        name: "MumbleChat - Decentralized Messaging",
+        short_name: "MumbleChat",
+        description:
+          "Decentralized messaging on Ramestta with XMTP—secure, fast, and community owned.",
+        start_url: "/",
+        scope: "/",
+        display: "fullscreen",
+        display_override: ["fullscreen", "standalone", "minimal-ui"],
+        orientation: "any",
+        background_color: "#05060f",
+        theme_color: "#0afff1",
+        categories: ["social", "productivity", "communication"],
+        lang: "en-US",
+        screenshots: [
+          {
+            src: "/Screenshots/chat-screen.png",
+            type: "image/png",
+            sizes: "1170x2532",
+            form_factor: "narrow",
+            label: "Chat interface",
+          },
+          {
+            src: "/Screenshots/contacts-screen.png",
+            type: "image/png",
+            sizes: "1170x2532",
+            form_factor: "narrow",
+            label: "Contacts list",
+          },
+        ],
+        icons: [
+          {
+            src: "/icons/icon-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "/icons/icon-256x256.png",
+            sizes: "256x256",
+            type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "/icons/icon-384x384.png",
+            sizes: "384x384",
+            type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "/icons/icon-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "/icons/icon-512x512-maskable.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable",
+          },
+        ],
+        shortcuts: [
+          {
+            name: "New Chat",
+            short_name: "New Chat",
+            description: "Start a new direct message",
+            url: "/conversations/new-dm",
+            icons: [{ src: "/icons/icon-192x192.png", sizes: "192x192" }],
+          },
+          {
+            name: "New Group",
+            short_name: "New Group",
+            description: "Create a new group chat",
+            url: "/conversations/new-group",
+            icons: [{ src: "/icons/icon-192x192.png", sizes: "192x192" }],
+          },
+        ],
+      },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
-        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3 MiB (increased from default 2 MiB)
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2,wasm}"],
+        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024, // 10 MiB for WASM files
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

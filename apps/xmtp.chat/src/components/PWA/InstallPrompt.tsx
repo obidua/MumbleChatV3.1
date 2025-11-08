@@ -13,7 +13,22 @@ export const InstallPrompt: React.FC = () => {
   const [showPrompt, setShowPrompt] = useState(false);
 
   useEffect(() => {
+    // Check if already installed
+    if (window.matchMedia("(display-mode: standalone)").matches) {
+      console.log("PWA: Already installed");
+      setShowPrompt(false);
+      return;
+    }
+
+    // Also check for fullscreen mode
+    if (window.matchMedia("(display-mode: fullscreen)").matches) {
+      console.log("PWA: Already installed (fullscreen)");
+      setShowPrompt(false);
+      return;
+    }
+
     const handler = (e: Event) => {
+      console.log("PWA: beforeinstallprompt event fired!");
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
 
@@ -23,19 +38,34 @@ export const InstallPrompt: React.FC = () => {
       const daysSinceDismissed =
         (Date.now() - dismissedTime) / (1000 * 60 * 60 * 24);
 
-      // Show prompt if never dismissed or dismissed more than 7 days ago
-      if (!dismissed || daysSinceDismissed > 7) {
-        // Show prompt immediately for better visibility
+      console.log("PWA: Days since dismissed:", daysSinceDismissed);
+
+      // Show prompt if never dismissed or dismissed more than 1 day ago
+      if (!dismissed || daysSinceDismissed > 1) {
+        console.log("PWA: Showing install prompt");
         setShowPrompt(true);
+      } else {
+        console.log("PWA: Not showing - recently dismissed");
       }
     };
 
+    console.log("PWA: Listening for beforeinstallprompt event");
+    console.log("PWA: User Agent:", navigator.userAgent);
+    console.log(
+      "PWA: Display Mode:",
+      window.matchMedia("(display-mode: browser)").matches
+        ? "browser"
+        : "standalone/fullscreen",
+    );
+
     window.addEventListener("beforeinstallprompt", handler);
 
-    // Check if already installed
-    if (window.matchMedia("(display-mode: standalone)").matches) {
+    // Also listen for app installed event
+    window.addEventListener("appinstalled", () => {
+      console.log("PWA: App installed successfully!");
       setShowPrompt(false);
-    }
+      setDeferredPrompt(null);
+    });
 
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);

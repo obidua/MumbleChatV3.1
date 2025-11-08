@@ -103,10 +103,19 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
   // loading conversations on mount and when client changes, and start streaming
   useEffect(() => {
     const loadConversations = async () => {
+      // Stop any existing streams first
+      stopStreams();
+      // Sync from network to get latest conversations
       await sync(true);
+      // Start streaming for new conversations and messages
       await startStreams();
     };
     void loadConversations();
+
+    // Cleanup: stop streams when client changes or component unmounts
+    return () => {
+      stopStreams();
+    };
   }, [client]); // Intentionally only client - we want fresh sync on reconnect
 
   // stop streaming on unmount

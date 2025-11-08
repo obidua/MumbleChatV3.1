@@ -198,10 +198,11 @@ export const XMTPProvider: React.FC<XMTPProviderProps> = ({
   const disconnect = useCallback(() => {
     if (client) {
       client.close();
-      setClient(undefined);
-      reset();
     }
-  }, [client, setClient]);
+    setClient(undefined);
+    // Reset the inbox store to clear all conversations and messages
+    reset();
+  }, [client, reset]);
 
   // memo-ize the context value to prevent unnecessary re-renders
   const value = useMemo(

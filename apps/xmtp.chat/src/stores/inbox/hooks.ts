@@ -93,6 +93,10 @@ export const useActions = () => {
     inboxStore,
     (state) => state.hasConversation,
   );
+  const removeConversation = useStore(
+    inboxStore,
+    (state) => state.removeConversation,
+  );
   const addMessage = useStore(inboxStore, (state) => state.addMessage);
   const addMessages = useStore(inboxStore, (state) => state.addMessages);
   const getMessage = useStore(inboxStore, (state) => state.getMessage);
@@ -114,6 +118,7 @@ export const useActions = () => {
     addConversations,
     getConversation,
     hasConversation,
+    removeConversation,
     addMessage,
     addMessages,
     getMessage,

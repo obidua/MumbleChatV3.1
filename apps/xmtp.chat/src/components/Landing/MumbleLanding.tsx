@@ -1,4 +1,5 @@
 import { useEffect, useState, type FC } from "react";
+import { LandingInstallBanner } from "@/components/PWA/LandingInstallBanner";
 import { MumbleChatLogo } from "@/icons/MumbleChatLogo";
 import classes from "./MumbleLanding.module.css";
 
@@ -261,6 +262,7 @@ export const MumbleLanding: FC = () => {
 
   return (
     <div className={classes.page}>
+      <LandingInstallBanner />
       <div className={classes.background} aria-hidden="true" />
       <header className={navClass}>
         <div className={classes.navContainer}>
