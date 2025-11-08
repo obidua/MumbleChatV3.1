@@ -15,6 +15,7 @@ import { Outlet, useNavigate } from "react-router";
 import { AppHeader } from "@/components/App/AppHeader";
 import { BadgeWithCopy } from "@/components/BadgeWithCopy";
 import { Modal } from "@/components/Modal";
+import { QRCodeModal } from "@/components/QRCode/QRCodeModal";
 import { useClient } from "@/contexts/XMTPContext";
 import { nsToDate } from "@/helpers/date";
 import { useCollapsedMediaQuery } from "@/hooks/useCollapsedMediaQuery";
@@ -36,6 +37,7 @@ export const IdentityModal: React.FC = () => {
   const [accountIdentifier, setAccountIdentifier] = useState<string | null>(
     null,
   );
+  const [showQRCode, setShowQRCode] = useState(false);
 
   const fullScreen = useCollapsedMediaQuery();
   const contentHeight = fullScreen ? "auto" : "70dvh";
@@ -230,6 +232,40 @@ export const IdentityModal: React.FC = () => {
                     </div>
                   </div>
                 </Stack>
+
+                {/* QR Code Button */}
+                <Button
+                  fullWidth
+                  size="md"
+                  variant="gradient"
+                  gradient={{ from: "#0afff1", to: "#9772fb", deg: 135 }}
+                  onClick={() => {
+                    setShowQRCode(true);
+                  }}
+                  mt="md"
+                  leftSection={
+                    <svg
+                      width="20"
+                      height="20"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M12 12h-4.01M12 12V8m0 4h4.01M12 12h-4.01M12 12v4m6-4h.01M12 12h.01M12 8h.01M12 8h4.01M12 8h-4.01M16 12h.01M8 12h.01"
+                      />
+                    </svg>
+                  }
+                  styles={{
+                    root: {
+                      fontWeight: 700,
+                      boxShadow: "0 4px 12px rgba(10, 255, 241, 0.3)",
+                    },
+                  }}>
+                  Show QR Code
+                </Button>
               </div>
             </div>
 
@@ -551,6 +587,18 @@ export const IdentityModal: React.FC = () => {
           </Stack>
         </ContentLayout>
       </Modal>
+
+      {/* QR Code Modal */}
+      {accountIdentifier && (
+        <QRCodeModal
+          opened={showQRCode}
+          onClose={() => {
+            setShowQRCode(false);
+          }}
+          address={accountIdentifier}
+        />
+      )}
+
       <Outlet />
     </>
   );

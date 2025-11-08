@@ -1,7 +1,16 @@
-import { Badge, Box, Group, Text, TextInput } from "@mantine/core";
+import {
+  ActionIcon,
+  Badge,
+  Box,
+  Group,
+  Text,
+  TextInput,
+  Tooltip,
+} from "@mantine/core";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ConversationsList } from "@/components/Conversations/ConversationList";
 import { ConversationsMenu } from "@/components/Conversations/ConversationsMenu";
+import { QRScannerModal } from "@/components/QRCode/QRScannerModal";
 import { useClient } from "@/contexts/XMTPContext";
 import { getMemberAddress } from "@/helpers/xmtp";
 import { useConversations } from "@/hooks/useConversations";
@@ -28,6 +37,7 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
   const stopConversationStreamRef = useRef<(() => void) | null>(null);
   const stopAllMessagesStreamRef = useRef<(() => void) | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showQRScanner, setShowQRScanner] = useState(false);
   const client = useClient();
 
   // Filter conversations based on search query
@@ -140,12 +150,42 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
       }
       loading={conversations.length === 0 && loading}
       headerActions={
-        <ConversationsMenu
-          loading={syncing || loading}
-          onSync={() => void handleSync()}
-          onSyncAll={() => void handleSyncAll()}
-          disabled={syncing}
-        />
+        <Group gap="xs">
+          <Tooltip label="Scan QR Code">
+            <ActionIcon
+              variant="light"
+              radius="xl"
+              size="lg"
+              onClick={() => {
+                setShowQRScanner(true);
+              }}
+              style={{
+                background: "rgba(151, 114, 251, 0.16)",
+                border: "1px solid rgba(151, 114, 251, 0.25)",
+                color: "#9772fb",
+              }}>
+              <svg
+                width="20"
+                height="20"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M12 12h-4.01M12 12V8m0 4h4.01M12 12h-4.01M12 12v4m6-4h.01M12 12h.01M12 8h.01M12 8h4.01M12 8h-4.01M16 12h.01M8 12h.01"
+                />
+              </svg>
+            </ActionIcon>
+          </Tooltip>
+          <ConversationsMenu
+            loading={syncing || loading}
+            onSync={() => void handleSync()}
+            onSyncAll={() => void handleSyncAll()}
+            disabled={syncing}
+          />
+        </Group>
       }
       withScrollArea={false}>
       {/* Search Bar */}
@@ -203,6 +243,13 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
           onConversationSelected={onConversationSelected}
         />
       )}
+
+      <QRScannerModal
+        opened={showQRScanner}
+        onClose={() => {
+          setShowQRScanner(false);
+        }}
+      />
     </ContentLayout>
   );
 };

@@ -87,6 +87,7 @@ export type InboxActions = {
 export const inboxStore = createStore<InboxState & InboxActions>()(
   (set, get, store) => ({
     conversations: new Map(),
+    lastCreatedAt: undefined,
     lastMessages: new Map(),
     lastSentAt: new Map(),
     members: new Map(),
@@ -95,6 +96,7 @@ export const inboxStore = createStore<InboxState & InboxActions>()(
     permissions: new Map(),
     sortedConversations: [],
     sortedMessages: new Map(),
+    lastSyncedAt: undefined,
     addConversation: async (conversation: Conversation<ContentTypes>) => {
       const state = get();
       // update conversations state

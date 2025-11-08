@@ -28,10 +28,8 @@ export const IOSInstallPrompt: React.FC = () => {
       !isInStandaloneMode &&
       (!dismissed || daysSinceDismissed > 7)
     ) {
-      // Delay showing the prompt by 5 seconds for better UX
-      setTimeout(() => {
-        setShowPrompt(true);
-      }, 5000);
+      // Show prompt immediately for better visibility
+      setShowPrompt(true);
     }
   }, []);
 

@@ -15,6 +15,7 @@ export default defineConfig({
       manifest: false, // Use external manifest file
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3 MiB (increased from default 2 MiB)
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

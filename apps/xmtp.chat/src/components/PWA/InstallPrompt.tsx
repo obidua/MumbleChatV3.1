@@ -25,10 +25,8 @@ export const InstallPrompt: React.FC = () => {
 
       // Show prompt if never dismissed or dismissed more than 7 days ago
       if (!dismissed || daysSinceDismissed > 7) {
-        // Delay showing the prompt by 3 seconds for better UX
-        setTimeout(() => {
-          setShowPrompt(true);
-        }, 3000);
+        // Show prompt immediately for better visibility
+        setShowPrompt(true);
       }
     };
 

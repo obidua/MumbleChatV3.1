@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
 import { AppHeader } from "@/components/App/AppHeader";
 import { Modal } from "@/components/Modal";
+import { QRScannerModal } from "@/components/QRCode/QRScannerModal";
 import { useClient } from "@/contexts/XMTPContext";
 import { useCollapsedMediaQuery } from "@/hooks/useCollapsedMediaQuery";
 import { useConversations } from "@/hooks/useConversations";
@@ -15,6 +16,7 @@ export const CreateDmModal: React.FC = () => {
   const { newDm } = useConversations();
   const { addConversation } = useActions();
   const [loading, setLoading] = useState(false);
+  const [showScanner, setShowScanner] = useState(false);
   const {
     memberId,
     setMemberId,
@@ -43,45 +45,83 @@ export const CreateDmModal: React.FC = () => {
     }
   };
 
+  const handleScan = useCallback(
+    (scannedAddress: string) => {
+      setMemberId(scannedAddress);
+      setShowScanner(false);
+    },
+    [setMemberId],
+  );
+
   return (
-    <Modal
-      closeOnClickOutside={false}
-      closeOnEscape={false}
-      withCloseButton={false}
-      opened
-      centered
-      fullScreen={fullScreen}
-      onClose={handleClose}
-      size="auto"
-      padding={0}>
-      <AppHeader client={client} />
-      <ContentLayout
-        maxHeight={contentHeight}
-        loading={loading}
-        withScrollAreaPadding={false}
-        title={
-          <Group align="center" gap="sm">
-            <Text
-              size="lg"
-              fw={700}
-              style={{
-                background: "linear-gradient(135deg, #0afff1, #9772fb)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>
-              New Message
-            </Text>
-          </Group>
-        }>
-        <Stack gap="lg" p="md">
-          {/* Header Card */}
-          <div className={classes.headerCard}>
-            <div className={classes.cardContent}>
-              <Flex align="center" gap="md" mb="md">
-                <div className={classes.iconWrapper}>
+    <>
+      <Modal
+        closeOnClickOutside={false}
+        closeOnEscape={false}
+        withCloseButton={false}
+        opened
+        centered
+        fullScreen={fullScreen}
+        onClose={handleClose}
+        size="auto"
+        padding={0}>
+        <AppHeader client={client} />
+        <ContentLayout
+          maxHeight={contentHeight}
+          loading={loading}
+          withScrollAreaPadding={false}
+          title={
+            <Group align="center" gap="sm">
+              <Text
+                size="lg"
+                fw={700}
+                style={{
+                  background: "linear-gradient(135deg, #0afff1, #9772fb)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}>
+                New Message
+              </Text>
+            </Group>
+          }>
+          <Stack gap="lg" p="md">
+            {/* Header Card */}
+            <div className={classes.headerCard}>
+              <div className={classes.cardContent}>
+                <Flex align="center" gap="md" mb="md">
+                  <div className={classes.iconWrapper}>
+                    <svg
+                      className={classes.icon}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <Text className={classes.headerTitle}>
+                      Start a Conversation
+                    </Text>
+                    <Text className={classes.headerSubtitle}>
+                      Send encrypted messages to anyone with a wallet
+                    </Text>
+                  </div>
+                </Flex>
+              </div>
+            </div>
+
+            {/* Recipient Card */}
+            <div className={classes.recipientCard}>
+              <div className={classes.cardContent}>
+                <div className={classes.sectionTitle}>
                   <svg
-                    className={classes.icon}
+                    className={classes.sectionIcon}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -89,174 +129,188 @@ export const CreateDmModal: React.FC = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                     />
                   </svg>
+                  Recipient Information
                 </div>
-                <div>
-                  <Text className={classes.headerTitle}>
-                    Start a Conversation
-                  </Text>
-                  <Text className={classes.headerSubtitle}>
-                    Send encrypted messages to anyone with a wallet
-                  </Text>
-                </div>
-              </Flex>
-            </div>
-          </div>
 
-          {/* Recipient Card */}
-          <div className={classes.recipientCard}>
-            <div className={classes.cardContent}>
-              <div className={classes.sectionTitle}>
-                <svg
-                  className={classes.sectionIcon}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                <Text size="xs" c="dimmed" mb="md">
+                  Enter the wallet address, ENS name, Base name, or inbox ID of
+                  the person you want to message.
+                </Text>
+
+                <Stack gap="sm">
+                  <TextInput
+                    size="md"
+                    placeholder="0x... or name.eth or @basename"
+                    styles={{
+                      input: {
+                        background: "rgba(10, 13, 25, 0.6)",
+                        border: "1px solid rgba(10, 255, 241, 0.2)",
+                        color: "rgba(255, 255, 255, 0.9)",
+                        fontSize: "0.95rem",
+                        padding: "12px 16px",
+                        height: "auto",
+                        borderRadius: "12px",
+                        transition: "all 0.2s ease",
+                      },
+                      error: {
+                        marginTop: "8px",
+                        fontSize: "0.85rem",
+                      },
+                    }}
+                    error={memberIdError}
+                    value={memberId}
+                    onChange={(event) => {
+                      setMemberId(event.target.value);
+                    }}
                   />
-                </svg>
-                Recipient Information
+
+                  <Button
+                    fullWidth
+                    variant="light"
+                    onClick={() => {
+                      setShowScanner(true);
+                    }}
+                    leftSection={
+                      <svg
+                        width="18"
+                        height="18"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M12 12h-4.01M12 12V8m0 4h4.01M12 12h-4.01M12 12v4m6-4h.01M12 12h.01M12 8h.01M12 8h4.01M12 8h-4.01M16 12h.01M8 12h.01"
+                        />
+                      </svg>
+                    }
+                    styles={{
+                      root: {
+                        background: "rgba(10, 255, 241, 0.1)",
+                        border: "1px solid rgba(10, 255, 241, 0.2)",
+                        color: "#0afff1",
+                        fontWeight: 600,
+                      },
+                    }}>
+                    Scan QR Code
+                  </Button>
+                </Stack>
+
+                {inboxId && !memberIdError && (
+                  <div className={classes.validIndicator}>
+                    <svg
+                      width="16"
+                      height="16"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <Text size="xs">Valid recipient found</Text>
+                  </div>
+                )}
               </div>
+            </div>
 
-              <Text size="xs" c="dimmed" mb="md">
-                Enter the wallet address, ENS name, Base name, or inbox ID of
-                the person you want to message.
-              </Text>
+            {/* Info Card */}
+            <div className={classes.infoCard}>
+              <div className={classes.cardContent}>
+                <Flex align="flex-start" gap="sm">
+                  <svg
+                    width="20"
+                    height="20"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="#0afff1"
+                    style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <Stack gap="xs">
+                    <Text size="sm" fw={600} style={{ color: "#0afff1" }}>
+                      End-to-End Encrypted
+                    </Text>
+                    <Text size="xs" c="dimmed">
+                      All messages are encrypted and can only be read by you and
+                      the recipient. No one else can access your conversations.
+                    </Text>
+                  </Stack>
+                </Flex>
+              </div>
+            </div>
 
-              <TextInput
+            {/* Action Buttons */}
+            <Group justify="flex-end" gap="sm" mt="md">
+              <Button
+                variant="default"
+                onClick={handleClose}
                 size="md"
-                placeholder="0x... or name.eth or @basename"
                 styles={{
-                  input: {
+                  root: {
                     background: "rgba(10, 13, 25, 0.6)",
                     border: "1px solid rgba(10, 255, 241, 0.2)",
                     color: "rgba(255, 255, 255, 0.9)",
-                    fontSize: "0.95rem",
-                    padding: "12px 16px",
-                    height: "auto",
-                    borderRadius: "12px",
-                    transition: "all 0.2s ease",
                   },
-                  error: {
-                    marginTop: "8px",
-                    fontSize: "0.85rem",
+                }}>
+                Cancel
+              </Button>
+              <Button
+                variant="gradient"
+                gradient={{ from: "#0afff1", to: "#9772fb" }}
+                disabled={loading || memberIdError !== null || !inboxId}
+                loading={loading}
+                onClick={() => void handleCreate()}
+                size="md"
+                styles={{
+                  root: {
+                    fontWeight: 700,
                   },
-                }}
-                error={memberIdError}
-                value={memberId}
-                onChange={(event) => {
-                  setMemberId(event.target.value);
-                }}
-              />
+                }}>
+                Start Chat
+              </Button>
+            </Group>
 
-              {inboxId && !memberIdError && (
-                <div className={classes.validIndicator}>
-                  <svg
-                    width="16"
-                    height="16"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <Text size="xs">Valid recipient found</Text>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Info Card */}
-          <div className={classes.infoCard}>
-            <div className={classes.cardContent}>
-              <Flex align="flex-start" gap="sm">
-                <svg
-                  width="20"
-                  height="20"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="#0afff1"
-                  style={{ flexShrink: 0, marginTop: "2px" }}>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <Stack gap="xs">
-                  <Text size="sm" fw={600} style={{ color: "#0afff1" }}>
-                    End-to-End Encrypted
-                  </Text>
-                  <Text size="xs" c="dimmed">
-                    All messages are encrypted and can only be read by you and
-                    the recipient. No one else can access your conversations.
-                  </Text>
-                </Stack>
-              </Flex>
-            </div>
-          </div>
-
-          {/* Action Buttons */}
-          <Group justify="flex-end" gap="sm" mt="md">
+            {/* Back to Conversations Button - Helpful for iOS */}
             <Button
-              variant="default"
+              fullWidth
+              size="lg"
+              variant="light"
               onClick={handleClose}
-              size="md"
+              mt="md"
               styles={{
                 root: {
-                  background: "rgba(10, 13, 25, 0.6)",
+                  background: "rgba(10, 255, 241, 0.1)",
                   border: "1px solid rgba(10, 255, 241, 0.2)",
-                  color: "rgba(255, 255, 255, 0.9)",
+                  color: "#0afff1",
+                  fontWeight: 600,
                 },
               }}>
-              Cancel
+              Back to Conversations
             </Button>
-            <Button
-              variant="gradient"
-              gradient={{ from: "#0afff1", to: "#9772fb" }}
-              disabled={loading || memberIdError !== null || !inboxId}
-              loading={loading}
-              onClick={() => void handleCreate()}
-              size="md"
-              styles={{
-                root: {
-                  fontWeight: 700,
-                },
-              }}>
-              Start Chat
-            </Button>
-          </Group>
+          </Stack>
+        </ContentLayout>
+      </Modal>
 
-          {/* Back to Conversations Button - Helpful for iOS */}
-          <Button
-            fullWidth
-            size="lg"
-            variant="light"
-            onClick={handleClose}
-            mt="md"
-            styles={{
-              root: {
-                background: "rgba(10, 255, 241, 0.1)",
-                border: "1px solid rgba(10, 255, 241, 0.2)",
-                color: "#0afff1",
-                fontWeight: 600,
-              },
-            }}>
-            Back to Conversations
-          </Button>
-        </Stack>
-      </ContentLayout>
-    </Modal>
+      <QRScannerModal
+        opened={showScanner}
+        onClose={() => {
+          setShowScanner(false);
+        }}
+        onScan={handleScan}
+      />
+    </>
   );
 };
