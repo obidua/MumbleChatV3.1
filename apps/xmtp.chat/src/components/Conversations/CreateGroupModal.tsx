@@ -379,6 +379,24 @@ export const CreateGroupModal: React.FC = () => {
               Create Group
             </Button>
           </Group>
+
+          {/* Back to Conversations Button - Helpful for iOS */}
+          <Button
+            fullWidth
+            size="lg"
+            variant="light"
+            onClick={handleClose}
+            mt="md"
+            styles={{
+              root: {
+                background: "rgba(10, 255, 241, 0.1)",
+                border: "1px solid rgba(10, 255, 241, 0.2)",
+                color: "#0afff1",
+                fontWeight: 600,
+              },
+            }}>
+            Back to Conversations
+          </Button>
         </Stack>
       </ContentLayout>
     </Modal>

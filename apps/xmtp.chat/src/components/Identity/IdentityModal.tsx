@@ -534,6 +534,20 @@ export const IdentityModal: React.FC = () => {
                 </Button>
               </div>
             </div>
+
+            {/* Back to Conversations Button */}
+            <Button
+              fullWidth
+              size="lg"
+              variant="gradient"
+              gradient={{ from: "#0afff1", to: "#9772fb", deg: 135 }}
+              onClick={handleClose}
+              style={{
+                fontWeight: 600,
+                boxShadow: "0 4px 12px rgba(10, 255, 241, 0.3)",
+              }}>
+              Back to Conversations
+            </Button>
           </Stack>
         </ContentLayout>
       </Modal>
