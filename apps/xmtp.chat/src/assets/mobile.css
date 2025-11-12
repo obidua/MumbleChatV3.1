@@ -12,7 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
   /* Remove default background to allow page-specific backgrounds */
-  background: transparent;
+  background: transparent !important;
 }
 
 #root {
@@ -25,7 +25,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
   /* Remove default background to allow page-specific backgrounds */
-  background: transparent;
+  background: transparent !important;
+}
+
+/* Override Mantine's default background */
+body[data-mantine-color-scheme] {
+  background: transparent !important;
 }
 
 /* iOS Safe Area Support */
