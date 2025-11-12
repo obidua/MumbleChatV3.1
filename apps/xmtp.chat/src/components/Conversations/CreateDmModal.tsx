@@ -187,7 +187,7 @@ export const CreateDmModal: React.FC = () => {
                       root: {
                         background: "rgba(33, 150, 243, 0.1)",
                         border: "1px solid rgba(33, 150, 243, 0.2)",
-                        color: "#2196f3",
+                        color: "#10b981",
                         fontWeight: 600,
                       },
                     }}>
@@ -225,7 +225,7 @@ export const CreateDmModal: React.FC = () => {
                     height="20"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="#2196f3"
+                    stroke="#10b981"
                     style={{ flexShrink: 0, marginTop: "2px" }}>
                     <path
                       strokeLinecap="round"
@@ -235,7 +235,7 @@ export const CreateDmModal: React.FC = () => {
                     />
                   </svg>
                   <Stack gap="xs">
-                    <Text size="sm" fw={600} style={{ color: "#2196f3" }}>
+                    <Text size="sm" fw={600} style={{ color: "#10b981" }}>
                       End-to-End Encrypted
                     </Text>
                     <Text size="xs" c="dimmed">
@@ -264,7 +264,7 @@ export const CreateDmModal: React.FC = () => {
               </Button>
               <Button
                 variant="gradient"
-                gradient={{ from: "#2196f3", to: "#1976d2" }}
+                gradient={{ from: "#10b981", to: "#1976d2" }}
                 disabled={loading || memberIdError !== null || !inboxId}
                 loading={loading}
                 onClick={() => void handleCreate()}
@@ -289,7 +289,7 @@ export const CreateDmModal: React.FC = () => {
                 root: {
                   background: "rgba(33, 150, 243, 0.1)",
                   border: "1px solid rgba(33, 150, 243, 0.2)",
-                  color: "#2196f3",
+                  color: "#10b981",
                   fontWeight: 600,
                 },
               }}>

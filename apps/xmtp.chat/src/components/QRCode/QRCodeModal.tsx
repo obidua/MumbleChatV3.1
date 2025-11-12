@@ -89,7 +89,7 @@ export const QRCodeModal: React.FC<QRCodeModalProps> = ({
             fullWidth
             size="lg"
             variant="gradient"
-            gradient={{ from: "#0afff1", to: "#9772fb", deg: 135 }}
+            gradient={{ from: "#10b981", to: "#0d9488", deg: 135 }}
             onClick={handleClose}
             className={classes.closeButton}>
             Close

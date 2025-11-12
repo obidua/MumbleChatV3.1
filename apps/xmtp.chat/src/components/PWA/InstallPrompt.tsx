@@ -130,7 +130,7 @@ export const InstallPrompt: React.FC = () => {
           <Button
             size="xs"
             variant="gradient"
-            gradient={{ from: "#0afff1", to: "#9772fb" }}
+            gradient={{ from: "#10b981", to: "#0d9488" }}
             onClick={() => void handleInstall()}
             className={classes.installButton}>
             Install

@@ -6,7 +6,7 @@
     rgba(6, 9, 20, 0.92),
     rgba(8, 11, 22, 0.88)
   );
-  border: 1px solid rgba(10, 255, 241, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.15);
   border-radius: 16px;
   padding: var(--mantine-spacing-md);
   transition:
@@ -17,7 +17,7 @@
   backdrop-filter: blur(12px);
   box-shadow:
     0 4px 16px rgba(4, 8, 20, 0.3),
-    0 0 20px rgba(10, 255, 241, 0.04);
+    0 0 20px rgba(16, 185, 129, 0.04);
   overflow: hidden;
 }
 
@@ -30,7 +30,7 @@
   height: 100%;
   background: radial-gradient(
     circle at top right,
-    rgba(10, 255, 241, 0.06),
+    rgba(16, 185, 129, 0.06),
     transparent 60%
   );
   pointer-events: none;
@@ -47,8 +47,8 @@
   height: 100%;
   background: linear-gradient(
     180deg,
-    rgba(10, 255, 241, 0.8),
-    rgba(151, 114, 251, 0.8)
+    rgba(16, 185, 129, 0.8),
+    rgba(13, 148, 136, 0.8)
   );
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -58,13 +58,13 @@
   transform: translateX(6px);
   background: linear-gradient(
     135deg,
-    rgba(10, 255, 241, 0.08),
-    rgba(151, 114, 251, 0.08)
+    rgba(16, 185, 129, 0.08),
+    rgba(13, 148, 136, 0.08)
   );
-  border-color: rgba(10, 255, 241, 0.28);
+  border-color: rgba(16, 185, 129, 0.28);
   box-shadow:
     0 8px 24px rgba(4, 8, 20, 0.4),
-    0 0 40px rgba(10, 255, 241, 0.12),
+    0 0 40px rgba(16, 185, 129, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
@@ -78,10 +78,10 @@
 
 .root:focus {
   outline: none;
-  border-color: rgba(10, 255, 241, 0.35);
+  border-color: rgba(16, 185, 129, 0.35);
   box-shadow:
     0 8px 24px rgba(4, 8, 20, 0.5),
-    0 0 50px rgba(10, 255, 241, 0.15),
+    0 0 50px rgba(16, 185, 129, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
@@ -95,10 +95,10 @@
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
-  border: 2px solid rgba(10, 255, 241, 0.2);
+  border: 2px solid rgba(16, 185, 129, 0.2);
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.3),
-    0 0 20px rgba(10, 255, 241, 0.1);
+    0 0 20px rgba(16, 185, 129, 0.1);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -130,26 +130,26 @@
   transform: scale(1.05);
   box-shadow:
     0 6px 16px rgba(0, 0, 0, 0.4),
-    0 0 30px rgba(10, 255, 241, 0.15);
+    0 0 30px rgba(16, 185, 129, 0.15);
 }
 
 .selected .avatar {
-  border-color: rgba(10, 255, 241, 0.4);
+  border-color: rgba(16, 185, 129, 0.4);
   box-shadow:
     0 6px 16px rgba(0, 0, 0, 0.4),
-    0 0 30px rgba(10, 255, 241, 0.2);
+    0 0 30px rgba(16, 185, 129, 0.2);
 }
 
 .selected {
   background: linear-gradient(
     135deg,
-    rgba(10, 255, 241, 0.16),
-    rgba(151, 114, 251, 0.16)
+    rgba(16, 185, 129, 0.16),
+    rgba(13, 148, 136, 0.16)
   );
-  border-color: rgba(10, 255, 241, 0.4);
+  border-color: rgba(16, 185, 129, 0.4);
   box-shadow:
     0 12px 32px rgba(4, 8, 20, 0.5),
-    0 0 60px rgba(10, 255, 241, 0.18),
+    0 0 60px rgba(16, 185, 129, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transform: translateX(6px);
 }
@@ -175,11 +175,11 @@
 }
 
 .selected .title {
-  background: linear-gradient(135deg, #0afff1, #e2e8f0);
+  background: linear-gradient(135deg, #10b981, #e2e8f0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 2px 4px rgba(10, 255, 241, 0.3));
+  filter: drop-shadow(0 2px 4px rgba(16, 185, 129, 0.3));
 }
 
 .time {
@@ -189,15 +189,15 @@
   font-size: 0.75rem;
   font-weight: 600;
   padding: 2px 8px;
-  background: rgba(10, 255, 241, 0.08);
+  background: rgba(16, 185, 129, 0.08);
   border-radius: 6px;
-  border: 1px solid rgba(10, 255, 241, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.15);
 }
 
 .selected .time {
-  color: rgba(10, 255, 241, 0.95);
-  background: rgba(10, 255, 241, 0.12);
-  border-color: rgba(10, 255, 241, 0.3);
+  color: rgba(16, 185, 129, 0.95);
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
 }
 
 .preview {
@@ -232,9 +232,9 @@
 }
 
 .selected .meta {
-  color: rgba(10, 255, 241, 0.85);
-  background: rgba(10, 255, 241, 0.1);
-  border-color: rgba(10, 255, 241, 0.25);
+  color: rgba(16, 185, 129, 0.85);
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.25);
 }
 
 /* Mobile Responsiveness */

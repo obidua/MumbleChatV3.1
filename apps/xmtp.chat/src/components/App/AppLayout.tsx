@@ -43,9 +43,14 @@ export const AppLayout: React.FC = () => {
   useEffect(() => {
     if (!client) {
       // save the current path to redirect to it after the client is initialized
+      // but exclude welcome, disconnect, and modal routes (new-dm, new-group, identity)
       if (
         location.pathname !== "/welcome" &&
-        location.pathname !== "/disconnect"
+        location.pathname !== "/disconnect" &&
+        location.pathname !== "/conversations/new-dm" &&
+        location.pathname !== "/conversations/new-group" &&
+        location.pathname !== "/conversations/identity" &&
+        !location.pathname.includes("/conversations/identity/")
       ) {
         setRedirectUrl(`${location.pathname}${location.search}`);
       }

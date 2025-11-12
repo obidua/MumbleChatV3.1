@@ -23,7 +23,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #9772fb, #0afff1, #9772fb);
+  background: linear-gradient(90deg, #9772fb, #10b981, #9772fb);
   background-size: 200% 100%;
   animation: shimmer 3s linear infinite;
 }
@@ -58,18 +58,18 @@
 }
 
 .connectButton {
-  background: linear-gradient(135deg, #0afff1, #9772fb);
+  background: linear-gradient(135deg, #10b981, #9772fb);
   color: #04060f;
   font-weight: 700;
   border: none;
-  box-shadow: 0 4px 16px rgba(10, 255, 241, 0.3);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
   transition: all 0.3s ease;
 }
 
 .connectButton:hover:not(:disabled) {
-  background: linear-gradient(135deg, #0afff1, #9772fb);
+  background: linear-gradient(135deg, #10b981, #9772fb);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(10, 255, 241, 0.4);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
 }
 
 .connectButton:disabled {

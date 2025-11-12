@@ -173,7 +173,7 @@ export const CreateGroupModal: React.FC = () => {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      style={{ color: "#2196f3" }}>
+                      style={{ color: "#10b981" }}>
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -218,7 +218,7 @@ export const CreateGroupModal: React.FC = () => {
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
-                        style={{ color: "#2196f3" }}>
+                        style={{ color: "#10b981" }}>
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -237,7 +237,7 @@ export const CreateGroupModal: React.FC = () => {
                       radius="md"
                       style={{
                         background: "rgba(33, 150, 243, 0.16)",
-                        color: "#2196f3",
+                        color: "#10b981",
                         border: "1px solid rgba(33, 150, 243, 0.32)",
                         fontWeight: 700,
                       }}>
@@ -276,7 +276,7 @@ export const CreateGroupModal: React.FC = () => {
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
-                        style={{ color: "#2196f3" }}>
+                        style={{ color: "#10b981" }}>
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -322,7 +322,7 @@ export const CreateGroupModal: React.FC = () => {
                   height="20"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="#2196f3"
+                  stroke="#10b981"
                   style={{ flexShrink: 0, marginTop: "2px" }}>
                   <path
                     strokeLinecap="round"
@@ -332,7 +332,7 @@ export const CreateGroupModal: React.FC = () => {
                   />
                 </svg>
                 <Stack gap="xs">
-                  <Text size="sm" fw={600} style={{ color: "#2196f3" }}>
+                  <Text size="sm" fw={600} style={{ color: "#10b981" }}>
                     Secure Group Messaging
                   </Text>
                   <Text size="xs" c="dimmed">
@@ -361,7 +361,7 @@ export const CreateGroupModal: React.FC = () => {
             </Button>
             <Button
               variant="gradient"
-              gradient={{ from: "#2196f3", to: "#1976d2" }}
+              gradient={{ from: "#10b981", to: "#1976d2" }}
               disabled={loading}
               loading={loading}
               onClick={() => void handleCreate()}
@@ -386,7 +386,7 @@ export const CreateGroupModal: React.FC = () => {
               root: {
                 background: "rgba(33, 150, 243, 0.1)",
                 border: "1px solid rgba(33, 150, 243, 0.2)",
-                color: "#2196f3",
+                color: "#10b981",
                 fontWeight: 600,
               },
             }}>

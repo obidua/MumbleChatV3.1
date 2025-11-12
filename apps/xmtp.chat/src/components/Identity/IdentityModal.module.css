@@ -5,11 +5,11 @@
   padding: var(--mantine-spacing-xl);
   background: linear-gradient(
     135deg,
-    rgba(10, 255, 241, 0.12),
+    rgba(16, 185, 129, 0.12),
     rgba(151, 114, 251, 0.12)
   );
   border-radius: var(--mantine-spacing-md);
-  border: 1px solid rgba(10, 255, 241, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   overflow: hidden;
 }
 
@@ -20,7 +20,7 @@
   background-image:
     radial-gradient(
       circle at 20% 50%,
-      rgba(10, 255, 241, 0.15) 0%,
+      rgba(16, 185, 129, 0.15) 0%,
       transparent 50%
     ),
     radial-gradient(
@@ -44,11 +44,11 @@
     rgba(6, 9, 20, 0.95),
     rgba(8, 11, 22, 0.92)
   );
-  border: 1px solid rgba(10, 255, 241, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: var(--mantine-spacing-md);
   box-shadow:
     0 12px 32px rgba(4, 8, 20, 0.5),
-    0 0 60px rgba(10, 255, 241, 0.08);
+    0 0 60px rgba(16, 185, 129, 0.08);
   backdrop-filter: blur(16px);
   transition: all 0.3s ease;
   overflow: hidden;
@@ -60,17 +60,17 @@
   inset: 0;
   background: radial-gradient(
     circle at top right,
-    rgba(10, 255, 241, 0.08),
+    rgba(16, 185, 129, 0.08),
     transparent 60%
   );
   pointer-events: none;
 }
 
 .identityCard:hover {
-  border-color: rgba(10, 255, 241, 0.35);
+  border-color: rgba(16, 185, 129, 0.35);
   box-shadow:
     0 16px 40px rgba(4, 8, 20, 0.6),
-    0 0 80px rgba(10, 255, 241, 0.12);
+    0 0 80px rgba(16, 185, 129, 0.12);
   transform: translateY(-2px);
 }
 
@@ -82,11 +82,11 @@
     rgba(6, 9, 20, 0.95),
     rgba(8, 11, 22, 0.92)
   );
-  border: 1px solid rgba(10, 255, 241, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: var(--mantine-spacing-md);
   box-shadow:
     0 12px 32px rgba(4, 8, 20, 0.5),
-    0 0 60px rgba(10, 255, 241, 0.08);
+    0 0 60px rgba(16, 185, 129, 0.08);
   backdrop-filter: blur(16px);
   transition: all 0.3s ease;
   overflow: hidden;
@@ -105,10 +105,10 @@
 }
 
 .shareCard:hover {
-  border-color: rgba(10, 255, 241, 0.35);
+  border-color: rgba(16, 185, 129, 0.35);
   box-shadow:
     0 16px 40px rgba(4, 8, 20, 0.6),
-    0 0 80px rgba(10, 255, 241, 0.12);
+    0 0 80px rgba(16, 185, 129, 0.12);
   transform: translateY(-2px);
 }
 
@@ -116,13 +116,13 @@
   position: relative;
   padding: 12px 16px;
   background: rgba(10, 13, 25, 0.6);
-  border: 1px solid rgba(10, 255, 241, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: 12px;
   overflow: hidden;
 }
 
 .linkText {
-  color: rgba(10, 255, 241, 0.9);
+  color: rgba(16, 185, 129, 0.9);
   font-family: "Courier New", monospace;
   word-break: break-all;
   font-weight: 600;
@@ -151,7 +151,7 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(10, 255, 241, 0.9);
+  color: rgba(16, 185, 129, 0.9);
   display: flex;
   align-items: center;
   gap: var(--mantine-spacing-xs);
@@ -160,7 +160,7 @@
 .labelIcon {
   width: 18px;
   height: 18px;
-  color: rgba(10, 255, 241, 0.7);
+  color: rgba(16, 185, 129, 0.7);
 }
 
 .infoValue {
@@ -171,7 +171,7 @@
 .sectionTitle {
   font-size: 1.1rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #0afff1, #9772fb);
+  background: linear-gradient(135deg, #10b981, #9772fb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -184,7 +184,7 @@
 .sectionIcon {
   width: 24px;
   height: 24px;
-  color: #0afff1;
+  color: #10b981;
 }
 
 .installationsCard {
@@ -195,11 +195,11 @@
     rgba(6, 9, 20, 0.95),
     rgba(8, 11, 22, 0.92)
   );
-  border: 1px solid rgba(10, 255, 241, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: var(--mantine-spacing-md);
   box-shadow:
     0 12px 32px rgba(4, 8, 20, 0.5),
-    0 0 60px rgba(10, 255, 241, 0.08);
+    0 0 60px rgba(16, 185, 129, 0.08);
   backdrop-filter: blur(16px);
   overflow: hidden;
 }
@@ -220,7 +220,7 @@
   position: relative;
   padding: var(--mantine-spacing-md);
   background: rgba(10, 13, 25, 0.6);
-  border: 1px solid rgba(10, 255, 241, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.12);
   border-radius: var(--mantine-spacing-sm);
   margin-bottom: var(--mantine-spacing-sm);
   transition: all 0.2s ease;
@@ -228,7 +228,7 @@
 
 .installationRow:hover {
   background: rgba(10, 13, 25, 0.8);
-  border-color: rgba(10, 255, 241, 0.24);
+  border-color: rgba(16, 185, 129, 0.24);
   transform: translateX(4px);
 }
 
@@ -277,14 +277,14 @@
 
 .currentBadge {
   padding: 4px 10px;
-  background: linear-gradient(135deg, #0afff1, rgba(10, 255, 241, 0.8));
+  background: linear-gradient(135deg, #10b981, rgba(16, 185, 129, 0.8));
   color: #04060f;
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   border-radius: 999px;
-  box-shadow: 0 4px 12px rgba(10, 255, 241, 0.3);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
 .revokeButton {

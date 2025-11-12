@@ -16,9 +16,9 @@
 
 .header :global(.mantine-Badge-root) {
   padding-inline: var(--mantine-spacing-xs);
-  background: rgba(10, 255, 241, 0.16);
-  border: 1px solid rgba(10, 255, 241, 0.28);
-  color: #0afff1;
+  background: rgba(16, 185, 129, 0.16);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  color: #10b981;
 }
 
 .content {

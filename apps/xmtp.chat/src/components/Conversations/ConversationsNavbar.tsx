@@ -8,8 +8,10 @@ import {
   Tooltip,
 } from "@mantine/core";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 import { ConversationsList } from "@/components/Conversations/ConversationList";
 import { ConversationsMenu } from "@/components/Conversations/ConversationsMenu";
+import { QRCodeModal } from "@/components/QRCode/QRCodeModal";
 import { QRScannerModal } from "@/components/QRCode/QRScannerModal";
 import { useClient } from "@/contexts/XMTPContext";
 import { getMemberAddress } from "@/helpers/xmtp";
@@ -38,7 +40,9 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
   const stopAllMessagesStreamRef = useRef<(() => void) | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [showQRScanner, setShowQRScanner] = useState(false);
+  const [showQRCode, setShowQRCode] = useState(false);
   const client = useClient();
+  const navigate = useNavigate();
 
   // Filter conversations based on search query
   const filteredConversations = useMemo(() => {
@@ -149,7 +153,7 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
             variant="light"
             style={{
               background: "rgba(10, 255, 241, 0.16)",
-              color: "#0afff1",
+              color: "#10b981",
               border: "1px solid rgba(10, 255, 241, 0.32)",
               fontWeight: 700,
             }}>
@@ -171,7 +175,7 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
               style={{
                 background: "rgba(151, 114, 251, 0.16)",
                 border: "1px solid rgba(151, 114, 251, 0.25)",
-                color: "#9772fb",
+                color: "#0d9488",
               }}>
               <svg
                 width="20"
@@ -192,6 +196,15 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
             loading={syncing || loading}
             onSync={() => void handleSync()}
             onSyncAll={() => void handleSyncAll()}
+            onCreateDm={() => {
+              void navigate("/conversations/new-dm");
+            }}
+            onCreateGroup={() => {
+              void navigate("/conversations/new-group");
+            }}
+            onShowQRCode={() => {
+              setShowQRCode(true);
+            }}
             disabled={syncing}
           />
         </Group>
@@ -258,6 +271,13 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
         onClose={() => {
           setShowQRScanner(false);
         }}
+      />
+      <QRCodeModal
+        opened={showQRCode}
+        onClose={() => {
+          setShowQRCode(false);
+        }}
+        address={client.accountAddress}
       />
     </ContentLayout>
   );

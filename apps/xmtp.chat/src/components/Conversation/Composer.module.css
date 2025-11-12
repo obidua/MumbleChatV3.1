@@ -15,7 +15,8 @@
 }
 
 .composer:focus-within {
-  border-color: rgba(33, 150, 243, 0.5);
+  border-color: rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
 .actionButton {
@@ -31,6 +32,14 @@
   width: 100%;
   color: #e9ecef;
   font-size: 15px;
+  background: transparent !important;
+}
+
+.input:disabled {
+  background: transparent !important;
+  color: #e9ecef !important;
+  opacity: 1 !important;
+  cursor: default !important;
 }
 
 .input::placeholder {
@@ -44,11 +53,11 @@
   min-width: 36px;
   min-height: 36px;
   padding: 0;
-  background: #2196f3;
+  background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
   color: #ffffff;
   border: none;
   border-radius: 50%;
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
@@ -56,8 +65,9 @@
 }
 
 .sendButton:hover:not(:disabled) {
-  background: #1e88e5;
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
   transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
 
 .sendButton:active:not(:disabled) {

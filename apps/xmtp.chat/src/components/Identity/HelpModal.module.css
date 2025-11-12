@@ -5,12 +5,12 @@
     rgba(6, 9, 20, 0.95),
     rgba(8, 11, 22, 0.92)
   );
-  border: 1px solid rgba(10, 255, 241, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: 16px;
   overflow: hidden;
   box-shadow:
     0 8px 24px rgba(4, 8, 20, 0.4),
-    0 0 40px rgba(10, 255, 241, 0.06);
+    0 0 40px rgba(16, 185, 129, 0.06);
   transition: all 0.3s ease;
   position: relative;
 }
@@ -24,17 +24,17 @@
   height: 100%;
   background: radial-gradient(
     circle at top right,
-    rgba(10, 255, 241, 0.08),
+    rgba(16, 185, 129, 0.08),
     transparent 60%
   );
   pointer-events: none;
 }
 
 .infoCard:hover {
-  border-color: rgba(10, 255, 241, 0.3);
+  border-color: rgba(16, 185, 129, 0.3);
   box-shadow:
     0 12px 32px rgba(4, 8, 20, 0.5),
-    0 0 60px rgba(10, 255, 241, 0.1);
+    0 0 60px rgba(16, 185, 129, 0.1);
 }
 
 .cardHeader {
@@ -44,10 +44,10 @@
   padding: 20px 24px;
   background: linear-gradient(
     135deg,
-    rgba(10, 255, 241, 0.1),
+    rgba(16, 185, 129, 0.1),
     rgba(151, 114, 251, 0.08)
   );
-  border-bottom: 1px solid rgba(10, 255, 241, 0.15);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.15);
   position: relative;
   z-index: 1;
 }
@@ -55,15 +55,15 @@
 .icon {
   width: 28px;
   height: 28px;
-  color: #0afff1;
-  filter: drop-shadow(0 2px 8px rgba(10, 255, 241, 0.4));
+  color: #10b981;
+  filter: drop-shadow(0 2px 8px rgba(16, 185, 129, 0.4));
   flex-shrink: 0;
 }
 
 .cardTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #0afff1, #e2e8f0);
+  background: linear-gradient(135deg, #10b981, #e2e8f0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -97,7 +97,7 @@
 }
 
 .featureDot {
-  color: #0afff1;
+  color: #10b981;
   font-size: 1.5rem;
   line-height: 1;
   flex-shrink: 0;
@@ -117,7 +117,7 @@
 
 .accordionItem {
   background: linear-gradient(135deg, rgba(4, 7, 18, 0.6), rgba(6, 9, 20, 0.5));
-  border: 1px solid rgba(10, 255, 241, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.12);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.2s ease;
@@ -125,10 +125,10 @@
 }
 
 .accordionItem:hover {
-  border-color: rgba(10, 255, 241, 0.2);
+  border-color: rgba(16, 185, 129, 0.2);
   background: linear-gradient(
     135deg,
-    rgba(10, 255, 241, 0.05),
+    rgba(16, 185, 129, 0.05),
     rgba(151, 114, 251, 0.05)
   );
 }
@@ -139,7 +139,7 @@
 }
 
 .accordionControl:hover {
-  background: rgba(10, 255, 241, 0.05);
+  background: rgba(16, 185, 129, 0.05);
 }
 
 .accordionLabel {
@@ -189,7 +189,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #0afff1, #9772fb);
+  background: linear-gradient(135deg, #10b981, #9772fb);
   color: #04060f;
   display: flex;
   align-items: center;
@@ -198,7 +198,7 @@
   font-weight: 700;
   flex-shrink: 0;
   box-shadow:
-    0 4px 12px rgba(10, 255, 241, 0.3),
+    0 4px 12px rgba(16, 185, 129, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
@@ -234,7 +234,7 @@
 
 .featureCard {
   background: linear-gradient(135deg, rgba(4, 7, 18, 0.7), rgba(6, 9, 20, 0.6));
-  border: 1px solid rgba(10, 255, 241, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.15);
   border-radius: 12px;
   padding: 20px;
   text-align: center;
@@ -252,7 +252,7 @@
   height: 100%;
   background: radial-gradient(
     circle at center,
-    rgba(10, 255, 241, 0.08),
+    rgba(16, 185, 129, 0.08),
     transparent 70%
   );
   opacity: 0;
@@ -261,11 +261,11 @@
 }
 
 .featureCard:hover {
-  border-color: rgba(10, 255, 241, 0.3);
+  border-color: rgba(16, 185, 129, 0.3);
   transform: translateY(-4px);
   box-shadow:
     0 8px 20px rgba(4, 8, 20, 0.4),
-    0 0 30px rgba(10, 255, 241, 0.1);
+    0 0 30px rgba(16, 185, 129, 0.1);
 }
 
 .featureCard:hover::before {
@@ -275,7 +275,7 @@
 .featureIcon {
   font-size: 2.5rem;
   margin-bottom: 12px;
-  filter: drop-shadow(0 2px 8px rgba(10, 255, 241, 0.3));
+  filter: drop-shadow(0 2px 8px rgba(16, 185, 129, 0.3));
 }
 
 .featureCardTitle {

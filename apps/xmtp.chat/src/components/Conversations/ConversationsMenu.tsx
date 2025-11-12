@@ -4,6 +4,9 @@ import { IconDots } from "@/icons/IconDots";
 export type ConversationsMenuProps = {
   onSync: () => void;
   onSyncAll: () => void;
+  onCreateDm?: () => void;
+  onCreateGroup?: () => void;
+  onShowQRCode?: () => void;
   disabled?: boolean;
   loading?: boolean;
 };
@@ -11,6 +14,9 @@ export type ConversationsMenuProps = {
 export const ConversationsMenu: React.FC<ConversationsMenuProps> = ({
   onSync,
   onSyncAll,
+  onCreateDm,
+  onCreateGroup,
+  onShowQRCode,
   disabled,
   loading,
 }) => {
@@ -33,6 +39,35 @@ export const ConversationsMenu: React.FC<ConversationsMenuProps> = ({
         </ActionIcon>
       </Menu.Target>
       <Menu.Dropdown miw={200}>
+        <Menu.Label>Create</Menu.Label>
+        {onCreateDm && (
+          <Menu.Item
+            onClick={onCreateDm}
+            leftSection={
+              <span style={{ fontSize: "16px" }}>💬</span>
+            }>
+            New Chat (DM)
+          </Menu.Item>
+        )}
+        {onCreateGroup && (
+          <Menu.Item
+            onClick={onCreateGroup}
+            leftSection={
+              <span style={{ fontSize: "16px" }}>👥</span>
+            }>
+            New Group
+          </Menu.Item>
+        )}
+        {onShowQRCode && (
+          <Menu.Item
+            onClick={onShowQRCode}
+            leftSection={
+              <span style={{ fontSize: "16px" }}>📱</span>
+            }>
+            Show QR Code
+          </Menu.Item>
+        )}
+        <Menu.Divider />
         <Menu.Label>Actions</Menu.Label>
         <Menu.Item onClick={onSync}>Sync</Menu.Item>
         <Menu.Item onClick={onSyncAll}>Sync All</Menu.Item>

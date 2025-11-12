@@ -128,7 +128,7 @@ export const IdentityModal: React.FC = () => {
                   style={{
                     background: "rgba(10, 255, 241, 0.1)",
                     border: "1px solid rgba(10, 255, 241, 0.2)",
-                    color: "#0afff1",
+                    color: "#10b981",
                   }}
                   aria-label="Help & Info">
                   <svg
@@ -240,7 +240,7 @@ export const IdentityModal: React.FC = () => {
                   fullWidth
                   size="md"
                   variant="gradient"
-                  gradient={{ from: "#0afff1", to: "#9772fb", deg: 135 }}
+                  gradient={{ from: "#10b981", to: "#0d9488", deg: 135 }}
                   onClick={() => {
                     setShowQRCode(true);
                   }}
@@ -305,7 +305,7 @@ export const IdentityModal: React.FC = () => {
                   <Button
                     fullWidth
                     variant="gradient"
-                    gradient={{ from: "#0afff1", to: "#9772fb" }}
+                    gradient={{ from: "#10b981", to: "#0d9488" }}
                     onClick={handleCopyLink}
                     leftSection={
                       clipboard.copied ? (
@@ -370,7 +370,7 @@ export const IdentityModal: React.FC = () => {
                         root: {
                           background: "rgba(10, 255, 241, 0.1)",
                           border: "1px solid rgba(10, 255, 241, 0.2)",
-                          color: "#0afff1",
+                          color: "#10b981",
                           fontWeight: 700,
                         },
                       }}>
@@ -405,7 +405,7 @@ export const IdentityModal: React.FC = () => {
                     radius="md"
                     style={{
                       background: "rgba(10, 255, 241, 0.16)",
-                      color: "#0afff1",
+                      color: "#10b981",
                       border: "1px solid rgba(10, 255, 241, 0.32)",
                       fontWeight: 700,
                     }}>
@@ -482,7 +482,7 @@ export const IdentityModal: React.FC = () => {
                                 ) : (
                                   <span
                                     style={{
-                                      color: "#0afff1",
+                                      color: "#10b981",
                                       fontWeight: 600,
                                     }}>
                                     ✓ Active
@@ -603,7 +603,7 @@ export const IdentityModal: React.FC = () => {
               fullWidth
               size="lg"
               variant="gradient"
-              gradient={{ from: "#0afff1", to: "#9772fb", deg: 135 }}
+              gradient={{ from: "#10b981", to: "#0d9488", deg: 135 }}
               onClick={handleClose}
               style={{
                 fontWeight: 600,

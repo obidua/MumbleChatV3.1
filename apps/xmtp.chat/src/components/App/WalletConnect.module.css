@@ -7,7 +7,7 @@
     rgba(6, 9, 20, 0.8),
     rgba(8, 11, 22, 0.75)
   );
-  border: 1px solid rgba(10, 255, 241, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: var(--mantine-spacing-md);
   overflow: hidden;
   box-shadow:
@@ -23,7 +23,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #0afff1, #9772fb, #0afff1);
+  background: linear-gradient(90deg, #10b981, #9772fb, #10b981);
   background-size: 200% 100%;
   animation: shimmer 3s linear infinite;
 }
@@ -38,23 +38,23 @@
 }
 
 .walletCard:hover {
-  border-color: rgba(10, 255, 241, 0.3);
+  border-color: rgba(16, 185, 129, 0.3);
   box-shadow:
     0 12px 40px rgba(4, 8, 20, 0.7),
-    0 0 60px rgba(10, 255, 241, 0.1),
+    0 0 60px rgba(16, 185, 129, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .optionsRow {
   padding: var(--mantine-spacing-md);
   background: rgba(10, 13, 25, 0.4);
-  border-bottom: 1px solid rgba(10, 255, 241, 0.1);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.1);
 }
 
 .actionsRow {
   padding: var(--mantine-spacing-md);
   background: rgba(10, 13, 25, 0.3);
-  border-top: 1px solid rgba(10, 255, 241, 0.1);
+  border-top: 1px solid rgba(16, 185, 129, 0.1);
 }
 
 /* Mobile Responsiveness */
