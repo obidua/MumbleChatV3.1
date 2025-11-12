@@ -72,7 +72,7 @@
   position: absolute;
   top: 0;
   bottom: var(--mantine-spacing-md);
-  right: 0;
+  right: calc(var(--content-aside-width) * -1);
   width: var(--content-aside-width);
   z-index: 1;
   background-color: var(--mantine-color-body);
@@ -84,7 +84,7 @@
 }
 
 .showAside {
-  right: calc(var(--content-aside-width) * -1 + 1px);
+  right: 0;
 }
 
 .footer {
@@ -139,7 +139,6 @@
 
 @media screen and (max-width: 1280px) {
   .aside {
-    right: 0;
     bottom: 0;
     transition-duration: 0s;
   }
@@ -167,11 +166,6 @@
   }
 
   .aside {
-    right: calc(var(--content-aside-width) * -1);
     transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .showAside {
-    right: 0;
   }
 }

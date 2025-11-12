@@ -200,6 +200,7 @@ export const XMTPProvider: React.FC<XMTPProviderProps> = ({
       client.close();
     }
     setClient(undefined);
+    // Reset the inbox store to clear all conversations and messages
     reset();
   }, [client, reset]);
 

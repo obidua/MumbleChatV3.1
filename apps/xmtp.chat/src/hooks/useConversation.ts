@@ -62,6 +62,8 @@ export const useConversation = (conversationId: string) => {
 
     try {
       await conversation.send(message, contentType);
+      // Sync after sending to immediately display the sent message
+      await sync();
     } finally {
       setSending(false);
     }
