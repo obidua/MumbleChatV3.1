@@ -66,7 +66,9 @@ export const DateLabel: React.FC<DateLabelProps> = ({
         onKeyDown={handleKeyboardCopy}
         onClick={handleCopy}
         miw={100}
-        tabIndex={0}>
+        tabIndex={0}
+        c="dimmed"
+        style={{ color: "rgba(255, 255, 255, 0.6)" }}>
         {intlFormat(date, {
           year: "numeric",
           month: "2-digit",

@@ -1,5 +1,9 @@
 import { Text } from "@mantine/core";
 
 export const ReadReceiptContent: React.FC = () => {
-  return <Text size="sm">Read receipt received</Text>;
+  return (
+    <Text size="sm" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
+      Read receipt received
+    </Text>
+  );
 };

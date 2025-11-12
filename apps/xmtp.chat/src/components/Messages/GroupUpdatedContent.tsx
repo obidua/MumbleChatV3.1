@@ -48,7 +48,9 @@ const GroupMembersUpdatedContent: React.FC<GroupMembersAddedContentProps> = ({
           tooltip={MEMBER_NO_LONGER_IN_GROUP}
         />
       )}
-      <Text size="sm">{type === "added" ? "added" : "removed"}</Text>
+      <Text size="sm" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
+        {type === "added" ? "added" : "removed"}
+      </Text>
       {updatedMembers.map((member) => {
         const memberMember = members.get(member);
         if (!memberMember) {
@@ -78,7 +80,9 @@ const GroupMembersUpdatedContent: React.FC<GroupMembersAddedContentProps> = ({
           />
         );
       })}
-      <Text size="sm">{type === "added" ? "to" : "from"} the group</Text>
+      <Text size="sm" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
+        {type === "added" ? "to" : "from"} the group
+      </Text>
     </Group>
   );
 };
@@ -131,14 +135,22 @@ const GroupMetadataUpdatedContent: React.FC<
           tooltip={MEMBER_NO_LONGER_IN_GROUP}
         />
       )}
-      <Text size="sm">
+      <Text size="sm" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
         {metadataFieldChange.newValue ? "changed" : "removed"} the group
       </Text>
-      <Text size="sm">{field}</Text>
+      <Text size="sm" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
+        {field}
+      </Text>
       {metadataFieldChange.newValue !== "" && (
         <>
-          <Text size="sm">to</Text>
-          <Text size="sm" fw={700} truncate>
+          <Text size="sm" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
+            to
+          </Text>
+          <Text
+            size="sm"
+            fw={700}
+            truncate
+            style={{ color: "rgba(255, 255, 255, 0.95)" }}>
             {metadataFieldChange.newValue}
           </Text>
         </>
@@ -200,7 +212,9 @@ export const GroupUpdatedContent: React.FC<GroupUpdatedContentProps> = ({
   return (
     <Stack gap="xxxs" align="center">
       <DateLabel date={nsToDate(sentAtNs)} align="center" padding="sm" />
-      <Text>Unknown permissions update</Text>
+      <Text style={{ color: "rgba(255, 255, 255, 0.9)" }}>
+        Unknown permissions update
+      </Text>
     </Stack>
   );
 };

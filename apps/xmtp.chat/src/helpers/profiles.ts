@@ -15,9 +15,20 @@ export const resolveAddresses = async (addresses: string[], force = false) => {
     return cachedProfiles;
   }
 
-  const response = await fetch(
-    `${import.meta.env.VITE_API_SERVICE_URL}/api/v1/resolve/profiles`,
-    {
+  // If API service URL is not configured, return cached profiles only
+  const apiServiceUrl = import.meta.env.VITE_API_SERVICE_URL;
+  if (!apiServiceUrl || apiServiceUrl.trim() === "") {
+    // Add empty profiles for unresolved addresses to prevent repeated lookups
+    unresolvedAddresses.forEach((address) => {
+      if (!cachedProfiles.has(address)) {
+        profilesStore.getState().addProfiles([createEmptyProfile(address)]);
+      }
+    });
+    return profilesStore.getState().findProfiles(addresses);
+  }
+
+  try {
+    const response = await fetch(`${apiServiceUrl}/api/v1/resolve/profiles`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,34 +36,44 @@ export const resolveAddresses = async (addresses: string[], force = false) => {
       body: JSON.stringify({
         addresses: force ? addresses : unresolvedAddresses,
       }),
-    },
-  );
+    });
 
-  if (!response.ok) {
-    // failed to resolve addresses, return the cached profiles
-    return cachedProfiles;
+    if (!response.ok) {
+      // failed to resolve addresses, return the cached profiles
+      return cachedProfiles;
+    }
+
+    const data = (await response.json()) as {
+      profiles: Profile[];
+    };
+
+    // addresses that don't have web3 profiles
+    const missingProfiles = unresolvedAddresses.filter(
+      (address) =>
+        !data.profiles.some((profile) => profile.address === address),
+    );
+
+    // add empty profiles for addresses that don't have web3 profiles so that
+    // we don't try to resolve them again in this session
+    missingProfiles.forEach((address) => {
+      data.profiles.push(createEmptyProfile(address));
+    });
+
+    if (data.profiles.length > 0) {
+      // cache the profiles
+      profilesStore.getState().addProfiles(data.profiles);
+    }
+
+    // return updated cached profiles
+    return profilesStore.getState().findProfiles(addresses);
+  } catch (error) {
+    console.warn("Failed to resolve addresses:", error);
+    // Add empty profiles for unresolved addresses to prevent repeated errors
+    unresolvedAddresses.forEach((address) => {
+      if (!cachedProfiles.has(address)) {
+        profilesStore.getState().addProfiles([createEmptyProfile(address)]);
+      }
+    });
+    return profilesStore.getState().findProfiles(addresses);
   }
-
-  const data = (await response.json()) as {
-    profiles: Profile[];
-  };
-
-  // addresses that don't have web3 profiles
-  const missingProfiles = unresolvedAddresses.filter(
-    (address) => !data.profiles.some((profile) => profile.address === address),
-  );
-
-  // add empty profiles for addresses that don't have web3 profiles so that
-  // we don't try to resolve them again in this session
-  missingProfiles.forEach((address) => {
-    data.profiles.push(createEmptyProfile(address));
-  });
-
-  if (data.profiles.length > 0) {
-    // cache the profiles
-    profilesStore.getState().addProfiles(data.profiles);
-  }
-
-  // return updated cached profiles
-  return profilesStore.getState().findProfiles(addresses);
 };

@@ -31,7 +31,9 @@ export const IntentContent: React.FC<IntentContentProps> = ({
           displayName={senderInboxId}
           tooltip={senderMember ? undefined : MEMBER_NO_LONGER_IN_GROUP}
         />
-        <Text size="sm">selected the</Text>
+        <Text size="sm" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
+          selected the
+        </Text>
         <Badge
           radius="md"
           variant="default"
@@ -43,7 +45,9 @@ export const IntentContent: React.FC<IntentContentProps> = ({
           }}>
           {content.actionId}
         </Badge>
-        <Text size="sm">action</Text>
+        <Text size="sm" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
+          action
+        </Text>
       </Group>
     </>
   );
