@@ -255,6 +255,29 @@ export const MumbleLanding: FC = () => {
     };
   }, []);
 
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    e.preventDefault();
+    setMenuOpen(false);
+
+    const targetId = href.replace("#", "");
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      const navbarHeight = 80; // Approximate navbar height
+      const targetPosition =
+        targetElement.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = targetPosition - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   const navClass = classNames(
     classes.navbar,
     scrolled && classes.navbarScrolled,
@@ -269,8 +292,8 @@ export const MumbleLanding: FC = () => {
           <a
             className={classes.brand}
             href="#home"
-            onClick={() => {
-              setMenuOpen(false);
+            onClick={(e) => {
+              handleNavClick(e, "#home");
             }}>
             <div className={classes.brandIcon}>
               <MumbleChatLogo className={classes.brandLogo} />
@@ -286,7 +309,13 @@ export const MumbleLanding: FC = () => {
           </a>
           <nav className={classes.navLinks} aria-label="Primary">
             {navLinks.map(({ label, href }) => (
-              <a key={label} href={href} className={classes.navLink}>
+              <a
+                key={label}
+                href={href}
+                className={classes.navLink}
+                onClick={(e) => {
+                  handleNavClick(e, href);
+                }}>
                 {label}
               </a>
             ))}
@@ -319,8 +348,8 @@ export const MumbleLanding: FC = () => {
                 key={label}
                 href={href}
                 className={classes.mobileNavLink}
-                onClick={() => {
-                  setMenuOpen(false);
+                onClick={(e) => {
+                  handleNavClick(e, href);
                 }}>
                 {label}
               </a>

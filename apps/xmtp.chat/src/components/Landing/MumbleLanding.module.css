@@ -36,6 +36,12 @@
   font-size: 0.98rem;
   line-height: 1.6;
 }
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
 .page {
   position: relative;
   min-height: 100vh;
