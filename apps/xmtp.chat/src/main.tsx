@@ -1,11 +1,10 @@
 import "@mantine/core/styles.css";
-import { createTheme, MantineProvider } from "@mantine/core";
 import "@/assets/mobile.css";
+import { createTheme, MantineProvider } from "@mantine/core";
 import { QueryClientProvider } from "@tanstack/react-query";
 import pkg from "@xmtp/browser-sdk/package.json";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
-import { registerSW } from "virtual:pwa-register";
 import { createConfig, http, WagmiProvider } from "wagmi";
 import {
   arbitrum,
@@ -36,6 +35,7 @@ import { ramestta } from "@/chains/ramestta";
 import { App } from "@/components/App/App";
 import { XMTPProvider } from "@/contexts/XMTPContext";
 import { queryClient } from "@/helpers/queries";
+import { registerSW } from "virtual:pwa-register";
 
 export const config = createConfig({
   connectors: [
@@ -237,12 +237,9 @@ if ("serviceWorker" in navigator) {
           swUrl ?? registration.scope,
         );
         // keep the worker fresh without waiting for a reload
-        setInterval(
-          () => {
-            void registration.update();
-          },
-          60 * 60 * 1000,
-        );
+        setInterval(() => {
+          void registration.update();
+        }, 60 * 60 * 1000);
       }
     },
     onRegisterError(error) {

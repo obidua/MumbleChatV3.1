@@ -40,11 +40,11 @@ export const useConversations = () => {
       // When syncing from network or on initial load, fetch ALL conversations
       // from the XMTP client's IndexedDB storage (it persists across reconnects)
       // Only use incremental sync (createdAfterNs) when we already have conversations loaded
-      // IMPORTANT: Always fetch all when conversations.length === 0 (e.g., after disconnect/reconnect)
-      const shouldFetchAll =
-        fromNetwork || conversations.length === 0 || !lastCreatedAt;
+      const shouldFetchAll = fromNetwork || conversations.length === 0;
       const convos = await client.conversations.list(
-        shouldFetchAll ? {} : { createdAfterNs: lastCreatedAt },
+        shouldFetchAll || !lastCreatedAt
+          ? {}
+          : { createdAfterNs: lastCreatedAt },
       );
       await addConversations(convos);
       setLastSyncedAt(dateToNs(new Date()));

@@ -255,29 +255,6 @@ export const MumbleLanding: FC = () => {
     };
   }, []);
 
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string,
-  ) => {
-    e.preventDefault();
-    setMenuOpen(false);
-
-    const targetId = href.replace("#", "");
-    const targetElement = document.getElementById(targetId);
-
-    if (targetElement) {
-      const navbarHeight = 80; // Approximate navbar height
-      const targetPosition =
-        targetElement.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = targetPosition - navbarHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
-  };
-
   const navClass = classNames(
     classes.navbar,
     scrolled && classes.navbarScrolled,
@@ -292,8 +269,8 @@ export const MumbleLanding: FC = () => {
           <a
             className={classes.brand}
             href="#home"
-            onClick={(e) => {
-              handleNavClick(e, "#home");
+            onClick={() => {
+              setMenuOpen(false);
             }}>
             <div className={classes.brandIcon}>
               <MumbleChatLogo className={classes.brandLogo} />
@@ -309,13 +286,7 @@ export const MumbleLanding: FC = () => {
           </a>
           <nav className={classes.navLinks} aria-label="Primary">
             {navLinks.map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                className={classes.navLink}
-                onClick={(e) => {
-                  handleNavClick(e, href);
-                }}>
+              <a key={label} href={href} className={classes.navLink}>
                 {label}
               </a>
             ))}
@@ -348,8 +319,8 @@ export const MumbleLanding: FC = () => {
                 key={label}
                 href={href}
                 className={classes.mobileNavLink}
-                onClick={(e) => {
-                  handleNavClick(e, href);
+                onClick={() => {
+                  setMenuOpen(false);
                 }}>
                 {label}
               </a>

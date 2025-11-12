@@ -34,23 +34,27 @@
     
     <title>MumbleChat - Decentralized Messaging</title>
     
-    <!-- Prevent bounce scrolling on iOS and set dark background -->
+    <!-- Prevent bounce scrolling on iOS -->
     <style>
       html, body {
         overscroll-behavior-y: none;
         -webkit-overflow-scrolling: touch;
         touch-action: pan-y;
-        background: #05060f !important;
-        background-color: #05060f !important;
+      }
+      
+      /* Prevent pull-to-refresh */
+      body {
+        overflow: hidden;
       }
       
       #root {
-        min-height: 100vh;
-        min-height: 100dvh;
+        overflow: auto;
+        height: 100vh;
+        height: 100dvh;
       }
     </style>
   </head>
-  <body style="background: #05060f;">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
