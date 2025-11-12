@@ -2,9 +2,8 @@
 
 /* Ensure full viewport height on mobile */
 html,
-body,
-#root {
-  height: 100%;
+body {
+  min-height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -12,6 +11,21 @@ body,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
+  /* Remove default background to allow page-specific backgrounds */
+  background: transparent;
+}
+
+#root {
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  /* Remove default background to allow page-specific backgrounds */
+  background: transparent;
 }
 
 /* iOS Safe Area Support */

@@ -75,12 +75,7 @@ export const CreateDmModal: React.FC = () => {
               <Text
                 size="lg"
                 fw={700}
-                style={{
-                  background: "linear-gradient(135deg, #0afff1, #9772fb)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}>
+                c="#ffffff">
                 New Message
               </Text>
             </Group>
@@ -147,7 +142,7 @@ export const CreateDmModal: React.FC = () => {
                     styles={{
                       input: {
                         background: "rgba(10, 13, 25, 0.6)",
-                        border: "1px solid rgba(10, 255, 241, 0.2)",
+                        border: "1px solid rgba(33, 150, 243, 0.2)",
                         color: "rgba(255, 255, 255, 0.9)",
                         fontSize: "0.95rem",
                         padding: "12px 16px",
@@ -190,9 +185,9 @@ export const CreateDmModal: React.FC = () => {
                     }
                     styles={{
                       root: {
-                        background: "rgba(10, 255, 241, 0.1)",
-                        border: "1px solid rgba(10, 255, 241, 0.2)",
-                        color: "#0afff1",
+                        background: "rgba(33, 150, 243, 0.1)",
+                        border: "1px solid rgba(33, 150, 243, 0.2)",
+                        color: "#2196f3",
                         fontWeight: 600,
                       },
                     }}>
@@ -230,7 +225,7 @@ export const CreateDmModal: React.FC = () => {
                     height="20"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="#0afff1"
+                    stroke="#2196f3"
                     style={{ flexShrink: 0, marginTop: "2px" }}>
                     <path
                       strokeLinecap="round"
@@ -240,7 +235,7 @@ export const CreateDmModal: React.FC = () => {
                     />
                   </svg>
                   <Stack gap="xs">
-                    <Text size="sm" fw={600} style={{ color: "#0afff1" }}>
+                    <Text size="sm" fw={600} style={{ color: "#2196f3" }}>
                       End-to-End Encrypted
                     </Text>
                     <Text size="xs" c="dimmed">
@@ -261,7 +256,7 @@ export const CreateDmModal: React.FC = () => {
                 styles={{
                   root: {
                     background: "rgba(10, 13, 25, 0.6)",
-                    border: "1px solid rgba(10, 255, 241, 0.2)",
+                    border: "1px solid rgba(33, 150, 243, 0.2)",
                     color: "rgba(255, 255, 255, 0.9)",
                   },
                 }}>
@@ -269,7 +264,7 @@ export const CreateDmModal: React.FC = () => {
               </Button>
               <Button
                 variant="gradient"
-                gradient={{ from: "#0afff1", to: "#9772fb" }}
+                gradient={{ from: "#2196f3", to: "#1976d2" }}
                 disabled={loading || memberIdError !== null || !inboxId}
                 loading={loading}
                 onClick={() => void handleCreate()}
@@ -292,9 +287,9 @@ export const CreateDmModal: React.FC = () => {
               mt="md"
               styles={{
                 root: {
-                  background: "rgba(10, 255, 241, 0.1)",
-                  border: "1px solid rgba(10, 255, 241, 0.2)",
-                  color: "#0afff1",
+                  background: "rgba(33, 150, 243, 0.1)",
+                  border: "1px solid rgba(33, 150, 243, 0.2)",
+                  color: "#2196f3",
                   fontWeight: 600,
                 },
               }}>
