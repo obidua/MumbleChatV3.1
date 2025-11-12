@@ -47,11 +47,13 @@ html {
   min-height: 100vh;
   background:
     radial-gradient(circle at top left, #11213b, transparent 45%),
+    radial-gradient(circle at top right, rgba(16, 185, 129, 0.15), transparent 50%),
     radial-gradient(
       circle at bottom right,
       rgba(21, 94, 117, 0.25),
       transparent 60%
     ),
+    radial-gradient(circle at bottom left, rgba(34, 197, 94, 0.12), transparent 55%),
     #05060f;
   color: #eef2ff;
   font-family:
@@ -86,7 +88,8 @@ html {
   left: -100px;
   background: radial-gradient(
     circle,
-    rgba(33, 150, 243, 0.45),
+    rgba(16, 185, 129, 0.35),
+    rgba(33, 150, 243, 0.25),
     transparent 65%
   );
 }
@@ -96,7 +99,8 @@ html {
   right: -160px;
   background: radial-gradient(
     circle,
-    rgba(25, 118, 210, 0.35),
+    rgba(34, 197, 94, 0.28),
+    rgba(25, 118, 210, 0.25),
     transparent 70%
   );
 }
@@ -409,18 +413,18 @@ html {
 }
 
 .heroTitle {
-  font-size: clamp(2.6rem, 6vw, 3.9rem);
+  font-size: clamp(3.2rem, 7vw, 4.8rem);
   line-height: 1.05;
   font-weight: 800;
   margin-bottom: 24px;
-  background: linear-gradient(120deg, #2196f3, #1976d2);
+  background: linear-gradient(135deg, #10b981, #2196f3, #1976d2);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .heroCopy {
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   color: rgba(226, 232, 240, 0.75);
   line-height: 1.7;
   margin-bottom: 32px;
@@ -442,7 +446,7 @@ html {
   border-radius: 999px;
   padding: 14px 24px;
   font-weight: 600;
-  font-size: 0.98rem;
+  font-size: 1.05rem;
   text-decoration: none;
   transition:
     transform 160ms ease,
@@ -767,7 +771,7 @@ html {
 }
 
 .sectionHeading h2 {
-  font-size: clamp(2rem, 4vw, 2.9rem);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
   margin-bottom: 16px;
   font-weight: 700;
 }
@@ -775,7 +779,7 @@ html {
 .sectionHeading p {
   color: rgba(226, 232, 240, 0.72);
   line-height: 1.7;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
 }
 
 .poweredGrid {
@@ -826,7 +830,7 @@ html {
 }
 
 .featureCard h3 {
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   margin-bottom: 12px;
 }
 
@@ -1085,7 +1089,7 @@ html {
 }
 
 .tokenomicCard h3 {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   margin-bottom: 12px;
 }
 
