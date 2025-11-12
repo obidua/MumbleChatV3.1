@@ -22,8 +22,8 @@ export default defineConfig({
         display: "fullscreen",
         display_override: ["fullscreen", "standalone", "minimal-ui"],
         orientation: "any",
-        background_color: "#05060f",
-        theme_color: "#0afff1",
+        background_color: "#0f1419",
+        theme_color: "#2196f3",
         categories: ["social", "productivity", "communication"],
         lang: "en-US",
         screenshots: [

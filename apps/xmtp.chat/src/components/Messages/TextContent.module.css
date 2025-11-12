@@ -1,113 +1,66 @@
 .text {
   cursor: text;
-  max-width: clamp(220px, 68vw, 520px);
-  line-height: 1.6;
-  font-size: 0.98rem;
+  max-width: clamp(280px, 70vw, 520px);
+  line-height: 1.5;
+  font-size: 15px;
   position: relative;
-  overflow: hidden;
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
+  overflow: visible;
+  word-wrap: break-word;
+  transition: none;
 }
 
 .text:hover {
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .inbound {
-  background: linear-gradient(
-    135deg,
-    rgba(8, 12, 22, 0.95),
-    rgba(12, 17, 30, 0.92)
-  );
-  color: rgba(226, 232, 240, 0.95);
-  border: 1px solid rgba(10, 255, 241, 0.18);
-  box-shadow:
-    0 8px 20px rgba(4, 8, 20, 0.35),
-    0 0 25px rgba(10, 255, 241, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(10px);
+  background: #182533;
+  color: #e9ecef;
+  border: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 12px 12px 12px 4px;
 }
 
 .inbound::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-    circle at top left,
-    rgba(10, 255, 241, 0.08),
-    transparent 60%
-  );
-  pointer-events: none;
+  display: none;
 }
 
 .inbound:hover {
-  border-color: rgba(10, 255, 241, 0.25);
-  box-shadow:
-    0 12px 28px rgba(4, 8, 20, 0.45),
-    0 0 35px rgba(10, 255, 241, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .outbound {
-  background: linear-gradient(135deg, #0afff1 0%, #9772fb 100%);
-  color: #041019;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow:
-    0 8px 20px rgba(10, 255, 241, 0.25),
-    0 0 30px rgba(151, 114, 251, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  font-weight: 500;
+  background: #2b5278;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  font-weight: 400;
+  border-radius: 12px 12px 4px 12px;
 }
 
 .outbound::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-    circle at top right,
-    rgba(255, 255, 255, 0.15),
-    transparent 60%
-  );
-  pointer-events: none;
+  display: none;
 }
 
 .outbound::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    rgba(151, 114, 251, 0.1) 100%
-  );
-  pointer-events: none;
+  display: none;
 }
 
 .outbound:hover {
-  box-shadow:
-    0 12px 28px rgba(10, 255, 241, 0.35),
-    0 0 40px rgba(151, 114, 251, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {
   .text {
-    font-size: 0.96rem;
-    line-height: 1.55;
+    font-size: 15px;
+    line-height: 1.5;
   }
 }
 
 @media (max-width: 520px) {
   .text {
-    max-width: 82vw;
-    font-size: 0.94rem;
+    max-width: 85vw;
+    font-size: 15px;
     line-height: 1.5;
   }
 }

@@ -99,66 +99,82 @@ const theme = createTheme({
     xxs: "calc(0.5rem * var(--mantine-scale))",
     xxxs: "calc(0.25rem * var(--mantine-scale))",
   },
-  primaryColor: "cyan",
+  primaryColor: "blue",
   colors: {
-    cyan: [
-      "#e6fffe",
-      "#d1fffc",
-      "#a8fff9",
-      "#7afff5",
-      "#50fff2",
-      "#0afff1", // Primary cyan
-      "#00e6d8",
-      "#00ccbf",
-      "#00b3a7",
-      "#009a8e",
+    // Telegram-inspired blue palette
+    blue: [
+      "#e3f2fd",
+      "#bbdefb",
+      "#90caf9",
+      "#64b5f6",
+      "#42a5f5",
+      "#2196f3", // Primary Telegram blue
+      "#1e88e5",
+      "#1976d2",
+      "#1565c0",
+      "#0d47a1",
     ],
-    purple: [
-      "#f5f0ff",
-      "#e9ddff",
-      "#d4b8ff",
-      "#be92ff",
-      "#a86fff",
-      "#9772fb", // Primary purple
-      "#8960e8",
-      "#7b4ed5",
-      "#6d3cc2",
-      "#5f2aaf",
+    // Soft accent colors
+    teal: [
+      "#e0f7fa",
+      "#b2ebf2",
+      "#80deea",
+      "#4dd0e1",
+      "#26c6da",
+      "#00bcd4", // Accent teal
+      "#00acc1",
+      "#0097a7",
+      "#00838f",
+      "#006064",
+    ],
+    // Clean grays for UI elements
+    dark: [
+      "#f8f9fa",
+      "#e9ecef",
+      "#dee2e6",
+      "#ced4da",
+      "#adb5bd",
+      "#6c757d",
+      "#495057",
+      "#343a40",
+      "#212529",
+      "#0f1419", // Deep background
     ],
   },
   components: {
     Button: {
       styles: () => ({
         root: {
-          transition: "all 0.2s ease",
-          fontWeight: 600,
+          transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
+          fontWeight: 500,
+          letterSpacing: "0.01em",
         },
       }),
       defaultProps: {
-        radius: "md",
+        radius: "lg",
       },
     },
     Badge: {
       styles: {
         root: {
-          fontWeight: 600,
-          letterSpacing: "0.02em",
+          fontWeight: 500,
+          letterSpacing: "0.01em",
         },
       },
     },
     Modal: {
       defaultProps: {
         centered: true,
-        radius: "md",
+        radius: "lg",
       },
     },
     TextInput: {
       styles: {
         input: {
-          transition: "all 0.2s ease",
+          transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
           "&:focus": {
-            borderColor: "rgba(10, 255, 241, 0.4)",
-            boxShadow: "0 0 0 2px rgba(10, 255, 241, 0.1)",
+            borderColor: "rgba(33, 150, 243, 0.5)",
+            boxShadow: "0 0 0 3px rgba(33, 150, 243, 0.08)",
           },
         },
       },
@@ -166,10 +182,10 @@ const theme = createTheme({
     Textarea: {
       styles: {
         input: {
-          transition: "all 0.2s ease",
+          transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
           "&:focus": {
-            borderColor: "rgba(10, 255, 241, 0.4)",
-            boxShadow: "0 0 0 2px rgba(10, 255, 241, 0.1)",
+            borderColor: "rgba(33, 150, 243, 0.5)",
+            boxShadow: "0 0 0 3px rgba(33, 150, 243, 0.08)",
           },
         },
       },
@@ -177,16 +193,16 @@ const theme = createTheme({
     Accordion: {
       styles: {
         control: {
-          transition: "all 0.2s ease",
+          transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
           "&:hover": {
-            background: "rgba(10, 255, 241, 0.08)",
+            background: "rgba(33, 150, 243, 0.06)",
           },
         },
         item: {
-          border: "1px solid rgba(10, 255, 241, 0.12)",
-          background: "rgba(6, 9, 20, 0.6)",
+          border: "1px solid rgba(33, 150, 243, 0.1)",
+          background: "rgba(15, 20, 25, 0.6)",
           "&[data-active]": {
-            borderColor: "rgba(10, 255, 241, 0.24)",
+            borderColor: "rgba(33, 150, 243, 0.2)",
           },
         },
       },
