@@ -1,6 +1,6 @@
 /* Mobile-specific styles for PWA */
 
-/* Ensure full viewport height on mobile */
+/* Ensure full viewport height on mobile with dark background matching landing page */
 html,
 body {
   min-height: 100%;
@@ -11,9 +11,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
-  /* Remove default background to allow page-specific backgrounds */
-  background: transparent !important;
-  background-color: transparent !important;
+  background: #05060f !important;
+  background-color: #05060f !important;
 }
 
 #root {
@@ -25,9 +24,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
-  /* Remove default background to allow page-specific backgrounds */
-  background: transparent !important;
-  background-color: transparent !important;
 }
 
 /* Override Mantine's default background - very specific selectors */
@@ -35,8 +31,8 @@ body[data-mantine-color-scheme],
 body[data-mantine-color-scheme="light"],
 body[data-mantine-color-scheme="dark"],
 body[data-mantine-color-scheme="auto"] {
-  background: transparent !important;
-  background-color: transparent !important;
+  background: #05060f !important;
+  background-color: #05060f !important;
 }
 
 /* iOS Safe Area Support */
