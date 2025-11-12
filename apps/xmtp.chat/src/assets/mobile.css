@@ -13,6 +13,7 @@ body {
   -webkit-tap-highlight-color: transparent;
   /* Remove default background to allow page-specific backgrounds */
   background: transparent !important;
+  background-color: transparent !important;
 }
 
 #root {
@@ -26,11 +27,16 @@ body {
   -webkit-tap-highlight-color: transparent;
   /* Remove default background to allow page-specific backgrounds */
   background: transparent !important;
+  background-color: transparent !important;
 }
 
-/* Override Mantine's default background */
-body[data-mantine-color-scheme] {
+/* Override Mantine's default background - very specific selectors */
+body[data-mantine-color-scheme],
+body[data-mantine-color-scheme="light"],
+body[data-mantine-color-scheme="dark"],
+body[data-mantine-color-scheme="auto"] {
   background: transparent !important;
+  background-color: transparent !important;
 }
 
 /* iOS Safe Area Support */
