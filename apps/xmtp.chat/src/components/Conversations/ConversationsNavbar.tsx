@@ -41,8 +41,17 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
   const [searchQuery, setSearchQuery] = useState("");
   const [showQRScanner, setShowQRScanner] = useState(false);
   const [showQRCode, setShowQRCode] = useState(false);
+  const [accountIdentifier, setAccountIdentifier] = useState<string | null>(
+    null,
+  );
   const client = useClient();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setAccountIdentifier(
+      client.accountIdentifier?.identifier.toLowerCase() ?? null,
+    );
+  }, [client.accountIdentifier]);
 
   // Filter conversations based on search query
   const filteredConversations = useMemo(() => {
@@ -272,13 +281,15 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
           setShowQRScanner(false);
         }}
       />
-      <QRCodeModal
-        opened={showQRCode}
-        onClose={() => {
-          setShowQRCode(false);
-        }}
-        address={client.accountAddress}
-      />
+      {accountIdentifier && (
+        <QRCodeModal
+          opened={showQRCode}
+          onClose={() => {
+            setShowQRCode(false);
+          }}
+          address={accountIdentifier}
+        />
+      )}
     </ContentLayout>
   );
 };
