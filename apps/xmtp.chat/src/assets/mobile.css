@@ -1,5 +1,16 @@
 /* Mobile-specific styles for PWA */
 
+/* Text selection highlighting - green theme */
+::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+}
+
 /* Ensure full viewport height on mobile */
 html,
 body,

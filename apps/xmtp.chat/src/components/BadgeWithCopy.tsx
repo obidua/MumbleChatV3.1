@@ -27,13 +27,24 @@ const CopyIcon: React.FC<CopyIconProps> = ({ value }) => {
     <Tooltip
       label={
         clipboard.copied ? (
-          <Text size="xs">Copied!</Text>
+          <Text size="xs" c="white">Copied!</Text>
         ) : (
-          <Text size="xs">{value}</Text>
+          <Text size="xs" c="white">{value}</Text>
         )
       }
       withArrow
-      events={{ hover: true, focus: true, touch: true }}>
+      events={{ hover: true, focus: true, touch: true }}
+      styles={{
+        tooltip: {
+          background: "rgba(10, 13, 25, 0.95)",
+          border: "1px solid rgba(16, 185, 129, 0.3)",
+          color: "white",
+        },
+        arrow: {
+          background: "rgba(10, 13, 25, 0.95)",
+          border: "1px solid rgba(16, 185, 129, 0.3)",
+        },
+      }}>
       <ActionIcon
         variant="transparent"
         onClick={handleCopy}

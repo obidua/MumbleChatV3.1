@@ -37,7 +37,7 @@ export const useMemberId = () => {
         !isValidInboxId(memberId) &&
         !isValidName(memberId)
       ) {
-        setError("Invalid address, inbox ID, ENS name, or Base name");
+        setError("Please enter a valid wallet address, ENS name, or Base name");
       } else if (isValidEthereumAddress(memberId)) {
         setLoading(true);
 
@@ -48,13 +48,13 @@ export const useMemberId = () => {
           );
 
           if (!inboxId) {
-            setError("Address not registered on XMTP");
+            setError("This address hasn't registered on XMTP yet. They need to connect first.");
           } else {
             setInboxId(inboxId);
             setAddress(memberId);
           }
         } catch {
-          setError("Unable to get inbox ID for address. Try again.");
+          setError("Couldn't verify this address. Please check and try again.");
         } finally {
           setLoading(false);
         }
@@ -65,7 +65,7 @@ export const useMemberId = () => {
         try {
           const profiles = await resolveNameQuery(memberId);
           if (!profiles || profiles.length === 0) {
-            setError("Invalid ENS or Base name");
+            setError("Couldn't find this ENS or Base name. Please check the spelling.");
           } else {
             try {
               const profile = combineProfiles(
@@ -78,7 +78,7 @@ export const useMemberId = () => {
                 environment,
               );
               if (!inboxId) {
-                setError("Address not registered on XMTP");
+                setError("This address hasn't registered on XMTP yet. They need to connect first.");
               } else {
                 setInboxId(inboxId);
                 setAddress(profile.address);
@@ -87,13 +87,13 @@ export const useMemberId = () => {
                 setAvatar(profile.avatar);
               }
             } catch {
-              setError("Unable to get inbox ID for address. Try again.");
+              setError("Couldn't verify this name. Please try again.");
             } finally {
               setLoading(false);
             }
           }
         } catch {
-          setError("Unable to resolve name");
+          setError("Couldn't look up this name. Please check your connection and try again.");
         } finally {
           setLoading(false);
         }

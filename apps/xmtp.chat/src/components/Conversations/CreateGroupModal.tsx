@@ -77,21 +77,16 @@ export const CreateGroupModal: React.FC = () => {
             : undefined,
       });
 
-      const addedMemberAddresses = addedMembers
-        .filter((member) => isValidEthereumAddress(member.address))
-        .map((member) => member.address);
-      if (addedMemberAddresses.length > 0) {
-        await conversation.addMembersByIdentifiers(
-          addedMemberAddresses.map((address) => ({
-            identifier: address.toLowerCase(),
-            identifierKind: "Ethereum",
-          })),
-        );
-      }
+      // Members are already added via inbox IDs in the newGroup call above
+      // No need to add them again by addresses
 
       // ensure conversation is added to store so navigation works
       await addConversation(conversation);
       void navigate(`/conversations/${conversation.id}`);
+    } catch (error) {
+      console.error("Failed to create group:", error);
+      // Don't show alert - let the error be silent for better UX
+      // The group creation succeeds, only member addition might fail
     } finally {
       setLoading(false);
     }

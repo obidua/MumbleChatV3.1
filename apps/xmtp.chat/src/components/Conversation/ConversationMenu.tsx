@@ -1,10 +1,8 @@
-import { ActionIcon, Menu, Text } from "@mantine/core";
-import { modals } from "@mantine/modals";
+import { ActionIcon, Menu } from "@mantine/core";
 import { useMemo } from "react";
 import { useNavigate } from "react-router";
 import { useClientPermissions } from "@/hooks/useClientPermissions";
 import { IconDots } from "@/icons/IconDots";
-import { useActions } from "@/stores/inbox/hooks";
 
 export type ConversationMenuProps = {
   conversationId: string;
@@ -20,7 +18,6 @@ export const ConversationMenu: React.FC<ConversationMenuProps> = ({
   disabled,
 }) => {
   const navigate = useNavigate();
-  const { removeConversation } = useActions();
   const clientPermissions = useClientPermissions(conversationId);
   const canManageMembers = useMemo(() => {
     return (
@@ -34,25 +31,6 @@ export const ConversationMenu: React.FC<ConversationMenuProps> = ({
       clientPermissions.canChangeGroupImage
     );
   }, [clientPermissions]);
-
-  const handleDeleteConversation = () => {
-    modals.openConfirmModal({
-      title: "Delete Conversation",
-      centered: true,
-      children: (
-        <Text size="sm">
-          Are you sure you want to delete this conversation? This will only
-          remove it from your device. You can sync again to restore it.
-        </Text>
-      ),
-      labels: { confirm: "Delete", cancel: "Cancel" },
-      confirmProps: { color: "red" },
-      onConfirm: () => {
-        removeConversation(conversationId);
-        void navigate("/conversations");
-      },
-    });
-  };
 
   return (
     <Menu shadow="md" disabled={disabled} position="bottom-end">
@@ -90,10 +68,6 @@ export const ConversationMenu: React.FC<ConversationMenuProps> = ({
           )}
         <Menu.Label>Actions</Menu.Label>
         <Menu.Item onClick={onSync}>Sync</Menu.Item>
-        <Menu.Divider />
-        <Menu.Item color="red" onClick={handleDeleteConversation}>
-          Delete Conversation
-        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );
