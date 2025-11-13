@@ -125,3 +125,61 @@
     height: 24px;
   }
 }
+
+/* ============================================
+   LIGHT MODE SUPPORT
+   ============================================ */
+
+@media (prefers-color-scheme: light) {
+  .content {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(248, 250, 252, 0.98)
+    );
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow:
+      0 12px 32px rgba(71, 85, 105, 0.2),
+      0 0 60px rgba(59, 130, 246, 0.15),
+      0 0 0 1px rgba(59, 130, 246, 0.1) inset;
+  }
+
+  .iconWrapper {
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.12),
+      rgba(124, 58, 237, 0.12)
+    );
+    border: 1px solid rgba(59, 130, 246, 0.25);
+  }
+
+  .icon {
+    color: #3b82f6;
+  }
+
+  .title {
+    color: rgba(0, 0, 0, 0.95);
+  }
+
+  .description {
+    color: rgba(71, 85, 105, 0.8);
+  }
+
+  .installButton {
+    background: linear-gradient(135deg, #3b82f6, #0ea5e9);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+  }
+
+  .installButton:hover {
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+  }
+
+  .closeButton {
+    color: rgba(71, 85, 105, 0.7);
+  }
+
+  .closeButton:hover {
+    color: rgba(0, 0, 0, 0.9);
+    background: rgba(59, 130, 246, 0.1);
+  }
+}

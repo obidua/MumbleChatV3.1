@@ -317,3 +317,93 @@
     font-size: 0.5rem;
   }
 }
+
+/* ============================================
+   LIGHT MODE SUPPORT
+   ============================================ */
+
+@media (prefers-color-scheme: light) {
+  .brandIcon {
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.08),
+      rgba(14, 165, 233, 0.12)
+    );
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    box-shadow:
+      0 8px 32px rgba(59, 130, 246, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .brandIcon::before {
+    background: conic-gradient(
+      from 0deg,
+      transparent,
+      rgba(59, 130, 246, 0.3),
+      transparent 30%
+    );
+  }
+
+  .brandIcon::after {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(248, 250, 252, 0.95)
+    );
+  }
+
+  .logo {
+    filter: drop-shadow(0 2px 12px rgba(59, 130, 246, 0.4));
+  }
+
+  .brandName {
+    background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 6px rgba(59, 130, 246, 0.2));
+  }
+
+  .brandAccent {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .brandTagline {
+    color: rgba(59, 130, 246, 0.7);
+  }
+
+  .statusContainer {
+    background: rgba(59, 130, 246, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .statusContainer:hover {
+    background: rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.35);
+  }
+
+  .statusDot {
+    background: #3b82f6;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.8);
+  }
+
+  .statusText {
+    color: rgba(59, 130, 246, 0.9);
+  }
+
+  .disconnectIcon:hover {
+    background: rgba(59, 130, 246, 0.15);
+  }
+  
+  .separator {
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(59, 130, 246, 0.4),
+      transparent
+    );
+  }
+}
