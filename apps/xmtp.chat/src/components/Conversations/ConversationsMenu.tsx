@@ -1,5 +1,6 @@
 import { ActionIcon, Menu } from "@mantine/core";
 import { IconDots } from "@/icons/IconDots";
+import { IconLogout } from "@/icons/IconLogout";
 
 export type ConversationsMenuProps = {
   onSync: () => void;
@@ -7,6 +8,7 @@ export type ConversationsMenuProps = {
   onCreateDm?: () => void;
   onCreateGroup?: () => void;
   onShowQRCode?: () => void;
+  onLogout?: () => void;
   disabled?: boolean;
   loading?: boolean;
 };
@@ -17,6 +19,7 @@ export const ConversationsMenu: React.FC<ConversationsMenuProps> = ({
   onCreateDm,
   onCreateGroup,
   onShowQRCode,
+  onLogout,
   disabled,
   loading,
 }) => {
@@ -65,6 +68,14 @@ export const ConversationsMenu: React.FC<ConversationsMenuProps> = ({
               <span style={{ fontSize: "16px" }}>📱</span>
             }>
             Show QR Code
+          </Menu.Item>
+        )}
+        {onLogout && (
+          <Menu.Item
+            onClick={onLogout}
+            leftSection={<IconLogout size={16} />}
+            color="red">
+            Logout
           </Menu.Item>
         )}
         <Menu.Divider />

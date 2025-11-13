@@ -30,7 +30,11 @@
     <!-- Icons and Manifest -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials" />
+
+    <!-- Performance optimizations for mobile -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     
     <!-- Feature Policy for Camera Access -->
     <meta http-equiv="Permissions-Policy" content="camera=*, microphone=*" />

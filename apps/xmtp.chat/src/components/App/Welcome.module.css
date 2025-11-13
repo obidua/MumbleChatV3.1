@@ -307,3 +307,102 @@
     font-size: 1.05rem;
   }
 }
+
+/* ============================================
+   LIGHT MODE SUPPORT
+   ============================================ */
+
+@media (prefers-color-scheme: light) {
+  .container {
+    background: #f8fafc;
+  }
+
+  .backIcon {
+    color: #3b82f6;
+  }
+
+  .backIcon:hover {
+    color: #2563eb;
+  }
+
+  .backButtonDesktop {
+    color: #3b82f6;
+  }
+
+  .backButtonDesktop:hover {
+    color: #2563eb;
+    background: rgba(59, 130, 246, 0.1);
+  }
+
+  .logoWrapper {
+    background: rgba(59, 130, 246, 0.12);
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+  }
+
+  .logo {
+    filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.3));
+  }
+
+  .brandName {
+    color: #0f172a;
+  }
+
+  .tagline {
+    color: #64748b;
+  }
+
+  .welcomeCard {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    box-shadow: 0 4px 12px rgba(71, 85, 105, 0.1);
+  }
+
+  .welcomeCard:hover {
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 8px 24px rgba(71, 85, 105, 0.15);
+  }
+
+  .cardTitle {
+    color: #0f172a;
+  }
+
+  .cardDescription {
+    color: #64748b;
+  }
+
+  .disclaimer {
+    color: #94a3b8;
+    border-top: 1px solid rgba(148, 163, 184, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      background: #f8fafc;
+    }
+
+    .logoWrapper {
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+    }
+
+    .welcomeCard {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 6px 16px rgba(71, 85, 105, 0.12);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .container {
+      background: #f8fafc;
+    }
+
+    .logoWrapper {
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+    }
+
+    .welcomeCard {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 6px 16px rgba(71, 85, 105, 0.12);
+    }
+  }
+}

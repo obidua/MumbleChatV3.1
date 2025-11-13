@@ -16,6 +16,7 @@ import { QRScannerModal } from "@/components/QRCode/QRScannerModal";
 import { useClient } from "@/contexts/XMTPContext";
 import { getMemberAddress } from "@/helpers/xmtp";
 import { useConversations } from "@/hooks/useConversations";
+import { useRedirect } from "@/hooks/useRedirect";
 import { ContentLayout } from "@/layouts/ContentLayout";
 import { inboxStore } from "@/stores/inbox/store";
 import classes from "./ConversationsNavbar.module.css";
@@ -46,6 +47,7 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
   );
   const client = useClient();
   const navigate = useNavigate();
+  const { setRedirectUrl } = useRedirect();
 
   useEffect(() => {
     setAccountIdentifier(
@@ -112,6 +114,11 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
     await syncAll();
     await startStreams();
   }, [syncAll, startStreams, stopStreams]);
+
+  const handleLogout = useCallback(() => {
+    setRedirectUrl(`${location.pathname}${location.search}`);
+    void navigate("/disconnect");
+  }, [navigate, setRedirectUrl]);
 
   // loading conversations on mount and when client changes, and start streaming
   useEffect(() => {
@@ -214,6 +221,7 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
             onShowQRCode={() => {
               setShowQRCode(true);
             }}
+            onLogout={handleLogout}
             disabled={syncing}
           />
         </Group>

@@ -14,21 +14,30 @@ export const InstallPrompt: React.FC = () => {
 
   useEffect(() => {
     // Check if already installed
-    if (window.matchMedia("(display-mode: standalone)").matches) {
-      console.log("PWA: Already installed");
+    const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
+    const isFullscreen = window.matchMedia("(display-mode: fullscreen)").matches;
+    const isIOSStandalone = (window.navigator as any).standalone === true;
+
+    if (isStandalone || isFullscreen || isIOSStandalone) {
+      console.log("PWA: Already installed", { isStandalone, isFullscreen, isIOSStandalone });
       setShowPrompt(false);
       return;
     }
 
-    // Also check for fullscreen mode
-    if (window.matchMedia("(display-mode: fullscreen)").matches) {
-      console.log("PWA: Already installed (fullscreen)");
-      setShowPrompt(false);
-      return;
-    }
+    // Enhanced Android detection
+    const isAndroid = /android/i.test(navigator.userAgent);
+    const isChrome = /chrome/i.test(navigator.userAgent) && !/edg/i.test(navigator.userAgent);
+    const isSamsung = /samsungbrowser/i.test(navigator.userAgent);
+
+    console.log("PWA: Device Detection", {
+      isAndroid,
+      isChrome,
+      isSamsung,
+      userAgent: navigator.userAgent,
+    });
 
     const handler = (e: Event) => {
-      console.log("PWA: beforeinstallprompt event fired!");
+      console.log("PWA: ✅ beforeinstallprompt event fired!");
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
 
@@ -40,35 +49,34 @@ export const InstallPrompt: React.FC = () => {
 
       console.log("PWA: Days since dismissed:", daysSinceDismissed);
 
-      // Show prompt immediately on Android for better visibility
-      // Only respect dismissal if it's been less than 7 days (increased from 1 day)
-      if (!dismissed || daysSinceDismissed > 7) {
-        console.log("PWA: Showing install prompt");
-        // Show prompt after a short delay to ensure page is loaded
+      // Show prompt more aggressively on Android
+      // Only respect dismissal if it's been less than 3 days on Android, 7 on others
+      const dismissalThreshold = isAndroid ? 3 : 7;
+
+      if (!dismissed || daysSinceDismissed > dismissalThreshold) {
+        console.log("PWA: ✅ Showing install prompt");
+        // Shorter delay on Android for immediate visibility
         setTimeout(() => {
           setShowPrompt(true);
-        }, 2000);
+        }, isAndroid ? 1000 : 2000);
       } else {
         console.log(
-          "PWA: Not showing - recently dismissed (less than 7 days)",
+          `PWA: ❌ Not showing - recently dismissed (less than ${dismissalThreshold} days)`,
         );
       }
     };
 
-    console.log("PWA: Listening for beforeinstallprompt event");
+    console.log("PWA: 👂 Listening for beforeinstallprompt event");
     console.log("PWA: User Agent:", navigator.userAgent);
-    console.log(
-      "PWA: Display Mode:",
-      window.matchMedia("(display-mode: browser)").matches
-        ? "browser"
-        : "standalone/fullscreen",
-    );
+    console.log("PWA: Display Mode:", window.matchMedia("(display-mode: browser)").matches ? "browser" : "standalone/fullscreen");
+    console.log("PWA: Protocol:", window.location.protocol);
+    console.log("PWA: Hostname:", window.location.hostname);
 
     window.addEventListener("beforeinstallprompt", handler);
 
     // Also listen for app installed event
     const appInstalledHandler = () => {
-      console.log("PWA: App installed successfully!");
+      console.log("PWA: ✅ App installed successfully!");
       setShowPrompt(false);
       setDeferredPrompt(null);
       // Clear dismissal flag since app is now installed
@@ -76,6 +84,21 @@ export const InstallPrompt: React.FC = () => {
     };
 
     window.addEventListener("appinstalled", appInstalledHandler);
+
+    // Debug: Check manifest availability after 2 seconds
+    setTimeout(() => {
+      fetch("/manifest.webmanifest")
+        .then((res) => {
+          console.log("PWA: Manifest fetch status:", res.status, res.ok ? "✅" : "❌");
+          return res.json();
+        })
+        .then((manifest) => {
+          console.log("PWA: Manifest loaded:", manifest);
+        })
+        .catch((err) => {
+          console.error("PWA: ❌ Manifest fetch error:", err);
+        });
+    }, 2000);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);

@@ -166,6 +166,25 @@ body,
       var(--bottom-nav-height) + var(--mobile-safe-area-bottom)
     ) !important;
   }
+
+  /* Ensure modal z-indexes don't interfere with bottom nav */
+  .mantine-Modal-overlay {
+    z-index: 199 !important;
+  }
+
+  .mantine-Modal-inner {
+    z-index: 200 !important;
+  }
+
+  .mantine-Modal-content {
+    z-index: 201 !important;
+  }
+
+  /* Ensure bottom navigation stays above everything */
+  [class*="bottomNav"],
+  [class*="BottomNav"] {
+    z-index: 1000 !important;
+  }
 }
 
 /* Light mode text visibility - Clean and readable */
@@ -414,6 +433,207 @@ body,
   [class*="navItem"][class*="active"] {
     color: #10b981 !important;
     background: rgba(16, 185, 129, 0.1) !important;
+  }
+
+  /* Modals background and overlay */
+  .mantine-Modal-root {
+    color: #212529 !important;
+  }
+
+  .mantine-Modal-overlay {
+    background: rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .mantine-Modal-content {
+    background: #ffffff !important;
+    color: #212529 !important;
+  }
+
+  .mantine-Modal-header {
+    background: #ffffff !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* All message-related components */
+  [class*="Message"],
+  [class*="message"] {
+    background: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    color: #212529 !important;
+  }
+
+  /* Conversation sidebar */
+  [class*="ConversationsNavbar"],
+  [class*="conversationsNavbar"],
+  [class*="shell"] {
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    color: #212529 !important;
+  }
+
+  /* App header */
+  [class*="AppHeader"],
+  [class*="appHeader"],
+  [class*="header"]:not([class*="message"]) {
+    background: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Empty states */
+  [class*="empty"],
+  [class*="Empty"] {
+    color: #6c757d !important;
+  }
+
+  /* Select/Dropdown components */
+  .mantine-Select-dropdown,
+  .mantine-MultiSelect-dropdown {
+    background: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .mantine-Select-option,
+  .mantine-MultiSelect-option {
+    color: #212529 !important;
+  }
+
+  .mantine-Select-option:hover,
+  .mantine-MultiSelect-option:hover {
+    background: #f8f9fa !important;
+  }
+
+  .mantine-Select-option[data-selected],
+  .mantine-MultiSelect-option[data-selected] {
+    background: rgba(33, 150, 243, 0.1) !important;
+  }
+
+  /* Dividers */
+  .mantine-Divider-root {
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Switch components */
+  .mantine-Switch-track {
+    background: #dee2e6 !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
+  }
+
+  .mantine-Switch-track[data-checked] {
+    background: #2196f3 !important;
+  }
+
+  /* Radio and Checkboxes */
+  .mantine-Radio-radio,
+  .mantine-Checkbox-input {
+    border-color: rgba(0, 0, 0, 0.3) !important;
+    background: #ffffff !important;
+  }
+
+  .mantine-Radio-radio:checked,
+  .mantine-Checkbox-input:checked {
+    border-color: #2196f3 !important;
+    background: #2196f3 !important;
+  }
+
+  /* Loader/Spinner */
+  .mantine-Loader-root {
+    color: #2196f3 !important;
+  }
+
+  /* Tooltips */
+  .mantine-Tooltip-tooltip {
+    background: rgba(0, 0, 0, 0.9) !important;
+    color: #ffffff !important;
+  }
+
+  /* Progress bars */
+  .mantine-Progress-root {
+    background: #e9ecef !important;
+  }
+
+  /* Alerts/Notifications */
+  .mantine-Alert-root,
+  .mantine-Notification-root {
+    background: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Fix remaining dark sections in modals and pages */
+  /* Target New Message, Create Group, Identity pages */
+
+  /* All Paper/Card components with dark bg */
+  .mantine-Paper-root[style*="background"],
+  .mantine-Card-root[style*="background"],
+  div[style*="background-color: rgb(31, 41, 55)"],
+  div[style*="background-color: rgb(17, 24, 39)"],
+  div[style*="background-color: rgb(55, 65, 81)"],
+  div[style*="background-color: rgb(30, 41, 59)"],
+  div[style*="background: rgb(31, 41, 55)"],
+  div[style*="background: rgb(17, 24, 39)"],
+  div[style*="background: rgb(55, 65, 81)"],
+  div[style*="background: rgb(30, 41, 59)"] {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Fix text colors in those dark sections */
+  div[style*="background-color: rgb(31, 41, 55)"] *,
+  div[style*="background-color: rgb(17, 24, 39)"] *,
+  div[style*="background-color: rgb(55, 65, 81)"] *,
+  div[style*="background-color: rgb(30, 41, 59)"] *,
+  div[style*="background: rgb(31, 41, 55)"] *,
+  div[style*="background: rgb(17, 24, 39)"] *,
+  div[style*="background: rgb(55, 65, 81)"] *,
+  div[style*="background: rgb(30, 41, 59)"] * {
+    color: #212529 !important;
+  }
+
+  /* Fix gray text colors */
+  span[style*="color: rgb(156, 163, 175)"],
+  span[style*="color: rgb(209, 213, 219)"],
+  div[style*="color: rgb(156, 163, 175)"],
+  div[style*="color: rgb(209, 213, 219)"],
+  p[style*="color: rgb(156, 163, 175)"],
+  p[style*="color: rgb(209, 213, 219)"] {
+    color: #6c757d !important;
+  }
+
+  /* Headings in dark sections */
+  h1[style*="color"],
+  h2[style*="color"],
+  h3[style*="color"],
+  h4[style*="color"],
+  h5[style*="color"],
+  h6[style*="color"] {
+    color: #000000 !important;
+  }
+
+  /* Green/teal text should stay green but darker */
+  span[style*="color: rgb(16, 185, 129)"],
+  span[style*="color: rgb(5, 150, 105)"],
+  div[style*="color: rgb(16, 185, 129)"],
+  div[style*="color: rgb(5, 150, 105)"] {
+    color: #059669 !important;
+  }
+
+  /* Ensure button text stays visible */
+  button {
+    color: inherit !important;
+  }
+
+  /* Primary buttons keep white text */
+  button[style*="background"],
+  .mantine-Button-root:not([data-variant="subtle"]):not([data-variant="light"]) {
+    color: #ffffff !important;
+  }
+
+  /* Stack and Group in dark sections */
+  .mantine-Stack-root[style*="background"],
+  .mantine-Group-root[style*="background"] {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
   }
 }
 

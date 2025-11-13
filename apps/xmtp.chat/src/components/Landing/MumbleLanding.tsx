@@ -348,6 +348,14 @@ export const MumbleLanding: FC = () => {
           <h1 className={classes.heroTitle}>
             Institutional-grade decentralized messaging, powered by Ramestta.
           </h1>
+          <div className={classes.heroActions}>
+            <a className={classes.primaryButton} href="/welcome">
+              Launch App
+            </a>
+            <a className={classes.secondaryButton} href="#powered-by">
+              Learn More About Ramestta
+            </a>
+          </div>
           <p className={classes.heroCopy}>
             Ramestta is an Ethereum-aligned Layer-3 blockchain built on Polygon,
             engineered for real-world adoption with sub-2 second finality,
@@ -365,14 +373,6 @@ export const MumbleLanding: FC = () => {
             <li>Enterprise-grade throughput (65,000+ TPS)</li>
             <li>Production-ready for payments, gaming, DeFi, and more</li>
           </ul>
-          <div className={classes.heroActions}>
-            <a className={classes.primaryButton} href="/welcome">
-              Launch App
-            </a>
-            <a className={classes.secondaryButton} href="#powered-by">
-              Learn More About Ramestta
-            </a>
-          </div>
           <p className={classes.heroNote}>
             Ramestta: The missing execution layer in Web3 infrastructure. Built
             for privacy, security, and true ownership of your communication.

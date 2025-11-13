@@ -11,6 +11,7 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       injectRegister: "auto",
+      strategies: "generateSW", // Explicitly use Workbox to generate SW
       includeAssets: ["favicon.svg", "apple-touch-icon.png", "icons/*.png"],
       manifest: {
         name: "MumbleChat - Decentralized Messaging",
@@ -21,12 +22,13 @@ export default defineConfig({
         scope: "/",
         display: "fullscreen",
         display_override: ["fullscreen", "standalone", "minimal-ui"],
-        orientation: "portrait-primary",
+        orientation: "any", // Changed from portrait-primary for better Android compatibility
         background_color: "#0f1419",
         theme_color: "#2196f3",
         categories: ["social", "productivity", "communication"],
         lang: "en-US",
         prefer_related_applications: false,
+        related_applications: [], // Explicitly set empty to prefer PWA
         screenshots: [
           {
             src: "/Screenshots/chat-screen.png",
@@ -101,6 +103,9 @@ export default defineConfig({
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2,wasm}"],
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024, // 10 MiB for WASM files
+        cleanupOutdatedCaches: true,
+        skipWaiting: true,
+        clientsClaim: true,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
