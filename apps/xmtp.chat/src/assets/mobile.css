@@ -170,6 +170,13 @@ body,
 
 /* Light mode text visibility - Clean and readable */
 @media (prefers-color-scheme: light) {
+  /* Light mode background colors */
+  html,
+  body,
+  #root {
+    background: #f8f9fa !important;
+  }
+
   /* Ensure all text elements have proper contrast in light mode */
   body,
   p,
@@ -304,6 +311,109 @@ body,
 
   .mantine-Tabs-tab[data-active="true"] {
     color: #2196f3;
+  }
+
+  /* Main layout components */
+  .mantine-AppShell-main,
+  .mantine-AppShell-root {
+    background: #f8f9fa !important;
+  }
+
+  .mantine-AppShell-header {
+    background: #ffffff !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .mantine-AppShell-navbar {
+    background: #ffffff !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .mantine-AppShell-footer {
+    background: #ffffff !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Cards and containers */
+  .mantine-Card-root,
+  .mantine-Paper-root {
+    background: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Navigation bar */
+  nav {
+    background: #ffffff !important;
+  }
+
+  /* Conversation list items */
+  [class*="ConversationCard"],
+  [class*="conversationCard"] {
+    background: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  [class*="ConversationCard"]:hover,
+  [class*="conversationCard"]:hover {
+    background: #f8f9fa !important;
+  }
+
+  /* Message bubbles */
+  [class*="message"],
+  [class*="Message"] {
+    background: #ffffff !important;
+  }
+
+  /* Composer area */
+  [class*="composer"],
+  [class*="Composer"] {
+    background: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Tables */
+  .mantine-Table-root {
+    background: #ffffff !important;
+  }
+
+  .mantine-Table-tr {
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Popovers and dropdowns */
+  .mantine-Popover-dropdown,
+  .mantine-Menu-dropdown {
+    background: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Action icons */
+  .mantine-ActionIcon-root {
+    color: #495057 !important;
+  }
+
+  .mantine-ActionIcon-root:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Bottom navigation for mobile */
+  [class*="bottomNav"],
+  [class*="BottomNav"] {
+    background: #ffffff !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  [class*="navItem"] {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
+
+  [class*="navItem"]:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  [class*="navItem"][class*="active"] {
+    color: #10b981 !important;
+    background: rgba(16, 185, 129, 0.1) !important;
   }
 }
 

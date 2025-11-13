@@ -180,3 +180,34 @@
     display: none;
   }
 }
+
+/* Light mode overrides */
+@media (prefers-color-scheme: light) {
+  .root {
+    background: #f8f9fa;
+  }
+
+  .header {
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .main {
+    background: #f8f9fa;
+  }
+
+  .aside {
+    background: #ffffff;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .overlay {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  @media screen and (min-width: 1080px) {
+    .aside {
+      border-right: 1px solid rgba(0, 0, 0, 0.08);
+    }
+  }
+}

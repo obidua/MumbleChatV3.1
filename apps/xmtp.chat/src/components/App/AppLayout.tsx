@@ -59,12 +59,17 @@ export const AppLayout: React.FC = () => {
   }, [client]);
 
   // Check if we're in a conversation view (for mobile full-screen behavior)
+  // Exclude modal routes that should show the bottom nav
   const isInConversation =
     location.pathname.startsWith("/conversations/") &&
+    location.pathname !== "/conversations" &&
     location.pathname !== "/conversations/new-dm" &&
     location.pathname !== "/conversations/new-group" &&
     location.pathname !== "/conversations/identity" &&
-    !location.pathname.includes("/conversations/identity/");
+    !location.pathname.includes("/conversations/identity/") &&
+    !location.pathname.includes("/new-dm") &&
+    !location.pathname.includes("/new-group") &&
+    !location.pathname.includes("/identity");
 
   return !client ? (
     <CenteredLayout fullScreen>

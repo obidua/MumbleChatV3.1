@@ -133,3 +133,27 @@
     display: none;
   }
 }
+
+/* Light mode overrides */
+@media (prefers-color-scheme: light) {
+  .bottomNav {
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08), 0 -1px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .navItem {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .navItem:hover {
+    color: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .navItem.active {
+    color: #10b981;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(13, 148, 136, 0.1) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+}
