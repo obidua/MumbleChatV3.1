@@ -47,6 +47,18 @@ export const Conversation: React.FC<ConversationProps> = ({
     void loadMessages();
   }, [conversationId]);
 
+  // Auto-sync messages every 1 second for live updates
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // Sync from network to get live messages
+      void sync(true);
+    }, 1000); // Sync every 1 second
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [conversationId, sync]);
+
   useEffect(() => {
     void resolveAddresses(
       Array.from(members.values()).map((m) => getMemberAddress(m)),

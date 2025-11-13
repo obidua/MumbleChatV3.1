@@ -40,12 +40,18 @@ export const InstallPrompt: React.FC = () => {
 
       console.log("PWA: Days since dismissed:", daysSinceDismissed);
 
-      // Show prompt if never dismissed or dismissed more than 1 day ago
-      if (!dismissed || daysSinceDismissed > 1) {
+      // Show prompt immediately on Android for better visibility
+      // Only respect dismissal if it's been less than 7 days (increased from 1 day)
+      if (!dismissed || daysSinceDismissed > 7) {
         console.log("PWA: Showing install prompt");
-        setShowPrompt(true);
+        // Show prompt after a short delay to ensure page is loaded
+        setTimeout(() => {
+          setShowPrompt(true);
+        }, 2000);
       } else {
-        console.log("PWA: Not showing - recently dismissed");
+        console.log(
+          "PWA: Not showing - recently dismissed (less than 7 days)",
+        );
       }
     };
 
@@ -61,14 +67,19 @@ export const InstallPrompt: React.FC = () => {
     window.addEventListener("beforeinstallprompt", handler);
 
     // Also listen for app installed event
-    window.addEventListener("appinstalled", () => {
+    const appInstalledHandler = () => {
       console.log("PWA: App installed successfully!");
       setShowPrompt(false);
       setDeferredPrompt(null);
-    });
+      // Clear dismissal flag since app is now installed
+      localStorage.removeItem("pwa-install-dismissed");
+    };
+
+    window.addEventListener("appinstalled", appInstalledHandler);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);
+      window.removeEventListener("appinstalled", appInstalledHandler);
     };
   }, []);
 

@@ -19,7 +19,7 @@ export default defineConfig({
           "Decentralized messaging on Ramestta with XMTP—secure, fast, and community owned.",
         start_url: "/",
         scope: "/",
-        display: "standalone",
+        display: "fullscreen",
         display_override: ["fullscreen", "standalone", "minimal-ui"],
         orientation: "portrait-primary",
         background_color: "#0f1419",
