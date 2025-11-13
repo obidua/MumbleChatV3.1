@@ -45,8 +45,8 @@ export const AccountCard: React.FC<AccountCardProps> = ({
         {label}
       </Text>
       {selected && (
-        <Box pos="absolute" right="var(--mantine-spacing-md)" w={20}>
-          <CheckIcon />
+        <Box className={classes.check} aria-hidden>
+          <CheckIcon size={22} />
         </Box>
       )}
     </Group>

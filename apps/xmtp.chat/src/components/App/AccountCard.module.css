@@ -18,6 +18,9 @@
   display: flex;
   align-items: center;
   min-height: 76px;
+
+  /* Reserve space for the check icon to avoid overlapping */
+  padding-right: calc(var(--mantine-spacing-md) + 28px);
 }
 
 /* Ensure label does not wrap and cause uneven heights */
@@ -25,6 +28,18 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Check icon visuals and positioning */
+.check {
+  position: absolute;
+  right: var(--mantine-spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  color: #10b981; /* teal in dark mode */
+  pointer-events: none; /* don't block clicks */
 }
 
 .root:hover {
@@ -103,6 +118,10 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     color: #0f172a;
     min-height: 76px; /* keep equal heights in light mode webview */
+  }
+
+  .check {
+    color: #2563eb; /* clearer blue tick in light mode */
   }
 
   .root:hover {
