@@ -10,7 +10,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      injectRegister: null,
+      injectRegister: "auto",
       includeAssets: ["favicon.svg", "apple-touch-icon.png", "icons/*.png"],
       manifest: {
         name: "MumbleChat - Decentralized Messaging",
@@ -19,13 +19,14 @@ export default defineConfig({
           "Decentralized messaging on Ramestta with XMTP—secure, fast, and community owned.",
         start_url: "/",
         scope: "/",
-        display: "fullscreen",
+        display: "standalone",
         display_override: ["fullscreen", "standalone", "minimal-ui"],
-        orientation: "any",
+        orientation: "portrait-primary",
         background_color: "#0f1419",
         theme_color: "#2196f3",
         categories: ["social", "productivity", "communication"],
         lang: "en-US",
+        prefer_related_applications: false,
         screenshots: [
           {
             src: "/Screenshots/chat-screen.png",
@@ -48,6 +49,12 @@ export default defineConfig({
             sizes: "192x192",
             type: "image/png",
             purpose: "any",
+          },
+          {
+            src: "/icons/icon-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "maskable",
           },
           {
             src: "/icons/icon-256x256.png",

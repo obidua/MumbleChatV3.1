@@ -129,41 +129,7 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
     return () => {
       stopStreams();
     };
-  }, [client.inboxId, sync, startStreams, stopStreams]);
-
-  // Handle page visibility to sync messages when app comes back into focus
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        console.log(
-          "[ConversationsNavbar] Page became visible, syncing messages...",
-        );
-        // Sync messages when page becomes visible (e.g., switching back from another tab/app)
-        void syncAll().then(() => {
-          console.log(
-            "[ConversationsNavbar] Sync completed after visibility change",
-          );
-        });
-      }
-    };
-
-    const handleFocus = () => {
-      console.log("[ConversationsNavbar] Window focused, syncing messages...");
-      // Sync when window regains focus
-      void syncAll().then(() => {
-        console.log("[ConversationsNavbar] Sync completed after focus");
-      });
-    };
-
-    // Listen for visibility and focus changes
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("focus", handleFocus);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("focus", handleFocus);
-    };
-  }, [syncAll]);
+  }, [client]); // Intentionally only client - we want fresh sync on reconnect
 
   // stop streaming on unmount
   useEffect(() => {

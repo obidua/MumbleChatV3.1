@@ -1,5 +1,16 @@
 /* Mobile-specific styles for PWA */
 
+/* Text selection highlighting - green theme */
+::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+}
+
 /* Ensure full viewport height on mobile */
 html,
 body,
@@ -12,16 +23,6 @@ body,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
-}
-
-/* iOS Safe Area Support */
-@supports (padding: env(safe-area-inset-bottom)) {
-  body {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-  }
 }
 
 /* Prevent pull-to-refresh on mobile */
@@ -71,13 +72,29 @@ body,
   }
 }
 
-/* Fix for notch devices */
+/* iOS PWA Safe Area Support for notch devices */
 @supports (padding: max(0px)) {
   @media screen and (max-width: 768px) {
-    .header,
-    .footer {
+    /* Adjust content areas to avoid notch/home indicator */
+    .mantine-AppShell-header,
+    .header {
+      padding-top: max(12px, env(safe-area-inset-top));
       padding-left: max(12px, env(safe-area-inset-left));
       padding-right: max(12px, env(safe-area-inset-right));
+    }
+
+    .mantine-AppShell-footer,
+    .footer,
+    .bottom-nav {
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
+
+    /* Ensure modals and overlays respect safe areas */
+    .mantine-Modal-content {
+      margin-top: env(safe-area-inset-top);
+      margin-bottom: env(safe-area-inset-bottom);
     }
   }
 }

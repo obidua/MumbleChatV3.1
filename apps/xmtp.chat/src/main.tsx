@@ -1,10 +1,11 @@
 import "@mantine/core/styles.css";
-import "@/assets/mobile.css";
 import { createTheme, MantineProvider } from "@mantine/core";
+import "@/assets/mobile.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import pkg from "@xmtp/browser-sdk/package.json";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
+import { registerSW } from "virtual:pwa-register";
 import { createConfig, http, WagmiProvider } from "wagmi";
 import {
   arbitrum,
@@ -35,7 +36,6 @@ import { ramestta } from "@/chains/ramestta";
 import { App } from "@/components/App/App";
 import { XMTPProvider } from "@/contexts/XMTPContext";
 import { queryClient } from "@/helpers/queries";
-import { registerSW } from "virtual:pwa-register";
 
 export const config = createConfig({
   connectors: [
@@ -226,24 +226,71 @@ createRoot(document.getElementById("root") as HTMLElement).render(
 
 console.log("[xmtp.chat] XMTP Browser SDK version:", pkg.version);
 
-// Register service worker for PWA (handled by vite-plugin-pwa helper)
+// Register service worker for PWA with better Android support
 if ("serviceWorker" in navigator) {
+  // Log environment info for debugging
+  console.log("[xmtp.chat] User Agent:", navigator.userAgent);
+  console.log("[xmtp.chat] Platform:", navigator.platform);
+  console.log("[xmtp.chat] Is Android:", /android/i.test(navigator.userAgent));
+  console.log(
+    "[xmtp.chat] Is iOS:",
+    /iphone|ipad|ipod/i.test(navigator.userAgent),
+  );
+  console.log(
+    "[xmtp.chat] Is Standalone:",
+    window.matchMedia("(display-mode: standalone)").matches,
+  );
+
   registerSW({
     immediate: true,
     onRegisteredSW(swUrl, registration) {
       if (registration) {
         console.log(
-          "[xmtp.chat] Service worker registered:",
+          "[xmtp.chat] Service worker registered successfully:",
           swUrl ?? registration.scope,
         );
-        // keep the worker fresh without waiting for a reload
-        setInterval(() => {
-          void registration.update();
-        }, 60 * 60 * 1000);
+        console.log(
+          "[xmtp.chat] Service worker state:",
+          registration.active?.state,
+        );
+
+        // Check for updates periodically
+        setInterval(
+          () => {
+            void registration.update();
+          },
+          60 * 60 * 1000,
+        ); // Check every hour
       }
     },
     onRegisterError(error) {
       console.error("[xmtp.chat] Service worker registration failed:", error);
     },
   });
+
+  // Listen for service worker updates
+  navigator.serviceWorker.ready
+    .then((registration) => {
+      console.log("[xmtp.chat] Service worker is ready");
+
+      // Listen for updates
+      registration.addEventListener("updatefound", () => {
+        const newWorker = registration.installing;
+        console.log("[xmtp.chat] New service worker found, installing...");
+
+        newWorker?.addEventListener("statechange", () => {
+          console.log("[xmtp.chat] Service worker state:", newWorker.state);
+        });
+      });
+    })
+    .catch((error) => {
+      console.error("[xmtp.chat] Service worker ready error:", error);
+    });
 }
+
+// Detect if PWA install is available (for debugging Android issues)
+window.addEventListener("beforeinstallprompt", (e) => {
+  console.log("[xmtp.chat] beforeinstallprompt event fired!");
+  console.log("[xmtp.chat] PWA install available");
+  // Don't prevent default here - let the InstallPrompt component handle it
+});
