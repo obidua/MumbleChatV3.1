@@ -196,7 +196,7 @@
   .headerCard {
     background: transparent;
     border: 2px solid;
-    border-image: linear-gradient(135deg, #047857, #1e40af, #7c3aed) 1;
+    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3), rgba(124, 58, 237, 0.3)) 1;
   }
 
   .headerCard::before {
@@ -206,7 +206,7 @@
   .iconWrapper {
     background: transparent;
     border: 2px solid;
-    border-image: linear-gradient(135deg, #047857, #7c3aed) 1;
+    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(124, 58, 237, 0.3)) 1;
   }
 
   .icon {
@@ -226,16 +226,16 @@
   .accordionItem {
     background: rgba(255, 255, 255, 0.95);
     border: 2px solid;
-    border-image: linear-gradient(135deg, #047857, #1e40af) 1 !important;
+    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3)) 1 !important;
   }
 
   .accordionItem:hover {
-    border-image: linear-gradient(135deg, #059669, #2563eb) 1 !important;
+    border-image: linear-gradient(135deg, rgba(5, 150, 105, 0.4), rgba(37, 99, 235, 0.4)) 1 !important;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   }
 
   .accordionItem[data-active] {
-    border-image: linear-gradient(135deg, #047857, #7c3aed) 1 !important;
+    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.5), rgba(124, 58, 237, 0.5)) 1 !important;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
   }
 
@@ -246,7 +246,7 @@
   .infoCard {
     background: rgba(248, 250, 252, 0.9);
     border: 2px solid;
-    border-image: linear-gradient(135deg, #1e40af, #7c3aed) 1;
+    border-image: linear-gradient(135deg, rgba(30, 64, 175, 0.3), rgba(124, 58, 237, 0.3)) 1;
   }
 
   .infoCard::before {
@@ -256,4 +256,71 @@
       transparent 50%
     );
   }
+
+  .cancelButton {
+    background: rgba(248, 250, 252, 0.95) !important;
+    border: 2px solid !important;
+    border-image: linear-gradient(135deg, rgba(203, 213, 219, 0.3), rgba(148, 163, 184, 0.3)) 1 !important;
+    color: #475569 !important;
+  }
+
+  .cancelButton:hover {
+    border-image: linear-gradient(135deg, rgba(148, 163, 184, 0.4), rgba(100, 116, 139, 0.4)) 1 !important;
+    background: rgba(241, 245, 249, 0.95) !important;
+  }
+
+  .backButton {
+    background: rgba(248, 250, 252, 0.95) !important;
+    border: 2px solid !important;
+    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3)) 1 !important;
+    color: #047857 !important;
+    font-weight: 700 !important;
+  }
+
+  .backButton:hover {
+    border-image: linear-gradient(135deg, rgba(5, 150, 105, 0.5), rgba(37, 99, 235, 0.5)) 1 !important;
+    background: rgba(241, 245, 249, 0.98) !important;
+  }
+
+  .accordionBadge {
+    background: rgba(248, 250, 252, 0.95) !important;
+    border: 1px solid rgba(4, 120, 87, 0.3) !important;
+    color: #047857 !important;
+  }
+
+  .accordionLabel {
+    color: #0f172a !important;
+  }
+
+  .accordionIcon {
+    color: #1e40af !important;
+  }
+}
+
+/* Button and Badge Classes */
+.cancelButton {
+  background: rgba(10, 13, 25, 0.6);
+  border: 1px solid rgba(33, 150, 243, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.backButton {
+  background: rgba(33, 150, 243, 0.1);
+  border: 1px solid rgba(33, 150, 243, 0.2);
+  color: #10b981;
+  font-weight: 600;
+}
+
+.accordionBadge {
+  background: rgba(33, 150, 243, 0.16);
+  border: 1px solid rgba(33, 150, 243, 0.32);
+  font-weight: 700;
+}
+
+.accordionLabel {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.accordionIcon {
+  color: #10b981;
 }

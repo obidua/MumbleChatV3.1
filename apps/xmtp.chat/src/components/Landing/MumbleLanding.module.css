@@ -1487,13 +1487,15 @@
 
   /* Navbar - Light mode */
   .navbar {
-    background: transparent;
+    background: rgba(248, 250, 252, 0.5);
+    backdrop-filter: blur(8px);
   }
 
   .navbarScrolled {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(248, 250, 252, 0.95);
     box-shadow: 0 16px 38px rgba(148, 163, 184, 0.15);
-    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    backdrop-filter: blur(12px);
   }
 
   .brandIcon {

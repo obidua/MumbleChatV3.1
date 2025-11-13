@@ -37,3 +37,34 @@
   background: rgba(16, 185, 129, 0.16);
   transform: scale(1.1);
 }
+
+/* ============================================
+   LIGHT MODE SUPPORT
+   ============================================ */
+
+@media (prefers-color-scheme: light) {
+  .badge {
+    background: #ffffff;
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #047857, #1e40af) 1;
+    color: #0f172a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .badge:hover {
+    border-image: linear-gradient(135deg, #059669, #2563eb) 1;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+  }
+
+  .button {
+    color: #047857;
+    background: rgba(4, 120, 87, 0.08);
+  }
+
+  .button:hover {
+    color: #059669;
+    background: rgba(4, 120, 87, 0.16);
+    transform: scale(1.1);
+  }
+}

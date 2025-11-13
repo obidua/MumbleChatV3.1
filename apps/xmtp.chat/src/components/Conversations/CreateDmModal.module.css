@@ -221,7 +221,7 @@
   .headerCard {
     background: transparent;
     border: 2px solid;
-    border-image: linear-gradient(135deg, #047857, #1e40af, #7c3aed) 1;
+    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3), rgba(124, 58, 237, 0.3)) 1;
   }
 
   .headerCard::before {
@@ -231,7 +231,7 @@
   .iconWrapper {
     background: transparent;
     border: 2px solid;
-    border-image: linear-gradient(135deg, #047857, #7c3aed) 1;
+    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(124, 58, 237, 0.3)) 1;
   }
 
   .icon {
@@ -251,7 +251,7 @@
   .recipientCard {
     background: rgba(255, 255, 255, 0.95);
     border: 2px solid;
-    border-image: linear-gradient(135deg, #047857, #1e40af) 1;
+    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3)) 1;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
   }
 
@@ -286,7 +286,7 @@
   .infoCard {
     background: rgba(248, 250, 252, 0.9);
     border: 2px solid;
-    border-image: linear-gradient(135deg, #1e40af, #7c3aed) 1;
+    border-image: linear-gradient(135deg, rgba(30, 64, 175, 0.3), rgba(124, 58, 237, 0.3)) 1;
   }
 
   .infoCard::before {

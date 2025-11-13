@@ -213,7 +213,7 @@ export const CreateGroupModal: React.FC = () => {
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
-                        style={{ color: "#10b981" }}>
+                        className={classes.accordionIcon}>
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -221,21 +221,15 @@ export const CreateGroupModal: React.FC = () => {
                           d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
                         />
                       </svg>
-                      <Text
-                        fw="bold"
-                        style={{ color: "rgba(255, 255, 255, 0.95)" }}>
+                      <Text fw="bold" className={classes.accordionLabel}>
                         Members
                       </Text>
                     </Flex>
                     <Badge
                       size="lg"
                       radius="md"
-                      style={{
-                        background: "rgba(33, 150, 243, 0.16)",
-                        color: "#10b981",
-                        border: "1px solid rgba(33, 150, 243, 0.32)",
-                        fontWeight: 700,
-                      }}>
+                      className={classes.accordionBadge}
+                      style={{ color: "#10b981" }}>
                       {addedMembers.length}
                     </Badge>
                   </Flex>
@@ -271,7 +265,7 @@ export const CreateGroupModal: React.FC = () => {
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
-                        style={{ color: "#10b981" }}>
+                        className={classes.accordionIcon}>
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -279,21 +273,15 @@ export const CreateGroupModal: React.FC = () => {
                           d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                         />
                       </svg>
-                      <Text
-                        fw="bold"
-                        style={{ color: "rgba(255, 255, 255, 0.95)" }}>
+                      <Text fw="bold" className={classes.accordionLabel}>
                         Permissions
                       </Text>
                     </Flex>
                     <Badge
                       size="lg"
                       radius="md"
-                      style={{
-                        background: "rgba(151, 114, 251, 0.16)",
-                        color: "#1976d2",
-                        border: "1px solid rgba(151, 114, 251, 0.32)",
-                        fontWeight: 700,
-                      }}>
+                      className={classes.accordionBadge}
+                      style={{ color: "#1976d2" }}>
                       {permissionsPolicyValue(permissionsPolicy)}
                     </Badge>
                   </Flex>
@@ -345,13 +333,7 @@ export const CreateGroupModal: React.FC = () => {
               variant="default"
               onClick={handleClose}
               size="md"
-              styles={{
-                root: {
-                  background: "rgba(10, 13, 25, 0.6)",
-                  border: "1px solid rgba(33, 150, 243, 0.2)",
-                  color: "rgba(255, 255, 255, 0.9)",
-                },
-              }}>
+              className={classes.cancelButton}>
               Cancel
             </Button>
             <Button
@@ -377,14 +359,7 @@ export const CreateGroupModal: React.FC = () => {
             variant="light"
             onClick={handleClose}
             mt="md"
-            styles={{
-              root: {
-                background: "rgba(33, 150, 243, 0.1)",
-                border: "1px solid rgba(33, 150, 243, 0.2)",
-                color: "#10b981",
-                fontWeight: 600,
-              },
-            }}>
+            className={classes.backButton}>
             Back to Conversations
           </Button>
         </Stack>

@@ -259,7 +259,7 @@ body,
     color: #0f172a !important;
     background: #ffffff !important;
     border: 2px solid !important;
-    border-image: linear-gradient(135deg, #047857, #1e40af) 1 !important;
+    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3)) 1 !important;
     border-radius: 12px;
   }
 
@@ -268,7 +268,7 @@ body,
   .mantine-Select-input:focus,
   input:focus,
   textarea:focus {
-    border-image: linear-gradient(135deg, #059669, #2563eb) 1 !important;
+    border-image: linear-gradient(135deg, rgba(5, 150, 105, 0.5), rgba(37, 99, 235, 0.5)) 1 !important;
     outline: none !important;
   }
 
@@ -288,7 +288,7 @@ body,
   textarea:disabled {
     background: rgba(241, 245, 249, 0.5) !important;
     color: rgba(100, 116, 139, 0.6) !important;
-    border-image: linear-gradient(135deg, #cbd5e1, #94a3b8) 1 !important;
+    border-image: linear-gradient(135deg, rgba(203, 213, 219, 0.3), rgba(148, 163, 184, 0.3)) 1 !important;
   }
 
   /* Accordion text visibility */
@@ -417,7 +417,7 @@ body,
   [class*="ConversationCard"]:hover,
   [class*="conversationCard"]:hover {
     background: linear-gradient(135deg, rgba(4, 120, 87, 0.05), rgba(30, 64, 175, 0.05)) !important;
-    border-color: rgba(30, 64, 175, 0.4) !important;
+    border-color: rgba(30, 64, 175, 0.3) !important;
     transform: translateX(2px);
   }
 
@@ -425,7 +425,7 @@ body,
   [class*="conversationCard"][class*="active"] {
     background: linear-gradient(135deg, rgba(4, 120, 87, 0.1), rgba(30, 64, 175, 0.1)) !important;
     border: 2px solid !important;
-    border-image: linear-gradient(135deg, #047857, #1e40af) 1 !important;
+    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3)) 1 !important;
   }
 
   /* Message bubbles */
@@ -472,7 +472,7 @@ body,
   [class*="BottomNav"] {
     background: #ffffff !important;
     border-top: 2px solid !important;
-    border-image: linear-gradient(90deg, #047857, #1e40af) 1 !important;
+    border-image: linear-gradient(90deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3)) 1 !important;
   }
 
   [class*="navItem"] {
@@ -637,7 +637,7 @@ body,
     background: #ffffff !important;
     background-color: #ffffff !important;
     border: 2px solid !important;
-    border-image: linear-gradient(135deg, #047857, #1e40af) 1 !important;
+    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3)) 1 !important;
   }
 
   /* Fix text colors in those dark sections */
