@@ -1512,12 +1512,12 @@
 
   /* Navbar - Light mode */
   .navbar {
-    background: rgba(248, 250, 252, 0.5);
+    background: transparent;
     backdrop-filter: blur(8px);
   }
 
   .navbarScrolled {
-    background: rgba(248, 250, 252, 0.85);
+    background: rgba(248, 250, 252, 0.7);
     box-shadow: 0 16px 38px rgba(148, 163, 184, 0.1);
     border-bottom: 1px solid rgba(148, 163, 184, 0.15);
     backdrop-filter: blur(12px);
@@ -1560,10 +1560,12 @@
 
   .navLink {
     color: rgba(30, 41, 59, 0.8);
+    background: transparent;
   }
 
   .navLink:hover {
     color: #3b82f6;
+    background: transparent;
   }
 
   .menuButton {

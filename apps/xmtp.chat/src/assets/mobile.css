@@ -422,8 +422,8 @@ body,
     border-color: rgba(0, 0, 0, 0.08) !important;
   }
 
-  /* Navigation bar */
-  nav {
+  /* Navigation bar - but not landing page */
+  nav:not([aria-label="Primary"]):not([aria-label="Mobile navigation"]) {
     background: #ffffff !important;
   }
 
