@@ -110,10 +110,7 @@ export const CreateGroupModal: React.FC = () => {
         withScrollAreaPadding={false}
         title={
           <Group align="center" gap="sm">
-            <Text
-              size="lg"
-              fw={700}
-              c="#ffffff">
+            <Text size="lg" fw={700} c="#ffffff">
               Create Group
             </Text>
           </Group>

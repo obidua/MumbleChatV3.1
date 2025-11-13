@@ -5,8 +5,9 @@
   width: 100%;
   margin: 0 auto;
   min-height: 100vh;
-  background: #0f1419;
+  background: transparent;
   position: relative;
+  overflow-x: hidden;
 }
 
 /* Back Button Styles */
@@ -116,10 +117,16 @@
   max-width: 700px;
   position: relative;
   padding: var(--mantine-spacing-xl);
-  background: #17212b;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: transparent;
+  border: 2px solid;
+  border-image: linear-gradient(
+      135deg,
+      rgba(4, 120, 87, 0.3),
+      rgba(30, 64, 175, 0.3)
+    )
+    1;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: none;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -133,8 +140,13 @@
 }
 
 .welcomeCard:hover {
-  border-color: rgba(16, 185, 129, 0.3);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border-image: linear-gradient(
+      135deg,
+      rgba(5, 150, 105, 0.4),
+      rgba(37, 99, 235, 0.4)
+    )
+    1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
 }
 
@@ -167,7 +179,7 @@
 @media (max-width: 768px) {
   .container {
     padding: 0 !important;
-    background: #0f1419;
+    background: transparent;
   }
 
   .backButton {
@@ -175,35 +187,11 @@
     left: 16px;
   }
 
-  .hero {
-    padding: var(--mantine-spacing-lg) var(--mantine-spacing-md);
-    padding-top: 60px;
-  }
-
-  .logoWrapper {
-    width: 100px;
-    height: 100px;
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
-  }
-
-  .brandName {
-    font-size: 2rem;
-  }
-
-  .tagline {
-    font-size: 1rem;
-  }
-
-  .heroDescription {
-    font-size: 0.9rem;
-    padding: 0 var(--mantine-spacing-md);
-  }
-
   .welcomeCard {
     padding: var(--mantine-spacing-lg);
     margin: 0 var(--mantine-spacing-md);
     border-radius: 20px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
   }
 
   .cardTitle {
@@ -215,68 +203,60 @@
   .container {
     min-height: 100vh;
     min-height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #0f1419;
+    align-items: center;
+    background: transparent;
+    overflow: hidden;
+    padding: var(--mantine-spacing-md) !important;
+    padding-top: max(
+      calc(var(--mantine-spacing-md) + 50px),
+      calc(env(safe-area-inset-top, 0px) + 60px)
+    ) !important;
+    padding-bottom: max(
+      var(--mantine-spacing-md),
+      calc(env(safe-area-inset-bottom, 0px) + var(--mantine-spacing-md))
+    ) !important;
   }
 
   .backButton {
-    top: max(16px, env(safe-area-inset-top, 0px));
+    position: fixed;
+    top: max(12px, env(safe-area-inset-top, 0px));
     left: 12px;
+    z-index: 100;
   }
 
-  .hero {
-    padding: var(--mantine-spacing-md);
-    padding-top: max(50px, calc(env(safe-area-inset-top, 0px) + 50px));
-  }
-
-  .logoWrapper {
-    width: 90px;
-    height: 90px;
-    padding: var(--mantine-spacing-md);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
-  }
-
-  .brandName {
-    font-size: 1.85rem;
-    margin-top: var(--mantine-spacing-lg);
-  }
-
-  .tagline {
-    font-size: 0.95rem;
-    letter-spacing: 0.02em;
-  }
-
-  .heroDescription {
-    font-size: 0.85rem;
-    padding: 0 var(--mantine-spacing-sm);
-    line-height: 1.6;
+  .backIcon {
+    color: #10b981;
   }
 
   .welcomeCard {
-    padding: var(--mantine-spacing-md);
-    border-radius: 16px;
-    margin: 0 var(--mantine-spacing-sm);
-    margin-bottom: max(
-      var(--mantine-spacing-md),
-      env(safe-area-inset-bottom, 0px)
-    );
-    background: #17212b;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    padding: var(--mantine-spacing-lg);
+    border-radius: 20px;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+    width: 100%;
+    max-width: 100%;
   }
 
   .cardTitle {
-    font-size: 1.15rem;
+    font-size: 1.25rem;
+    color: #ffffff;
   }
 
   .cardDescription {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+    color: #adb5bd;
   }
 
   .disclaimer {
     font-size: 0.7rem;
     line-height: 1.5;
+    color: #6c757d;
   }
 }
 
@@ -314,7 +294,7 @@
 
 @media (prefers-color-scheme: light) {
   .container {
-    background: #f8fafc;
+    background: transparent;
   }
 
   .backIcon {
@@ -334,41 +314,36 @@
     background: rgba(59, 130, 246, 0.1);
   }
 
-  .logoWrapper {
-    background: rgba(59, 130, 246, 0.12);
-    border: 2px solid rgba(59, 130, 246, 0.3);
-    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
-  }
-
-  .logo {
-    filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.3));
-  }
-
-  .brandName {
-    color: #0f172a;
-  }
-
-  .tagline {
-    color: #64748b;
-  }
-
   .welcomeCard {
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    box-shadow: 0 4px 12px rgba(71, 85, 105, 0.1);
+    background: transparent;
+    border: 2px solid;
+    border-image: linear-gradient(
+        135deg,
+        rgba(4, 120, 87, 0.3),
+        rgba(30, 64, 175, 0.3)
+      )
+      1;
+    box-shadow: none;
   }
 
   .welcomeCard:hover {
-    border-color: rgba(59, 130, 246, 0.3);
-    box-shadow: 0 8px 24px rgba(71, 85, 105, 0.15);
+    border-image: linear-gradient(
+        135deg,
+        rgba(5, 150, 105, 0.4),
+        rgba(37, 99, 235, 0.4)
+      )
+      1;
+    box-shadow: 0 8px 24px rgba(71, 85, 105, 0.08);
   }
 
   .cardTitle {
     color: #0f172a;
+    font-weight: 700;
   }
 
   .cardDescription {
     color: #64748b;
+    font-weight: 500;
   }
 
   .disclaimer {
@@ -378,31 +353,59 @@
 
   @media (max-width: 768px) {
     .container {
-      background: #f8fafc;
+      background: transparent;
     }
 
-    .logoWrapper {
-      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+    .backIcon {
+      color: #3b82f6;
     }
 
     .welcomeCard {
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 6px 16px rgba(71, 85, 105, 0.12);
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .cardTitle {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .cardDescription {
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .disclaimer {
+      color: #94a3b8;
     }
   }
 
   @media (max-width: 520px) {
     .container {
-      background: #f8fafc;
+      background: transparent;
     }
 
-    .logoWrapper {
-      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+    .backIcon {
+      color: #3b82f6;
     }
 
     .welcomeCard {
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 6px 16px rgba(71, 85, 105, 0.12);
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .cardTitle {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .cardDescription {
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .disclaimer {
+      color: #94a3b8;
     }
   }
 }

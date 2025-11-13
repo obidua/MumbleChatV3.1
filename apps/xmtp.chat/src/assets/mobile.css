@@ -259,7 +259,12 @@ body,
     color: #0f172a !important;
     background: #ffffff !important;
     border: 2px solid !important;
-    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3)) 1 !important;
+    border-image: linear-gradient(
+        135deg,
+        rgba(4, 120, 87, 0.3),
+        rgba(30, 64, 175, 0.3)
+      )
+      1 !important;
     border-radius: 12px;
   }
 
@@ -268,7 +273,12 @@ body,
   .mantine-Select-input:focus,
   input:focus,
   textarea:focus {
-    border-image: linear-gradient(135deg, rgba(5, 150, 105, 0.5), rgba(37, 99, 235, 0.5)) 1 !important;
+    border-image: linear-gradient(
+        135deg,
+        rgba(5, 150, 105, 0.5),
+        rgba(37, 99, 235, 0.5)
+      )
+      1 !important;
     outline: none !important;
   }
 
@@ -288,7 +298,12 @@ body,
   textarea:disabled {
     background: rgba(241, 245, 249, 0.5) !important;
     color: rgba(100, 116, 139, 0.6) !important;
-    border-image: linear-gradient(135deg, rgba(203, 213, 219, 0.3), rgba(148, 163, 184, 0.3)) 1 !important;
+    border-image: linear-gradient(
+        135deg,
+        rgba(203, 213, 219, 0.3),
+        rgba(148, 163, 184, 0.3)
+      )
+      1 !important;
   }
 
   /* Accordion text visibility */
@@ -299,6 +314,11 @@ body,
 
   .mantine-Accordion-content {
     color: #495057;
+  }
+
+  .mantine-Accordion-panel,
+  .mantine-Accordion-item {
+    background: transparent !important;
   }
 
   /* Button text visibility */
@@ -416,16 +436,29 @@ body,
 
   [class*="ConversationCard"]:hover,
   [class*="conversationCard"]:hover {
-    background: linear-gradient(135deg, rgba(4, 120, 87, 0.05), rgba(30, 64, 175, 0.05)) !important;
+    background: linear-gradient(
+      135deg,
+      rgba(4, 120, 87, 0.05),
+      rgba(30, 64, 175, 0.05)
+    ) !important;
     border-color: rgba(30, 64, 175, 0.3) !important;
     transform: translateX(2px);
   }
 
   [class*="ConversationCard"][class*="active"],
   [class*="conversationCard"][class*="active"] {
-    background: linear-gradient(135deg, rgba(4, 120, 87, 0.1), rgba(30, 64, 175, 0.1)) !important;
+    background: linear-gradient(
+      135deg,
+      rgba(4, 120, 87, 0.1),
+      rgba(30, 64, 175, 0.1)
+    ) !important;
     border: 2px solid !important;
-    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3)) 1 !important;
+    border-image: linear-gradient(
+        135deg,
+        rgba(4, 120, 87, 0.3),
+        rgba(30, 64, 175, 0.3)
+      )
+      1 !important;
   }
 
   /* Message bubbles */
@@ -472,7 +505,12 @@ body,
   [class*="BottomNav"] {
     background: #ffffff !important;
     border-top: 2px solid !important;
-    border-image: linear-gradient(90deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3)) 1 !important;
+    border-image: linear-gradient(
+        90deg,
+        rgba(4, 120, 87, 0.3),
+        rgba(30, 64, 175, 0.3)
+      )
+      1 !important;
   }
 
   [class*="navItem"] {
@@ -487,7 +525,11 @@ body,
 
   [class*="navItem"][class*="active"] {
     color: #047857 !important;
-    background: linear-gradient(135deg, rgba(4, 120, 87, 0.12), rgba(30, 64, 175, 0.12)) !important;
+    background: linear-gradient(
+      135deg,
+      rgba(4, 120, 87, 0.12),
+      rgba(30, 64, 175, 0.12)
+    ) !important;
     font-weight: 800;
     border-radius: 12px;
   }
@@ -637,7 +679,12 @@ body,
     background: #ffffff !important;
     background-color: #ffffff !important;
     border: 2px solid !important;
-    border-image: linear-gradient(135deg, rgba(4, 120, 87, 0.3), rgba(30, 64, 175, 0.3)) 1 !important;
+    border-image: linear-gradient(
+        135deg,
+        rgba(4, 120, 87, 0.3),
+        rgba(30, 64, 175, 0.3)
+      )
+      1 !important;
   }
 
   /* Fix text colors in those dark sections */
@@ -692,7 +739,9 @@ body,
 
   /* Primary buttons - Dark gradient with white text */
   button[style*="background"],
-  .mantine-Button-root:not([data-variant="subtle"]):not([data-variant="light"]) {
+  .mantine-Button-root:not([data-variant="subtle"]):not(
+      [data-variant="light"]
+    ) {
     background: linear-gradient(135deg, #047857, #1e40af) !important;
     color: #ffffff !important;
     font-weight: 700;
@@ -702,7 +751,9 @@ body,
 
   /* Primary button hover */
   button[style*="background"]:hover:not(:disabled),
-  .mantine-Button-root:not([data-variant="subtle"]):not([data-variant="light"]):hover:not(:disabled) {
+  .mantine-Button-root:not([data-variant="subtle"]):not(
+      [data-variant="light"]
+    ):hover:not(:disabled) {
     background: linear-gradient(135deg, #059669, #2563eb) !important;
     box-shadow: 0 6px 16px rgba(4, 120, 87, 0.4);
     transform: translateY(-1px);
@@ -712,7 +763,11 @@ body,
   mark,
   .highlighted,
   [data-highlighted="true"] {
-    background: linear-gradient(135deg, rgba(4, 120, 87, 0.15), rgba(30, 64, 175, 0.15)) !important;
+    background: linear-gradient(
+      135deg,
+      rgba(4, 120, 87, 0.15),
+      rgba(30, 64, 175, 0.15)
+    ) !important;
     color: #0f172a !important;
     font-weight: 700;
     padding: 2px 6px;

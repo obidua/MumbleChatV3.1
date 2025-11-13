@@ -10,7 +10,6 @@ import { useCallback } from "react";
 import { Connect } from "@/components/App/Connect";
 import { useMobile } from "@/hooks/useMobile";
 import { IconBack } from "@/icons/IconBack";
-import { MumbleChatLogo } from "@/icons/MumbleChatLogo";
 import classes from "./Welcome.module.css";
 
 export const Welcome = () => {
@@ -54,24 +53,6 @@ export const Welcome = () => {
           </Button>
         )}
       </div>
-
-      {/* Hero Section */}
-      <Stack gap="md" align="center" className={classes.hero}>
-        <div className={classes.logoWrapper}>
-          <MumbleChatLogo className={classes.logo} />
-        </div>
-        <Text className={classes.brandName}>MumbleChat</Text>
-        <Text className={classes.tagline}>⚡ Decentralized Messaging</Text>
-        <Text
-          size="sm"
-          c="dimmed"
-          ta="center"
-          maw={500}
-          className={classes.heroDescription}>
-          Connect your wallet to start secure, private conversations on the
-          decentralized web. No email, no phone number—just your wallet.
-        </Text>
-      </Stack>
 
       {/* Connection Card */}
       <Paper className={classes.welcomeCard}>

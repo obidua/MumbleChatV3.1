@@ -2,59 +2,46 @@
 
 .xmtpCard {
   position: relative;
-  background: linear-gradient(
-    135deg,
-    rgba(6, 9, 20, 0.8),
-    rgba(8, 11, 22, 0.75)
-  );
-  border: 1px solid rgba(151, 114, 251, 0.2);
+  background: transparent;
+  border: 2px solid;
+  border-image: linear-gradient(
+      135deg,
+      rgba(4, 120, 87, 0.3),
+      rgba(30, 64, 175, 0.3),
+      rgba(124, 58, 237, 0.3)
+    )
+    1;
   border-radius: var(--mantine-spacing-md);
   overflow: hidden;
-  box-shadow:
-    0 8px 32px rgba(4, 8, 20, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: none;
   transition: all 0.3s ease;
 }
 
 .xmtpCard::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #9772fb, #10b981, #9772fb);
-  background-size: 200% 100%;
-  animation: shimmer 3s linear infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  display: none;
 }
 
 .xmtpCard:hover {
-  border-color: rgba(151, 114, 251, 0.3);
-  box-shadow:
-    0 12px 40px rgba(4, 8, 20, 0.7),
-    0 0 60px rgba(151, 114, 251, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border-image: linear-gradient(
+      135deg,
+      rgba(5, 150, 105, 0.4),
+      rgba(37, 99, 235, 0.4),
+      rgba(139, 92, 246, 0.4)
+    )
+    1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .settingsSection {
   padding: var(--mantine-spacing-md);
-  background: rgba(10, 13, 25, 0.4);
-  border-bottom: 1px solid rgba(151, 114, 251, 0.1);
+  background: transparent;
+  border-bottom: 1px solid rgba(4, 120, 87, 0.2);
 }
 
 .actions {
-  border-top: 1px solid rgba(151, 114, 251, 0.1);
+  border-top: 1px solid rgba(4, 120, 87, 0.2);
   padding: var(--mantine-spacing-md);
-  background: rgba(10, 13, 25, 0.3);
+  background: transparent;
 }
 
 .connectButton {
@@ -83,5 +70,58 @@
   .settingsSection,
   .actions {
     padding: var(--mantine-spacing-sm);
+  }
+}
+
+/* Light Mode */
+@media (prefers-color-scheme: light) {
+  .xmtpCard {
+    background: transparent;
+    border: 2px solid;
+    border-image: linear-gradient(
+        135deg,
+        rgba(4, 120, 87, 0.3),
+        rgba(30, 64, 175, 0.3),
+        rgba(124, 58, 237, 0.3)
+      )
+      1;
+    box-shadow: none;
+  }
+
+  .xmtpCard:hover {
+    border-image: linear-gradient(
+        135deg,
+        rgba(5, 150, 105, 0.4),
+        rgba(37, 99, 235, 0.4),
+        rgba(139, 92, 246, 0.4)
+      )
+      1;
+    box-shadow: 0 8px 24px rgba(71, 85, 105, 0.08);
+  }
+
+  .settingsSection {
+    background: transparent;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  }
+
+  .actions {
+    background: transparent;
+    border-top: 1px solid rgba(148, 163, 184, 0.2);
+  }
+
+  .connectButton {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+  }
+
+  .connectButton:hover:not(:disabled) {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+  }
+
+  .connectButton:disabled {
+    background: rgba(148, 163, 184, 0.2);
+    color: rgba(100, 116, 139, 0.6);
   }
 }
