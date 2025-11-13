@@ -4,10 +4,14 @@
   max-width: 940px;
   width: 100%;
   margin: 0 auto;
-  min-height: 100vh;
+  /* Use dynamic viewport height to avoid iOS/Android address bar issues */
+  min-height: 100dvh;
   background: transparent;
   position: relative;
   overflow-x: hidden;
+  /* Allow vertical scrolling so bottom content (buttons/disclaimer) is reachable */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Back Button Styles */
@@ -127,7 +131,8 @@
     1;
   border-radius: 16px;
   box-shadow: none;
-  overflow: hidden;
+  /* Don't clip inner content on small screens */
+  overflow: visible;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -201,16 +206,15 @@
 
 @media (max-width: 520px) {
   .container {
-    min-height: 100vh;
+    /* Allow content to scroll instead of being clipped */
     min-height: 100dvh;
-    max-height: 100vh;
-    max-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    height: auto;
+    max-height: none;
+    display: block;
     background: transparent;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding: var(--mantine-spacing-md) !important;
     padding-top: max(
       calc(var(--mantine-spacing-md) + 50px),
@@ -218,7 +222,7 @@
     ) !important;
     padding-bottom: max(
       var(--mantine-spacing-md),
-      calc(env(safe-area-inset-bottom, 0px) + var(--mantine-spacing-md))
+      calc(env(safe-area-inset-bottom, 0px) + var(--mantine-spacing-md) + 12px)
     ) !important;
   }
 
@@ -239,6 +243,7 @@
     margin: 0;
     background: transparent;
     box-shadow: none;
+    overflow: visible;
     width: 100%;
     max-width: 100%;
   }
