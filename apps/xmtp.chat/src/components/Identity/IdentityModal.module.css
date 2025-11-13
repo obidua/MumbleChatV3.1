@@ -457,3 +457,193 @@
     padding: var(--mantine-spacing-xs);
   }
 }
+
+/* ============================================
+   LIGHT MODE SUPPORT - Dark Green, Blue, Purple Gradients
+   ============================================ */
+
+@media (prefers-color-scheme: light) {
+  .profileHeader {
+    background: transparent;
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #047857, #1e40af, #7c3aed) 1;
+  }
+
+  .profileHeader::before {
+    background-image: none;
+  }
+
+  .identityCard {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #047857, #1e40af) 1;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .identityCard::before {
+    background: radial-gradient(
+      circle at top right,
+      rgba(30, 64, 175, 0.03),
+      transparent 60%
+    );
+  }
+
+  .identityCard:hover {
+    border-image: linear-gradient(135deg, #059669, #2563eb) 1;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  .shareCard {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #1e40af, #7c3aed) 1;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .shareCard::before {
+    background: radial-gradient(
+      circle at bottom right,
+      rgba(124, 58, 237, 0.03),
+      transparent 60%
+    );
+  }
+
+  .shareCard:hover {
+    border-image: linear-gradient(135deg, #2563eb, #9333ea) 1;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  .linkDisplay {
+    background: rgba(248, 250, 252, 0.8);
+    border: 1px solid rgba(4, 120, 87, 0.2);
+  }
+
+  .linkText {
+    color: #047857;
+  }
+
+  .infoRow {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .infoLabel {
+    color: #047857;
+    font-weight: 700;
+  }
+
+  .labelIcon {
+    color: #1e40af;
+  }
+
+  .infoValue {
+    color: #0f172a;
+  }
+
+  .sectionTitle {
+    background: linear-gradient(135deg, #047857, #1e40af, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .sectionIcon {
+    color: #047857;
+  }
+
+  .installationsCard {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #047857, #7c3aed) 1;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .installationsCard::before {
+    background: radial-gradient(
+      circle at bottom left,
+      rgba(124, 58, 237, 0.03),
+      transparent 60%
+    );
+  }
+
+  .installationRow {
+    background: rgba(248, 250, 252, 0.9);
+    border: 1px solid rgba(4, 120, 87, 0.15);
+  }
+
+  .installationRow:hover {
+    background: rgba(241, 245, 249, 0.95);
+    border-color: rgba(30, 64, 175, 0.3);
+  }
+
+  .installationMeta .metaLabel {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .installationMeta .metaValue {
+    color: #0f172a;
+  }
+
+  .currentBadge {
+    background: linear-gradient(135deg, #047857, #059669);
+    color: #ffffff;
+  }
+
+  .revokeButton {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: #dc2626;
+  }
+
+  .revokeButton:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #b91c1c;
+  }
+
+  .revokeAllButton {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: #dc2626;
+  }
+
+  .revokeAllButton:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #b91c1c;
+  }
+
+  .emptyState {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .disconnectCard {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #dc2626, #ef4444) 1;
+    box-shadow: 0 12px 32px rgba(239, 68, 68, 0.12);
+  }
+
+  .disconnectCard::before {
+    background: radial-gradient(
+      circle at top right,
+      rgba(239, 68, 68, 0.03),
+      transparent 60%
+    );
+  }
+
+  .disconnectCard:hover {
+    border-image: linear-gradient(135deg, #b91c1c, #dc2626) 1;
+    box-shadow: 0 16px 40px rgba(239, 68, 68, 0.18);
+  }
+
+  .errorBadge {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: #dc2626;
+  }
+
+  .errorBadge:hover {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.4);
+  }
+}

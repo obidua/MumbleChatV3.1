@@ -1,8 +1,11 @@
 .shell {
   height: 100%;
   border-radius: 24px;
-  background:
-    linear-gradient(180deg, rgba(6, 9, 20, 0.88), rgba(6, 9, 20, 0.72));
+  background: linear-gradient(
+    180deg,
+    rgba(6, 9, 20, 0.88),
+    rgba(6, 9, 20, 0.72)
+  );
   border: 1px solid rgba(148, 163, 184, 0.12);
   box-shadow: 0 28px 48px rgba(4, 8, 20, 0.4);
   backdrop-filter: blur(14px);
@@ -59,8 +62,11 @@
 
 @media (prefers-color-scheme: light) {
   .shell {
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.95));
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(248, 250, 252, 0.95)
+    );
     border: 1px solid rgba(148, 163, 184, 0.2);
     box-shadow: 0 28px 48px rgba(71, 85, 105, 0.15);
   }
