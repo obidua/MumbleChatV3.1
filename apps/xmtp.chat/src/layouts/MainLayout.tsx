@@ -1,8 +1,11 @@
 import { useClickOutside } from "@mantine/hooks";
 import classes from "./MainLayout.module.css";
 
-export const MainLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return <div className={classes.root}>{children}</div>;
+export const MainLayout: React.FC<
+  React.PropsWithChildren<{ className?: string }>
+> = ({ children, className }) => {
+  const rootClass = [classes.root, className].filter(Boolean).join(" ");
+  return <div className={rootClass}>{children}</div>;
 };
 
 export const MainLayoutHeader: React.FC<React.PropsWithChildren> = ({
@@ -40,7 +43,9 @@ export const MainLayoutNav: React.FC<MainLayoutNavProps> = ({
       toggle?.();
     }
   });
-  const classNames = [classes.aside, opened && classes.showNavbar].filter(Boolean);
+  const classNames = [classes.aside, opened && classes.showNavbar].filter(
+    Boolean,
+  );
   const overlayClassNames = [classes.overlay, opened && classes.overlayVisible]
     .filter(Boolean)
     .join(" ");

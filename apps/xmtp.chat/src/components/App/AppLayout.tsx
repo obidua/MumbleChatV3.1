@@ -16,6 +16,7 @@ import {
   MainLayoutHeader,
   MainLayoutNav,
 } from "@/layouts/MainLayout";
+import mainLayoutClasses from "@/layouts/MainLayout.module.css";
 
 export const AppLayout: React.FC = () => {
   const navigate = useNavigate();
@@ -71,12 +72,16 @@ export const AppLayout: React.FC = () => {
     !location.pathname.includes("/new-group") &&
     !location.pathname.includes("/identity");
 
+  // When we are on mobile and inside a conversation, we hide the header.
+  // Apply a class to give safe-area top padding to prevent content from sitting under status bar.
+  const hideHeader = isMobile && isInConversation;
+
   return !client ? (
     <CenteredLayout fullScreen>
       <LoadingOverlay visible />
     </CenteredLayout>
   ) : (
-    <MainLayout>
+    <MainLayout className={hideHeader ? mainLayoutClasses.noHeader : undefined}>
       {(!isMobile || !isInConversation) && (
         <MainLayoutHeader>
           <AppHeader client={client} opened={opened} toggle={toggle} />
