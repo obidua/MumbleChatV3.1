@@ -13,6 +13,18 @@
     0 8px 24px rgba(4, 8, 20, 0.4),
     0 0 40px rgba(10, 255, 241, 0.06);
   color: #ffffff;
+
+  /* Alignment fixes to keep all wallet tiles same height in webview */
+  display: flex;
+  align-items: center;
+  min-height: 76px;
+}
+
+/* Ensure label does not wrap and cause uneven heights */
+.root :global(.mantine-Text-root) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .root:hover {
@@ -79,6 +91,7 @@
 @media (max-width: 768px) {
   .root {
     padding: var(--mantine-spacing-sm);
+    min-height: 64px;
   }
 }
 
@@ -89,6 +102,7 @@
     border: 2px solid rgba(4, 120, 87, 0.2);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     color: #0f172a;
+    min-height: 76px; /* keep equal heights in light mode webview */
   }
 
   .root:hover {
