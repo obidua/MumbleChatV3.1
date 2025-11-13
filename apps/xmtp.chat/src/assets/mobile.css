@@ -1,6 +1,6 @@
 /* Mobile-specific styles for PWA */
 
-/* Text selection highlighting - green theme */
+/* Text selection highlighting - green theme for dark mode */
 ::selection {
   background: rgba(16, 185, 129, 0.3);
   color: #ffffff;
@@ -9,6 +9,19 @@
 ::-moz-selection {
   background: rgba(16, 185, 129, 0.3);
   color: #ffffff;
+}
+
+/* Text selection highlighting - light mode */
+@media (prefers-color-scheme: light) {
+  ::selection {
+    background: rgba(59, 130, 246, 0.25);
+    color: #0f172a;
+  }
+
+  ::-moz-selection {
+    background: rgba(59, 130, 246, 0.25);
+    color: #0f172a;
+  }
 }
 
 /* Ensure full viewport height on mobile */
@@ -237,16 +250,45 @@ body,
 
   .mantine-TextInput-input,
   .mantine-Textarea-input,
-  .mantine-Select-input {
-    color: #212529;
-    background: #ffffff;
-    border-color: rgba(0, 0, 0, 0.12);
+  .mantine-Select-input,
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  textarea {
+    color: #0f172a !important;
+    background: #ffffff !important;
+    border: 2px solid !important;
+    border-image: linear-gradient(135deg, #047857, #1e40af) 1 !important;
+    border-radius: 12px;
+  }
+
+  .mantine-TextInput-input:focus,
+  .mantine-Textarea-input:focus,
+  .mantine-Select-input:focus,
+  input:focus,
+  textarea:focus {
+    border-image: linear-gradient(135deg, #059669, #2563eb) 1 !important;
+    outline: none !important;
   }
 
   .mantine-TextInput-input::placeholder,
   .mantine-Textarea-input::placeholder,
-  .mantine-Select-input::placeholder {
-    color: rgba(0, 0, 0, 0.4);
+  .mantine-Select-input::placeholder,
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba(71, 85, 105, 0.5) !important;
+  }
+
+  /* Remove gray backgrounds from disabled inputs */
+  .mantine-TextInput-input:disabled,
+  .mantine-Textarea-input:disabled,
+  .mantine-Select-input:disabled,
+  input:disabled,
+  textarea:disabled {
+    background: rgba(241, 245, 249, 0.5) !important;
+    color: rgba(100, 116, 139, 0.6) !important;
+    border-image: linear-gradient(135deg, #cbd5e1, #94a3b8) 1 !important;
   }
 
   /* Accordion text visibility */
@@ -369,12 +411,21 @@ body,
   [class*="ConversationCard"],
   [class*="conversationCard"] {
     background: #ffffff !important;
-    border-color: rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid rgba(148, 163, 184, 0.2) !important;
   }
 
   [class*="ConversationCard"]:hover,
   [class*="conversationCard"]:hover {
-    background: #f8f9fa !important;
+    background: linear-gradient(135deg, rgba(4, 120, 87, 0.05), rgba(30, 64, 175, 0.05)) !important;
+    border-color: rgba(30, 64, 175, 0.4) !important;
+    transform: translateX(2px);
+  }
+
+  [class*="ConversationCard"][class*="active"],
+  [class*="conversationCard"][class*="active"] {
+    background: linear-gradient(135deg, rgba(4, 120, 87, 0.1), rgba(30, 64, 175, 0.1)) !important;
+    border: 2px solid !important;
+    border-image: linear-gradient(135deg, #047857, #1e40af) 1 !important;
   }
 
   /* Message bubbles */
@@ -408,31 +459,37 @@ body,
 
   /* Action icons */
   .mantine-ActionIcon-root {
-    color: #495057 !important;
+    color: #1e40af !important;
   }
 
   .mantine-ActionIcon-root:hover {
-    background: rgba(0, 0, 0, 0.05) !important;
+    background: rgba(30, 64, 175, 0.08) !important;
+    color: #2563eb !important;
   }
 
   /* Bottom navigation for mobile */
   [class*="bottomNav"],
   [class*="BottomNav"] {
     background: #ffffff !important;
-    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-top: 2px solid !important;
+    border-image: linear-gradient(90deg, #047857, #1e40af) 1 !important;
   }
 
   [class*="navItem"] {
-    color: rgba(0, 0, 0, 0.6) !important;
+    color: rgba(71, 85, 105, 0.7) !important;
+    font-weight: 600;
   }
 
   [class*="navItem"]:hover {
-    background: rgba(0, 0, 0, 0.05) !important;
+    background: rgba(30, 64, 175, 0.08) !important;
+    color: #1e40af !important;
   }
 
   [class*="navItem"][class*="active"] {
-    color: #10b981 !important;
-    background: rgba(16, 185, 129, 0.1) !important;
+    color: #047857 !important;
+    background: linear-gradient(135deg, rgba(4, 120, 87, 0.12), rgba(30, 64, 175, 0.12)) !important;
+    font-weight: 800;
+    border-radius: 12px;
   }
 
   /* Modals background and overlay */
@@ -569,13 +626,18 @@ body,
   div[style*="background-color: rgb(17, 24, 39)"],
   div[style*="background-color: rgb(55, 65, 81)"],
   div[style*="background-color: rgb(30, 41, 59)"],
+  div[style*="background-color: rgb(75, 85, 99)"],
+  div[style*="background-color: rgb(107, 114, 128)"],
   div[style*="background: rgb(31, 41, 55)"],
   div[style*="background: rgb(17, 24, 39)"],
   div[style*="background: rgb(55, 65, 81)"],
-  div[style*="background: rgb(30, 41, 59)"] {
+  div[style*="background: rgb(30, 41, 59)"],
+  div[style*="background: rgb(75, 85, 99)"],
+  div[style*="background: rgb(107, 114, 128)"] {
     background: #ffffff !important;
     background-color: #ffffff !important;
-    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border: 2px solid !important;
+    border-image: linear-gradient(135deg, #047857, #1e40af) 1 !important;
   }
 
   /* Fix text colors in those dark sections */
@@ -583,11 +645,15 @@ body,
   div[style*="background-color: rgb(17, 24, 39)"] *,
   div[style*="background-color: rgb(55, 65, 81)"] *,
   div[style*="background-color: rgb(30, 41, 59)"] *,
+  div[style*="background-color: rgb(75, 85, 99)"] *,
+  div[style*="background-color: rgb(107, 114, 128)"] *,
   div[style*="background: rgb(31, 41, 55)"] *,
   div[style*="background: rgb(17, 24, 39)"] *,
   div[style*="background: rgb(55, 65, 81)"] *,
-  div[style*="background: rgb(30, 41, 59)"] * {
-    color: #212529 !important;
+  div[style*="background: rgb(30, 41, 59)"] *,
+  div[style*="background: rgb(75, 85, 99)"] *,
+  div[style*="background: rgb(107, 114, 128)"] * {
+    color: #0f172a !important;
   }
 
   /* Fix gray text colors */
@@ -615,7 +681,8 @@ body,
   span[style*="color: rgb(5, 150, 105)"],
   div[style*="color: rgb(16, 185, 129)"],
   div[style*="color: rgb(5, 150, 105)"] {
-    color: #059669 !important;
+    color: #047857 !important;
+    font-weight: 700;
   }
 
   /* Ensure button text stays visible */
@@ -623,10 +690,34 @@ body,
     color: inherit !important;
   }
 
-  /* Primary buttons keep white text */
+  /* Primary buttons - Dark gradient with white text */
   button[style*="background"],
   .mantine-Button-root:not([data-variant="subtle"]):not([data-variant="light"]) {
+    background: linear-gradient(135deg, #047857, #1e40af) !important;
     color: #ffffff !important;
+    font-weight: 700;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(4, 120, 87, 0.3);
+  }
+
+  /* Primary button hover */
+  button[style*="background"]:hover:not(:disabled),
+  .mantine-Button-root:not([data-variant="subtle"]):not([data-variant="light"]):hover:not(:disabled) {
+    background: linear-gradient(135deg, #059669, #2563eb) !important;
+    box-shadow: 0 6px 16px rgba(4, 120, 87, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* Highlighted elements - vibrant colors */
+  mark,
+  .highlighted,
+  [data-highlighted="true"] {
+    background: linear-gradient(135deg, rgba(4, 120, 87, 0.15), rgba(30, 64, 175, 0.15)) !important;
+    color: #0f172a !important;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(4, 120, 87, 0.3);
   }
 
   /* Stack and Group in dark sections */
