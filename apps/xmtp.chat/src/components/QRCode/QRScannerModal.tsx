@@ -10,6 +10,49 @@ interface QRScannerModalProps {
   onScan?: (address: string) => void;
 }
 
+// Detect if running in an in-app browser (WebView)
+const isInAppBrowser = (): boolean => {
+  const ua = navigator.userAgent || navigator.vendor || "";
+  // Common in-app browser patterns
+  return (
+    /FBAN|FBAV|Instagram|Twitter|Line|Snapchat|WeChat|MicroMessenger|Ramapay|TrustWallet|MetaMask|Coinbase/i.test(
+      ua,
+    ) ||
+    // Generic WebView detection
+    /wv|WebView/i.test(ua) ||
+    // Android WebView
+    (/Android/i.test(ua) && /Version\/[\d.]+/i.test(ua) && !/Chrome/i.test(ua))
+  );
+};
+
+// Request camera permission explicitly - crucial for in-app browsers
+const requestCameraPermission = async (): Promise<MediaStream | null> => {
+  try {
+    // For in-app browsers, we need to explicitly request getUserMedia
+    // This triggers the native permission dialog
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: {
+        facingMode: "environment",
+        width: { ideal: 1280 },
+        height: { ideal: 720 },
+      },
+    });
+    return stream;
+  } catch (error) {
+    console.error("Camera permission request failed:", error);
+    return null;
+  }
+};
+
+// Stop all tracks on a media stream
+const stopMediaStream = (stream: MediaStream | null) => {
+  if (stream) {
+    stream.getTracks().forEach((track) => {
+      track.stop();
+    });
+  }
+};
+
 export const QRScannerModal: React.FC<QRScannerModalProps> = ({
   opened,
   onClose,
@@ -17,13 +60,16 @@ export const QRScannerModal: React.FC<QRScannerModalProps> = ({
 }) => {
   const [scanning, setScanning] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [permissionRequested, setPermissionRequested] = useState(false);
   const scannerRef = useRef<Html5Qrcode | null>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
   const scannerIdRef = useRef(
     "qr-scanner-" + Math.random().toString(36).substr(2, 9),
   );
   const navigate = useNavigate();
 
   const handleClose = useCallback(() => {
+    // Stop the scanner first
     if (scannerRef.current && scanning) {
       scannerRef.current
         .stop()
@@ -35,34 +81,59 @@ export const QRScannerModal: React.FC<QRScannerModalProps> = ({
           console.error("Error stopping scanner:", err);
         });
     }
+    // Also stop any media stream we opened
+    stopMediaStream(mediaStreamRef.current);
+    mediaStreamRef.current = null;
     setScanning(false);
     setError(null);
+    setPermissionRequested(false);
     onClose();
   }, [onClose, scanning]);
 
   const startScanning = useCallback(async () => {
     setError(null);
-    try {
-      // First check if camera permission is granted
-      if (navigator.permissions) {
-        try {
-          const permissionStatus = await navigator.permissions.query({
-            name: "camera" as PermissionName,
-          });
 
-          if (permissionStatus.state === "denied") {
-            setError(
-              "Camera access denied. Please enable camera permissions in your browser settings.",
-            );
-            return;
-          }
-        } catch (permErr) {
-          // Some browsers don't support permissions.query for camera
-          console.log("Permission query not supported:", permErr);
+    // Check if mediaDevices API is available
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setError(
+        "Camera access is not supported in this browser. Please try opening the app in a regular browser like Chrome or Safari.",
+      );
+      return;
+    }
+
+    try {
+      const inAppBrowser = isInAppBrowser();
+
+      // For in-app browsers, we need to explicitly request camera permission
+      // This triggers the native permission dialog that WebViews require
+      if (inAppBrowser || !permissionRequested) {
+        console.log(
+          "Requesting camera permission explicitly for in-app browser...",
+        );
+
+        // Request camera access first to trigger the permission dialog
+        const stream = await requestCameraPermission();
+
+        if (!stream) {
+          setError(
+            inAppBrowser
+              ? "Camera access was not granted. Please:\n1. Check if Ramapay has camera permission in your device settings\n2. Go to Settings > Apps > Ramapay > Permissions > Camera\n3. Enable camera access and try again"
+              : "Camera access denied. Please allow camera access when prompted.",
+          );
+          return;
         }
+
+        // Store the stream reference so we can stop it later
+        mediaStreamRef.current = stream;
+        setPermissionRequested(true);
+
+        // Stop the stream - html5-qrcode will request its own
+        // But we needed this to trigger the permission dialog
+        stopMediaStream(stream);
+        mediaStreamRef.current = null;
       }
 
-      // Request camera access
+      // Now start the QR scanner
       const html5QrCode = new Html5Qrcode(scannerIdRef.current);
       scannerRef.current = html5QrCode;
 
@@ -71,6 +142,8 @@ export const QRScannerModal: React.FC<QRScannerModalProps> = ({
         {
           fps: 10,
           qrbox: { width: 250, height: 250 },
+          // Additional config for better in-app browser compatibility
+          aspectRatio: 1.0,
         },
         (decodedText) => {
           // Successfully scanned
@@ -91,9 +164,9 @@ export const QRScannerModal: React.FC<QRScannerModalProps> = ({
             void navigate(`/dm/${decodedText}`);
           }
         },
-        (errorMessage) => {
+        () => {
           // Scanning errors (can be ignored as they're frequent)
-          // console.log("Scan error:", errorMessage);
+          // These are not actual errors, just frames without QR codes
         },
       );
       setScanning(true);
@@ -101,6 +174,7 @@ export const QRScannerModal: React.FC<QRScannerModalProps> = ({
       console.error("Error starting scanner:", err);
 
       const errorMessage = err instanceof Error ? err.message : String(err);
+      const inAppBrowser = isInAppBrowser();
 
       if (
         errorMessage.includes("Permission") ||
@@ -108,26 +182,54 @@ export const QRScannerModal: React.FC<QRScannerModalProps> = ({
         errorMessage.includes("NotAllowedError") ||
         errorMessage.includes("denied")
       ) {
-        setError(
-          "Camera access denied. Please allow camera access when prompted by your browser.",
-        );
+        if (inAppBrowser) {
+          setError(
+            "Camera permission not granted. To fix this:\n\n" +
+              "1. Go to your device Settings\n" +
+              "2. Find Ramapay in Apps\n" +
+              "3. Tap Permissions > Camera\n" +
+              "4. Allow camera access\n" +
+              "5. Return here and try again",
+          );
+        } else {
+          setError(
+            "Camera access denied. Please allow camera access when prompted by your browser.",
+          );
+        }
       } else if (
         errorMessage.includes("NotFoundError") ||
-        errorMessage.includes("not found")
+        errorMessage.includes("not found") ||
+        errorMessage.includes("Requested device not found")
       ) {
         setError("No camera found on this device.");
       } else if (
         errorMessage.includes("NotReadableError") ||
-        errorMessage.includes("in use")
+        errorMessage.includes("in use") ||
+        errorMessage.includes("Could not start video source")
       ) {
-        setError("Camera is already in use by another application.");
+        setError(
+          "Camera is already in use by another application. Please close other apps using the camera.",
+        );
+      } else if (errorMessage.includes("NotSupportedError")) {
+        setError(
+          "Camera access is not supported. Please try opening the app in a regular browser.",
+        );
+      } else if (
+        errorMessage.includes("AbortError") ||
+        errorMessage.includes("Starting video source failed")
+      ) {
+        setError(
+          "Failed to start camera. Please try again or restart the app.",
+        );
       } else {
         setError(
-          "Unable to access camera. Please ensure camera permissions are granted and try again.",
+          inAppBrowser
+            ? "Unable to access camera. Please check camera permissions in your device settings for Ramapay app."
+            : "Unable to access camera. Please ensure camera permissions are granted and try again.",
         );
       }
     }
-  }, [onScan, handleClose, navigate]);
+  }, [onScan, handleClose, navigate, permissionRequested]);
 
   useEffect(() => {
     if (opened && !scanning) {

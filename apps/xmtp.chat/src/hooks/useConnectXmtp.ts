@@ -50,13 +50,25 @@ export const useConnectXmtp = () => {
       return;
     }
 
+    // For Ramestta chain (1370) and other custom chains, always use EOA signer
+    // SCW (Smart Contract Wallet) mode is only supported on certain chains by XMTP
+    const isCustomChain = account.chainId === 1370; // Ramestta
+    const shouldUseSCW = useSCW && !isCustomChain;
+
+    console.log("Connecting to XMTP with:", {
+      address: account.address,
+      chainId: account.chainId,
+      useSCW: shouldUseSCW,
+      isCustomChain,
+    });
+
     void initialize({
       dbEncryptionKey: encryptionKey
         ? hexToUint8Array(encryptionKey)
         : undefined,
       env: environment,
       loggingLevel,
-      signer: useSCW
+      signer: shouldUseSCW
         ? createSCWSigner(
             account.address,
             (message: string) => signMessageAsync({ message }),

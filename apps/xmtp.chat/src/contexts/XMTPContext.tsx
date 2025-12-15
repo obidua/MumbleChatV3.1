@@ -142,6 +142,24 @@ export const XMTPProvider: React.FC<XMTPProviderProps> = ({
         } catch (e) {
           const error = e as Error;
 
+          // Handle "Unknown signer" error - typically caused by SCW mode with unsupported chain
+          if (error.message.includes("Unknown signer")) {
+            console.error(
+              "XMTP: Unknown signer error. This usually happens when using Smart Contract Wallet mode with an unsupported chain.",
+              error,
+            );
+
+            const signerError = new Error(
+              "Wallet signature verification failed. If you're using a Smart Contract Wallet, please try connecting with a standard wallet. For Ramestta chain, only EOA wallets are supported.",
+            );
+
+            setClient(undefined);
+            setError(signerError);
+            initializingRef.current = false;
+            setInitializing(false);
+            throw signerError;
+          }
+
           // Handle "Multiple create operations detected" error
           if (error.message.includes("Multiple create operations detected")) {
             console.error(
