@@ -11,9 +11,60 @@ export const ErrorModal: React.FC = () => {
   const fullScreen = useCollapsedMediaQuery();
   const contentHeight = fullScreen ? "auto" : 500;
 
+  // Check if an error should be suppressed (not shown to user)
+  const shouldSuppressError = (error: Error | unknown): boolean => {
+    const errorMessage = String(
+      error instanceof Error ? error.message : error || "",
+    );
+    const errorString = String(error || "");
+
+    // Service Worker errors - these are recoverable and shouldn't bother the user
+    if (
+      errorMessage.includes("ServiceWorker") ||
+      errorMessage.includes("service worker") ||
+      errorMessage.includes("Failed to update a ServiceWorker") ||
+      errorMessage.includes("invalid state") ||
+      errorMessage.includes("The object is in an invalid state") ||
+      errorString.includes("ServiceWorker")
+    ) {
+      console.log("[xmtp.chat] Suppressed SW error from UI:", errorMessage);
+      return true;
+    }
+
+    // Network errors during idle - these are transient
+    if (
+      errorMessage.includes("Failed to fetch") ||
+      errorMessage.includes("NetworkError") ||
+      errorMessage.includes("net::ERR_")
+    ) {
+      console.log("[xmtp.chat] Suppressed network error from UI:", errorMessage);
+      return true;
+    }
+
+    // Extension/third-party errors
+    if (
+      errorMessage.includes("Extension context invalidated") ||
+      errorMessage.includes("chrome-extension://")
+    ) {
+      console.log("[xmtp.chat] Suppressed extension error from UI:", errorMessage);
+      return true;
+    }
+
+    return false;
+  };
+
   useEffect(() => {
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
-      setUnhandledRejectionError(event.reason as Error);
+      const error = event.reason as Error;
+      
+      // Check if this error should be suppressed
+      if (shouldSuppressError(error)) {
+        // Prevent the error from propagating further
+        event.preventDefault();
+        return;
+      }
+      
+      setUnhandledRejectionError(error);
     };
     window.addEventListener("unhandledrejection", handleUnhandledRejection);
     return () => {
