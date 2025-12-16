@@ -1,59 +1,8 @@
 /**
- * Custom Service Worker extensions for Push Notifications
- * This file is imported by the main service worker
+ * Custom Service Worker extensions for Notifications
+ * Decentralized - NO backend required
+ * Works with Ramapay and other decentralized wallets
  */
-
-// Handle push events (when notification is received from server)
-self.addEventListener("push", (event) => {
-  console.log("[SW] Push notification received");
-
-  if (!event.data) {
-    console.log("[SW] Push event has no data");
-    return;
-  }
-
-  try {
-    const data = event.data.json();
-
-    const title = data.title || "MumbleChat";
-    const options = {
-      body: data.body || "You have a new message",
-      icon: data.icon || "/icons/icon-192x192.png",
-      badge: "/icons/icon-192x192.png",
-      vibrate: [200, 100, 200],
-      tag: data.tag || `message-${Date.now()}`,
-      data: {
-        url: data.url || "/conversations",
-        conversationId: data.conversationId,
-        messageId: data.messageId,
-      },
-      actions: [
-        {
-          action: "open",
-          title: "Open Chat",
-        },
-        {
-          action: "dismiss",
-          title: "Dismiss",
-        },
-      ],
-      requireInteraction: false,
-    };
-
-    event.waitUntil(self.registration.showNotification(title, options));
-  } catch (error) {
-    console.error("[SW] Error handling push event:", error);
-
-    // Show a generic notification if parsing fails
-    event.waitUntil(
-      self.registration.showNotification("MumbleChat", {
-        body: "You have a new message",
-        icon: "/icons/icon-192x192.png",
-        badge: "/icons/icon-192x192.png",
-      }),
-    );
-  }
-});
 
 // Handle notification click
 self.addEventListener("notificationclick", (event) => {
@@ -96,34 +45,68 @@ self.addEventListener("notificationclose", (event) => {
   console.log("[SW] Notification closed");
 });
 
-// Handle push subscription change (e.g., when browser refreshes subscription)
-self.addEventListener("pushsubscriptionchange", (event) => {
-  console.log("[SW] Push subscription changed");
+// Handle Background Sync (for periodic message checking without backend)
+self.addEventListener("sync", (event) => {
+  console.log("[SW] Background Sync event:", event.tag);
 
-  // Re-subscribe with the new subscription
-  event.waitUntil(
-    self.registration.pushManager
-      .subscribe({
-        userVisibleOnly: true,
-        // Note: applicationServerKey should be stored/retrieved
-      })
-      .then((subscription) => {
-        // Send new subscription to server
-        return fetch("/api/push/resubscribe", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            oldEndpoint: event.oldSubscription?.endpoint,
-            newSubscription: subscription.toJSON(),
-          }),
-        });
-      })
-      .catch((error) => {
-        console.error("[SW] Error resubscribing:", error);
-      }),
-  );
+  if (event.tag === "check-messages") {
+    event.waitUntil(notifyClientsToCheckMessages());
+  }
 });
 
-console.log("[SW] Push notification handlers registered");
+// Handle Periodic Background Sync (if available)
+self.addEventListener("periodicsync", (event) => {
+  console.log("[SW] Periodic Background Sync event:", event.tag);
+
+  if (event.tag === "check-messages-periodic") {
+    event.waitUntil(notifyClientsToCheckMessages());
+  }
+});
+
+// Notify all clients to check for new messages
+async function notifyClientsToCheckMessages() {
+  try {
+    const clients = await self.clients.matchAll({
+      type: "window",
+      includeUncontrolled: true,
+    });
+
+    for (const client of clients) {
+      client.postMessage({
+        type: "CHECK_MESSAGES",
+        timestamp: Date.now(),
+      });
+    }
+
+    console.log("[SW] Notified", clients.length, "clients to check messages");
+  } catch (error) {
+    console.error("[SW] Error notifying clients:", error);
+  }
+}
+
+// Handle messages from the main app
+self.addEventListener("message", (event) => {
+  console.log("[SW] Message received:", event.data?.type);
+
+  if (event.data?.type === "SHOW_NOTIFICATION") {
+    // Show notification from app
+    const { title, body, icon, tag, data } = event.data.payload;
+    self.registration.showNotification(title, {
+      body,
+      icon: icon || "/icons/icon-192x192.png",
+      badge: "/icons/icon-192x192.png",
+      tag: tag || `message-${Date.now()}`,
+      data,
+      requireInteraction: false,
+      silent: false,
+    });
+  }
+
+  if (event.data?.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+console.log(
+  "[SW] Decentralized notification handlers registered (no backend required)",
+);

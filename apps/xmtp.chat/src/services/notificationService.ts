@@ -1,10 +1,11 @@
 /**
  * Notification Service
  * Handles browser notifications and sounds for new messages
- * Also integrates with push notifications for background delivery
+ * Uses decentralized approach - NO backend required
+ * Works with Ramapay and other decentralized wallets
  */
 
-import { pushNotificationService } from "./pushNotificationService";
+import { decentralizedNotificationService } from "./decentralizedNotificationService";
 
 export class NotificationService {
   private static instance: NotificationService;
@@ -277,13 +278,13 @@ export class NotificationService {
     conversationId?: string;
     onClick?: () => void;
   }): Promise<void> {
-    // Check if push notification service is available
-    if (pushNotificationService.isPushSupported()) {
+    // Use decentralized notification service (no backend required)
+    if (decentralizedNotificationService.isNotificationSupported()) {
       try {
-        await pushNotificationService.showLocalNotification(options.title, {
+        await decentralizedNotificationService.showNotification({
+          title: options.title,
           body: options.body,
           icon: options.icon || "/icons/icon-192x192.png",
-          badge: "/icons/icon-192x192.png",
           tag: options.tag || `message-${Date.now()}`,
           data: {
             url: options.conversationId
