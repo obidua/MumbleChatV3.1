@@ -1,7 +1,10 @@
 /**
  * Notification Service
  * Handles browser notifications and sounds for new messages
+ * Also integrates with push notifications for background delivery
  */
+
+import { pushNotificationService } from "./pushNotificationService";
 
 export class NotificationService {
   private static instance: NotificationService;
@@ -233,6 +236,7 @@ export class NotificationService {
 
   /**
    * Show a notification for a new message
+   * Uses Service Worker notification for better background support (Ramapay, etc.)
    */
   showMessageNotification(options: {
     title: string;
@@ -254,6 +258,59 @@ export class NotificationService {
     // Play receive sound
     void this.playSound("receive");
 
+    // Try to use Service Worker notification first (better for in-app browsers like Ramapay)
+    // This has better support for background/locked screen notifications
+    void this.showServiceWorkerNotification(options).catch(() => {
+      // Fallback to regular Notification API
+      this.showFallbackNotification(options);
+    });
+  }
+
+  /**
+   * Show notification via Service Worker (better for background/in-app browser support)
+   */
+  private async showServiceWorkerNotification(options: {
+    title: string;
+    body: string;
+    icon?: string;
+    tag?: string;
+    conversationId?: string;
+    onClick?: () => void;
+  }): Promise<void> {
+    // Check if push notification service is available
+    if (pushNotificationService.isPushSupported()) {
+      try {
+        await pushNotificationService.showLocalNotification(options.title, {
+          body: options.body,
+          icon: options.icon || "/icons/icon-192x192.png",
+          badge: "/icons/icon-192x192.png",
+          tag: options.tag || `message-${Date.now()}`,
+          data: {
+            url: options.conversationId
+              ? `/dm/${options.conversationId}`
+              : "/conversations",
+            conversationId: options.conversationId,
+          },
+        });
+        return;
+      } catch (error) {
+        console.log("[Notification] SW notification failed, using fallback");
+      }
+    }
+    throw new Error("SW notification not available");
+  }
+
+  /**
+   * Fallback to regular Notification API
+   */
+  private showFallbackNotification(options: {
+    title: string;
+    body: string;
+    icon?: string;
+    tag?: string;
+    conversationId?: string;
+    onClick?: () => void;
+  }): void {
     try {
       const notification = new Notification(options.title, {
         body: options.body,
