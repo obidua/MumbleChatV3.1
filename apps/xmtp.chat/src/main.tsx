@@ -93,7 +93,7 @@ export const config = createConfig({
     [lensTestnet.id]: http(),
   },
   // Reduce connection timeout for faster mobile experience
-  multiInjectedProviderDiscovery: false, // Disable slow provider discovery on Android
+  multiInjectedProviderDiscovery: true, // Enable EIP-6963 to detect all installed wallets
   syncConnectedChain: false, // Don't auto-sync on load, reduces initial requests
 });
 

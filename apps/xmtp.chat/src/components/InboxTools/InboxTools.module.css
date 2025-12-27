@@ -4,7 +4,11 @@
 }
 
 .header {
-  background: linear-gradient(135deg, rgba(10, 255, 241, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(10, 255, 241, 0.1) 0%,
+    rgba(16, 185, 129, 0.05) 100%
+  );
   border-bottom: 1px solid rgba(10, 255, 241, 0.15);
   padding: 16px 20px;
 }
@@ -29,7 +33,7 @@
   color: #ffffff;
   font-size: 20px;
   font-weight: 700;
-  background: linear-gradient(135deg, #0aFFF1 0%, #10b981 100%);
+  background: linear-gradient(135deg, #0afff1 0%, #10b981 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -65,7 +69,11 @@
 }
 
 .connectedCard {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(10, 255, 241, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.1) 0%,
+    rgba(10, 255, 241, 0.05) 100%
+  );
   border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: 12px;
   padding: 16px;
@@ -86,13 +94,14 @@
 .networkDot {
   width: 8px;
   height: 8px;
-  background: #0aFFF1;
+  background: #0afff1;
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -167,7 +176,7 @@
 
 .installationsCount {
   background: rgba(10, 255, 241, 0.2);
-  color: #0aFFF1;
+  color: #0afff1;
   font-size: 12px;
   padding: 2px 8px;
   border-radius: 10px;
@@ -214,7 +223,7 @@
 .backButton {
   background: rgba(0, 0, 0, 0.3) !important;
   border: 1px solid rgba(10, 255, 241, 0.2) !important;
-  color: #0aFFF1 !important;
+  color: #0afff1 !important;
   font-weight: 500;
   transition: all 0.2s ease;
 }
@@ -225,7 +234,11 @@
 }
 
 .walletCard {
-  background: linear-gradient(135deg, rgba(10, 255, 241, 0.08) 0%, rgba(16, 185, 129, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(10, 255, 241, 0.08) 0%,
+    rgba(16, 185, 129, 0.05) 100%
+  );
   border: 1px solid rgba(10, 255, 241, 0.2);
   border-radius: 12px;
   padding: 16px;
@@ -238,7 +251,7 @@
   padding: 8px 12px;
   font-family: monospace;
   font-size: 14px;
-  color: #0aFFF1;
+  color: #0afff1;
 }
 
 .disconnectBtn {
