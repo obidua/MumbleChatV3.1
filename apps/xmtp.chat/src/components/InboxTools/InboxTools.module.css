@@ -1,0 +1,251 @@
+.container {
+  background: linear-gradient(180deg, #1a252f 0%, #17212b 100%);
+  min-height: 100%;
+}
+
+.header {
+  background: linear-gradient(135deg, rgba(10, 255, 241, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  border-bottom: 1px solid rgba(10, 255, 241, 0.15);
+  padding: 16px 20px;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.headerIcon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0aFFF1 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stepper {
+  padding: 20px;
+}
+
+.stepperRoot {
+  --stepper-color: #10b981;
+}
+
+.stepLabel {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500;
+}
+
+.stepIcon {
+  background: linear-gradient(135deg, #10b981 0%, #0d9488 100%) !important;
+  border: none !important;
+}
+
+.stepIconCompleted {
+  background: linear-gradient(135deg, #10b981 0%, #0d9488 100%) !important;
+}
+
+.card {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(10, 255, 241, 0.15);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.connectedCard {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(10, 255, 241, 0.05) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.networkBadge {
+  background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.networkDot {
+  width: 8px;
+  height: 8px;
+  background: #0aFFF1;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+}
+
+.inputSection {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.inputLabel {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.textInput {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+}
+
+.textInput:focus {
+  border-color: rgba(10, 255, 241, 0.5);
+  box-shadow: 0 0 0 3px rgba(10, 255, 241, 0.1);
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #10b981 0%, #0d9488 100%) !important;
+  border: none !important;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.primaryButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #0f766e 100%) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.secondaryButton {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+.secondaryButton:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.installationsSection {
+  margin-top: 24px;
+}
+
+.installationsTitle {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.installationsCount {
+  background: rgba(10, 255, 241, 0.2);
+  color: #0aFFF1;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.emptyIcon {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.footer {
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(10, 255, 241, 0.1);
+  padding: 16px 20px;
+}
+
+.revokeButton {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  border: none !important;
+  font-weight: 600;
+}
+
+.revokeButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+}
+
+.revokeButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.backButton {
+  background: rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(10, 255, 241, 0.2) !important;
+  color: #0aFFF1 !important;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.backButton:hover {
+  background: rgba(10, 255, 241, 0.1) !important;
+  border-color: rgba(10, 255, 241, 0.4) !important;
+}
+
+.walletCard {
+  background: linear-gradient(135deg, rgba(10, 255, 241, 0.08) 0%, rgba(16, 185, 129, 0.05) 100%);
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.addressBadge {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(10, 255, 241, 0.3);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: monospace;
+  font-size: 14px;
+  color: #0aFFF1;
+}
+
+.disconnectBtn {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 13px;
+}
+
+.disconnectBtn:hover {
+  color: #ef4444 !important;
+}
