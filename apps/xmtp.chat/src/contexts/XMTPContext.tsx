@@ -161,15 +161,45 @@ export const XMTPProvider: React.FC<XMTPProviderProps> = ({
               }
             }).catch((regError) => {
               console.error("XMTP: Registration check failed:", regError);
+              
+              // Check for RamaPay-specific private key error
+              const errorMessage = regError?.message || regError?.toString() || "";
+              if (errorMessage.includes("invalid private key") || 
+                  errorMessage.includes("RamaPayProvider")) {
+                const ramaPayError = new Error(
+                  "RamaPay wallet signing failed. This is a known issue with the RamaPay extension. Please try using MetaMask or WalletConnect instead, or contact RamaPay support to fix their signing implementation."
+                );
+                setError(ramaPayError);
+              }
             });
           } else {
             setClient(xmtpClient);
           }
         } catch (e) {
           const error = e as Error;
+          const errorMessage = error.message || "";
+
+          // Handle RamaPay wallet private key error
+          if (errorMessage.includes("invalid private key") || 
+              errorMessage.includes("RamaPayProvider")) {
+            console.error(
+              "XMTP: RamaPay wallet signing failed. This is a bug in the RamaPay extension.",
+              error,
+            );
+
+            const ramaPayError = new Error(
+              "RamaPay wallet signing failed. This is a known issue with the RamaPay browser extension - it returns an invalid private key when signing. Please try using MetaMask or WalletConnect instead, or contact RamaPay support.",
+            );
+
+            setClient(undefined);
+            setError(ramaPayError);
+            initializingRef.current = false;
+            setInitializing(false);
+            throw ramaPayError;
+          }
 
           // Handle "Unknown signer" error - typically caused by SCW mode with unsupported chain
-          if (error.message.includes("Unknown signer")) {
+          if (errorMessage.includes("Unknown signer")) {
             console.error(
               "XMTP: Unknown signer error. This usually happens when using Smart Contract Wallet mode with an unsupported chain.",
               error,

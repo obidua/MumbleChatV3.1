@@ -8,8 +8,36 @@ import { useSettings } from "@/hooks/useSettings";
 import { CoinbaseWallet } from "@/icons/CoinbaseWallet";
 import { InjectedWallet } from "@/icons/InjectedWallet";
 import { MetamaskWallet } from "@/icons/MetamaskWallet";
+import { RamaPayWallet } from "@/icons/RamaPayWallet";
 import { WalletConnectWallet } from "@/icons/WalletConnectWallet";
 import classes from "./ConnectorSelect.module.css";
+
+// Get custom icon for known wallets that may not provide good icons via EIP-6963
+const getWalletIcon = (wallet: { name: string; icon?: string }) => {
+  const nameLower = wallet.name.toLowerCase();
+  
+  // RamaPay wallet - use custom high-quality icon
+  if (nameLower.includes("ramapay") || nameLower.includes("rama")) {
+    return <RamaPayWallet />;
+  }
+  
+  // Use EIP-6963 provided icon if available
+  if (wallet.icon) {
+    return (
+      <Image
+        src={wallet.icon}
+        alt={wallet.name}
+        w={32}
+        h={32}
+        radius="sm"
+        style={{ objectFit: "contain" }}
+      />
+    );
+  }
+  
+  // Fallback to generic injected icon
+  return <InjectedWallet />;
+};
 
 export const ConnectorSelect: React.FC = () => {
   const { isConnected, loading, detectedWallets, connectById } =
@@ -58,20 +86,7 @@ export const ConnectorSelect: React.FC = () => {
           <AccountCard
             selected={connector === wallet.name}
             disabled={isDisabled}
-            icon={
-              wallet.icon ? (
-                <Image
-                  src={wallet.icon}
-                  alt={wallet.name}
-                  w={32}
-                  h={32}
-                  radius="sm"
-                  style={{ objectFit: "contain" }}
-                />
-              ) : (
-                <InjectedWallet />
-              )
-            }
+            icon={getWalletIcon(wallet)}
             label={wallet.name}
             onClick={handleWalletById(wallet.id, wallet.name)}
           />
