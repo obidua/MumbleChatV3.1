@@ -8,6 +8,7 @@ export type ConversationsMenuProps = {
   onCreateDm?: () => void;
   onCreateGroup?: () => void;
   onShowQRCode?: () => void;
+  onInboxTools?: () => void;
   onLogout?: () => void;
   disabled?: boolean;
   loading?: boolean;
@@ -19,6 +20,7 @@ export const ConversationsMenu: React.FC<ConversationsMenuProps> = ({
   onCreateDm,
   onCreateGroup,
   onShowQRCode,
+  onInboxTools,
   onLogout,
   disabled,
   loading,
@@ -82,6 +84,17 @@ export const ConversationsMenu: React.FC<ConversationsMenuProps> = ({
         <Menu.Label>Actions</Menu.Label>
         <Menu.Item onClick={onSync}>Sync</Menu.Item>
         <Menu.Item onClick={onSyncAll}>Sync All</Menu.Item>
+        <Menu.Divider />
+        <Menu.Label>Support</Menu.Label>
+        {onInboxTools && (
+          <Menu.Item
+            onClick={onInboxTools}
+            leftSection={
+              <span style={{ fontSize: "16px" }}>🔧</span>
+            }>
+            Inbox Tools
+          </Menu.Item>
+        )}
       </Menu.Dropdown>
     </Menu>
   );

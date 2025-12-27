@@ -7,7 +7,9 @@
   background: linear-gradient(180deg, #17212b 0%, #1a252f 100%);
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(16, 185, 129, 0.15);
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15), 0 -1px 0 rgba(16, 185, 129, 0.1);
+  box-shadow:
+    0 -2px 8px rgba(0, 0, 0, 0.15),
+    0 -1px 0 rgba(16, 185, 129, 0.1);
   z-index: 1000;
   display: flex;
   align-items: flex-start;
@@ -32,6 +34,12 @@
   border: none;
   min-width: 60px;
   margin-top: 4px;
+  /* iOS touch handling improvements */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .navItem:hover {
@@ -41,7 +49,11 @@
 
 .navItem.active {
   color: #10b981;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(13, 148, 136, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.15) 0%,
+    rgba(13, 148, 136, 0.1) 100%
+  );
   border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
@@ -86,7 +98,8 @@
 }
 
 @keyframes badgePulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -139,7 +152,9 @@
   .bottomNav {
     background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
     border-top: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08), 0 -1px 0 rgba(0, 0, 0, 0.05);
+    box-shadow:
+      0 -2px 8px rgba(0, 0, 0, 0.08),
+      0 -1px 0 rgba(0, 0, 0, 0.05);
   }
 
   .navItem {
@@ -153,7 +168,11 @@
 
   .navItem.active {
     color: #10b981;
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(13, 148, 136, 0.1) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.15) 0%,
+      rgba(13, 148, 136, 0.1) 100%
+    );
     border: 1px solid rgba(16, 185, 129, 0.2);
   }
 }

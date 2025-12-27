@@ -20,6 +20,7 @@ import {
   useState,
 } from "react";
 import BreakableText from "@/components/Messages/BreakableText";
+import { EditNickname } from "@/components/Contacts/EditNickname";
 import { useClient } from "@/contexts/XMTPContext";
 import { shortAddress } from "@/helpers/strings";
 import {
@@ -30,6 +31,7 @@ import { useConversation } from "@/hooks/useConversation";
 import { useConversations } from "@/hooks/useConversations";
 import { IconDots } from "@/icons/IconDots";
 import { useActions } from "@/stores/inbox/hooks";
+import { useContactNickname } from "@/stores/contacts";
 import classes from "./MemberPopover.module.css";
 
 type MemberPopoverContextType = {
@@ -92,6 +94,9 @@ export const MemberPopover: React.FC<MemberPopoverProps> = ({
   const [sendError, setSendError] = useState(false);
   const [message, setMessage] = useState("");
   const [opened, setOpened] = useState(false);
+  const [nicknameModalOpen, setNicknameModalOpen] = useState(false);
+  const { nickname } = useContactNickname(address);
+  
   const handleCopy = useCallback(
     (value: string) => {
       clipboard.copy(value);
@@ -301,6 +306,14 @@ export const MemberPopover: React.FC<MemberPopoverProps> = ({
                 <Menu.Item
                   onClick={(e) => {
                     e.stopPropagation();
+                    setNicknameModalOpen(true);
+                    setOpened(false);
+                  }}>
+                  {nickname ? "Edit Nickname" : "Set Nickname"}
+                </Menu.Item>
+                <Menu.Item
+                  onClick={(e) => {
+                    e.stopPropagation();
                     handleCopy(address);
                   }}>
                   Copy address
@@ -327,7 +340,14 @@ export const MemberPopover: React.FC<MemberPopoverProps> = ({
             </Menu>
             <Avatar src={avatar} size="xl" radius="100%" variant="default" />
             <Group w="100%" align="center" justify="center">
-              {displayName ? (
+              {nickname ? (
+                <Stack gap="0" align="center">
+                  <BreakableText>{nickname}</BreakableText>
+                  <Tooltip label={<Text size="xs">{address}</Text>}>
+                    <Text size="xs" c="dimmed">{shortAddress(address, 8)}</Text>
+                  </Tooltip>
+                </Stack>
+              ) : displayName ? (
                 <BreakableText>{displayName}</BreakableText>
               ) : (
                 <Tooltip label={<Text size="xs">{address}</Text>}>
@@ -375,6 +395,12 @@ export const MemberPopover: React.FC<MemberPopoverProps> = ({
           </Stack>
         </Popover.Dropdown>
       </Popover>
+      <EditNickname
+        address={address}
+        displayName={displayName}
+        opened={nicknameModalOpen}
+        onClose={() => setNicknameModalOpen(false)}
+      />
     </MemberPopoverProvider>
   );
 };

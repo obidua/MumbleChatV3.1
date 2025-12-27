@@ -60,6 +60,36 @@ export const useSettings = () => {
     getInitialValueInEffect: false,
   });
 
+  // Track which wallet addresses have been registered with XMTP
+  // This prevents creating new installations on reconnect
+  const [registeredWallets, setRegisteredWallets] = useLocalStorage<string[]>({
+    key: "XMTP_REGISTERED_WALLETS",
+    defaultValue: [],
+    getInitialValueInEffect: false,
+  });
+
+  // Helper to check if a wallet is registered
+  const isWalletRegistered = (address: string | undefined) => {
+    if (!address) return false;
+    return registeredWallets.includes(address.toLowerCase());
+  };
+
+  // Helper to mark a wallet as registered
+  const markWalletAsRegistered = (address: string | undefined) => {
+    if (!address) return;
+    const lowerAddress = address.toLowerCase();
+    if (!registeredWallets.includes(lowerAddress)) {
+      setRegisteredWallets([...registeredWallets, lowerAddress]);
+    }
+  };
+
+  // Helper to unmark a wallet as registered (for when user wants to fully disconnect)
+  const unmarkWalletAsRegistered = (address: string | undefined) => {
+    if (!address) return;
+    const lowerAddress = address.toLowerCase();
+    setRegisteredWallets(registeredWallets.filter((w) => w !== lowerAddress));
+  };
+
   return {
     autoConnect,
     blockchain,
@@ -70,7 +100,11 @@ export const useSettings = () => {
     ephemeralAccountKey,
     forceSCW,
     loggingLevel,
+    registeredWallets,
     useSCW,
+    isWalletRegistered,
+    markWalletAsRegistered,
+    unmarkWalletAsRegistered,
     setAutoConnect,
     setBlockchain,
     setConnector,
@@ -80,6 +114,7 @@ export const useSettings = () => {
     setEphemeralAccountKey,
     setForceSCW,
     setLoggingLevel,
+    setRegisteredWallets,
     setUseSCW,
   };
 };

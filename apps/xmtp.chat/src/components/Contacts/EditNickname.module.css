@@ -1,0 +1,104 @@
+.editButton {
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.editButton:hover {
+  opacity: 1;
+}
+
+/* Modal styling to match dark theme */
+.modal {
+  --mantine-color-body: #17212b;
+}
+
+.modal [class*="mantine-Modal-content"] {
+  background: linear-gradient(180deg, #1a252f 0%, #17212b 100%);
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  border-radius: 16px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(10, 255, 241, 0.1);
+}
+
+.modal [class*="mantine-Modal-header"] {
+  background: transparent;
+  border-bottom: 1px solid rgba(10, 255, 241, 0.1);
+  padding: 16px 20px;
+}
+
+.modal [class*="mantine-Modal-title"] {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.modal [class*="mantine-Modal-close"] {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.modal [class*="mantine-Modal-close"]:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.modal [class*="mantine-Modal-body"] {
+  padding: 20px;
+}
+
+.input [class*="mantine-TextInput-input"] {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(10, 255, 241, 0.2);
+  color: #ffffff;
+  border-radius: 8px;
+}
+
+.input [class*="mantine-TextInput-input"]:focus {
+  border-color: rgba(10, 255, 241, 0.5);
+  box-shadow: 0 0 0 2px rgba(10, 255, 241, 0.1);
+}
+
+.input [class*="mantine-TextInput-input"]::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.input [class*="mantine-TextInput-label"] {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.saveButton {
+  background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
+  border: none;
+}
+
+.saveButton:hover {
+  background: linear-gradient(135deg, #059669 0%, #0f766e 100%);
+}
+
+.cancelButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.cancelButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.removeButton {
+  color: #ef4444;
+}
+
+.removeButton:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.addressText {
+  font-family: monospace;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}

@@ -275,12 +275,12 @@
    ============================================ */
 @media (max-width: 768px) {
   .stepper {
-    padding: 0;
+    padding: 0 var(--mantine-spacing-xs);
   }
 
   .stepIcon {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     font-size: 1rem;
     border-width: 2px;
   }
@@ -295,21 +295,21 @@
   }
 
   .stepBody {
-    margin-top: var(--mantine-spacing-sm);
+    margin-top: var(--mantine-spacing-md);
   }
 
   .stepLabel {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.3;
   }
 
   .step[data-progress="true"] .stepLabel {
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 
   .stepDescription {
     font-size: 0.8rem;
-    margin-top: 2px;
+    margin-top: 4px;
     line-height: 1.4;
   }
 
@@ -329,8 +329,8 @@
   }
 
   .stepIcon {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     font-size: 0.95rem;
     box-shadow:
       0 3px 12px rgba(4, 8, 20, 0.4),
@@ -345,26 +345,21 @@
   .step[data-progress="true"] .stepIcon {
     transform: scale(1.05);
     box-shadow:
-      0 6px 16px rgba(16, 185, 129, 0.5),
-      0 0 24px rgba(16, 185, 129, 0.2);
-  }
-
-  .stepBody {
-    margin-top: var(--mantine-spacing-xs);
+      0 6px 20px rgba(16, 185, 129, 0.5),
+      0 0 30px rgba(16, 185, 129, 0.2);
   }
 
   .stepLabel {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .step[data-progress="true"] .stepLabel {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   .stepDescription {
     font-size: 0.75rem;
-    line-height: 1.3;
-    margin-top: 2px;
+    opacity: 0.9;
   }
 
   .separator {
@@ -379,26 +374,25 @@
    ============================================ */
 @media (max-width: 400px) {
   .stepIcon {
-    width: 40px;
-    height: 40px;
-    font-size: 0.9rem;
-    border-width: 2px;
-  }
-
-  .stepIcon::before {
-    inset: -3px;
-  }
-
-  .stepLabel {
+    width: 36px;
+    height: 36px;
     font-size: 0.85rem;
   }
 
+  .stepIcon::before {
+    display: none;
+  }
+
+  .stepLabel {
+    font-size: 0.8rem;
+  }
+
   .step[data-progress="true"] .stepLabel {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .stepDescription {
-    font-size: 0.7rem;
+    display: none;
   }
 
   .separator {
@@ -408,6 +402,6 @@
   }
 
   .stepBody {
-    margin-top: 6px;
+    margin-top: var(--mantine-spacing-sm);
   }
 }

@@ -1,17 +1,20 @@
-import { Box, Card, Flex, Stack, Text } from "@mantine/core";
+import { ActionIcon, Box, Card, Flex, Menu, Stack, Text } from "@mantine/core";
 import { Dm, type DecodedMessage } from "@xmtp/browser-sdk";
 import { ContentTypeGroupUpdated } from "@xmtp/content-type-group-updated";
 import { ContentTypeReadReceipt } from "@xmtp/content-type-read-receipt";
 import { ContentTypeRemoteAttachment } from "@xmtp/content-type-remote-attachment";
 import { ContentTypeReply } from "@xmtp/content-type-reply";
 import { differenceInCalendarDays, format, isToday } from "date-fns";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { EditNickname } from "@/components/Contacts/EditNickname";
 import { useClient } from "@/contexts/XMTPContext";
 import { nsToDate } from "@/helpers/date";
 import { isValidInboxId, shortAddress } from "@/helpers/strings";
 import { getMemberAddress } from "@/helpers/xmtp";
 import { useConversation } from "@/hooks/useConversation";
+import { IconDots } from "@/icons/IconDots";
+import { useContactNickname } from "@/stores/contacts";
 import styles from "./ConversationCard.module.css";
 
 export type ConversationCardProps = {
@@ -28,8 +31,11 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
   const navigate = useNavigate();
   const { conversationId: paramsConversationId } = useParams();
   const client = useClient();
+  const [nicknameModalOpen, setNicknameModalOpen] = useState(false);
 
   const memberCount = useMemo(() => members.size, [members]);
+
+  const isDm = useMemo(() => conversation instanceof Dm, [conversation]);
 
   const otherMemberAddress = useMemo(() => {
     if (!(conversation instanceof Dm)) {
@@ -45,7 +51,14 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
     return otherMember ? getMemberAddress(otherMember) : null;
   }, [conversation, members, client.inboxId]);
 
+  // Get nickname for the other member (for DMs)
+  const { nickname } = useContactNickname(otherMemberAddress ?? undefined);
+
   const displayName = useMemo(() => {
+    // Priority: nickname > group name > ENS/basename > truncated address
+    if (nickname) {
+      return nickname;
+    }
     if (name && !isValidInboxId(name)) {
       return name;
     }
@@ -56,7 +69,7 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
       return shortAddress(name, 4);
     }
     return "Untitled";
-  }, [name, otherMemberAddress]);
+  }, [name, otherMemberAddress, nickname]);
 
   const avatarText = useMemo(() => {
     const address = otherMemberAddress || name || "";
@@ -153,11 +166,40 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
               <Text fw={700} className={styles.title} lineClamp={1}>
                 {displayName}
               </Text>
-              {sentAtLabel && (
-                <Text size="xs" c="dimmed" className={styles.time}>
-                  {sentAtLabel}
-                </Text>
-              )}
+              <Flex align="center" gap="xs">
+                {sentAtLabel && (
+                  <Text size="xs" c="dimmed" className={styles.time}>
+                    {sentAtLabel}
+                  </Text>
+                )}
+                {isDm && otherMemberAddress && (
+                  <Menu shadow="md" position="bottom-end">
+                    <Menu.Target>
+                      <ActionIcon
+                        variant="subtle"
+                        size="xs"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                        }}>
+                        <IconDots size={14} />
+                      </ActionIcon>
+                    </Menu.Target>
+                    <Menu.Dropdown
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}>
+                      <Menu.Item
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setNicknameModalOpen(true);
+                        }}>
+                        {nickname ? "Edit Nickname" : "Set Nickname"}
+                      </Menu.Item>
+                    </Menu.Dropdown>
+                  </Menu>
+                )}
+              </Flex>
             </Flex>
             <Text size="sm" c="dimmed" className={styles.preview} lineClamp={2}>
               {previewText}
@@ -168,6 +210,15 @@ export const ConversationCard: React.FC<ConversationCardProps> = ({
           </Stack>
         </Flex>
       </Card>
+      {isDm && otherMemberAddress && (
+        <EditNickname
+          address={otherMemberAddress}
+          opened={nicknameModalOpen}
+          onClose={() => {
+            setNicknameModalOpen(false);
+          }}
+        />
+      )}
     </Box>
   );
 };

@@ -221,6 +221,9 @@ export const ConversationsNavbar: React.FC<ConversationsNavbarProps> = ({
             onShowQRCode={() => {
               setShowQRCode(true);
             }}
+            onInboxTools={() => {
+              void navigate("/inbox-tools");
+            }}
             onLogout={handleLogout}
             disabled={syncing}
           />

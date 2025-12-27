@@ -42,6 +42,8 @@ export type InitializeClientOptions = {
   env?: ClientOptions["env"];
   loggingLevel?: ClientOptions["loggingLevel"];
   signer: Signer;
+  // If true, skip auto-registration (used for already registered wallets)
+  disableAutoRegister?: boolean;
 };
 
 export type XMTPContextValue = {
@@ -101,6 +103,7 @@ export const XMTPProvider: React.FC<XMTPProviderProps> = ({
       env,
       loggingLevel,
       signer,
+      disableAutoRegister,
     }: InitializeClientOptions) => {
       // only initialize a client if one doesn't already exist
       if (!client) {
@@ -121,11 +124,13 @@ export const XMTPProvider: React.FC<XMTPProviderProps> = ({
 
         try {
           // create a new XMTP client
+          // Use disableAutoRegister to prevent creating new installations for already registered wallets
           xmtpClient = await Client.create(signer, {
             env,
             loggingLevel,
             dbEncryptionKey,
             appVersion: "xmtp.chat/0",
+            disableAutoRegister: disableAutoRegister ?? false,
             codecs: [
               new ReactionCodec(),
               new ReplyCodec(),
@@ -138,7 +143,28 @@ export const XMTPProvider: React.FC<XMTPProviderProps> = ({
               new MarkdownCodec(),
             ],
           });
-          setClient(xmtpClient);
+
+          // If we disabled auto-register, check if registration is needed
+          // Do this AFTER setting the client to not block the UI
+          if (disableAutoRegister) {
+            // Set client first for faster UI response
+            setClient(xmtpClient);
+            
+            // Then check registration in background
+            xmtpClient.isRegistered().then((isRegistered) => {
+              if (!isRegistered) {
+                // Wallet was marked as registered but actually isn't - register now
+                console.log("XMTP: Client not registered, registering now...");
+                return xmtpClient.register();
+              } else {
+                console.log("XMTP: Reusing existing installation (no new registration needed)");
+              }
+            }).catch((regError) => {
+              console.error("XMTP: Registration check failed:", regError);
+            });
+          } else {
+            setClient(xmtpClient);
+          }
         } catch (e) {
           const error = e as Error;
 

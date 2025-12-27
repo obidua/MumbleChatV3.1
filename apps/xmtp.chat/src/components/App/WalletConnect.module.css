@@ -130,14 +130,9 @@
 @media (max-width: 768px) {
   .walletCard {
     border-radius: 12px;
-    background: linear-gradient(
-      145deg,
-      rgba(6, 9, 20, 0.85),
-      rgba(10, 14, 28, 0.9)
-    );
     box-shadow:
       0 8px 28px rgba(4, 8, 20, 0.6),
-      0 0 0 1px rgba(16, 185, 129, 0.1) inset;
+      0 0 0 1px rgba(16, 185, 129, 0.08) inset;
   }
 
   .walletCard::before {
@@ -165,17 +160,11 @@
    ============================================ */
 @media (max-width: 520px) {
   .walletCard {
-    border-radius: 12px;
-    background: linear-gradient(
-      145deg,
-      rgba(6, 9, 20, 0.9),
-      rgba(10, 14, 28, 0.95)
-    );
+    border-radius: 10px;
   }
 
   .walletCard::before {
-    border-radius: 12px 12px 0 0;
-    height: 2px;
+    border-radius: 10px 10px 0 0;
   }
 
   .walletCard::after {
@@ -184,7 +173,7 @@
 
   .optionsRow,
   .actionsRow {
-    padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+    padding: var(--mantine-spacing-sm);
   }
 }
 
@@ -193,16 +182,16 @@
    ============================================ */
 @media (max-width: 400px) {
   .walletCard {
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   .walletCard::before {
     height: 2px;
-    border-radius: 10px 10px 0 0;
+    border-radius: 8px 8px 0 0;
   }
 
   .optionsRow,
   .actionsRow {
-    padding: var(--mantine-spacing-xs);
+    padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
   }
 }

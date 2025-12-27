@@ -1,5 +1,6 @@
-import { Button, Group, Paper, Stack, Text } from "@mantine/core";
+import { Anchor, Button, Group, Paper, Stack, Text } from "@mantine/core";
 import { useCallback } from "react";
+import { Link } from "react-router";
 import { ConnectedAddress } from "@/components/App/ConnectedAddress";
 import { LoggingSelect } from "@/components/App/LoggingSelect";
 import { NetworkSelect } from "@/components/App/NetworkSelect";
@@ -25,18 +26,31 @@ export const ConnectXMTP = ({ onDisconnectWallet }: ConnectXMTPProps) => {
     connect();
   }, [connect]);
 
+  const isInstallationLimitError = error && (
+    error.message.includes("already registered 10/10 installations") ||
+    error.message.includes("Maximum XMTP installations")
+  );
+
   return (
     <Paper className={classes.xmtpCard}>
       <Stack gap="xs">
         {error && (
-          <Text size="sm" c="red" ta="center">
-            {error.message.includes("already registered 10/10 installations") ||
-            error.message.includes("Maximum XMTP installations")
-              ? "Maximum installations (10/10) reached. Please revoke old installations to continue. Visit the XMTP dashboard to manage installations."
-              : error.message.includes("Multiple create operations detected")
-                ? "Identity already exists. Database cleared. Please try again."
-                : `Error: ${error.message}`}
-          </Text>
+          <Stack gap="xs">
+            <Text size="sm" c="red" ta="center">
+              {isInstallationLimitError
+                ? "Maximum installations (10/10) reached. Please revoke old installations to continue."
+                : error.message.includes("Multiple create operations detected")
+                  ? "Identity already exists. Database cleared. Please try again."
+                  : `Error: ${error.message}`}
+            </Text>
+            {isInstallationLimitError && (
+              <Group justify="center">
+                <Anchor component={Link} to="/inbox-tools" size="sm" fw={600}>
+                  → Manage Installations
+                </Anchor>
+              </Group>
+            )}
+          </Stack>
         )}
         <Stack gap="md" className={classes.settingsSection}>
           <NetworkSelect />

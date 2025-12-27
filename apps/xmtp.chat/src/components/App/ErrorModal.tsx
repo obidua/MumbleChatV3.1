@@ -1,5 +1,7 @@
-import { Box, Button, Group, Tabs } from "@mantine/core";
+import { Box, Button, Group, Stack, Tabs, Text } from "@mantine/core";
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router";
+import { AutoRevokeInstallations } from "@/components/App/AutoRevokeInstallations";
 import { CodeWithCopy } from "@/components/CodeWithCopy";
 import { Modal } from "@/components/Modal";
 import { useCollapsedMediaQuery } from "@/hooks/useCollapsedMediaQuery";
@@ -10,6 +12,17 @@ export const ErrorModal: React.FC = () => {
     useState<Error | null>(null);
   const fullScreen = useCollapsedMediaQuery();
   const contentHeight = fullScreen ? "auto" : 500;
+  const navigate = useNavigate();
+
+  // Check if this is an installation limit error
+  const isInstallationLimitError = useMemo(() => {
+    if (!unhandledRejectionError) return false;
+    const message = unhandledRejectionError.message || "";
+    return (
+      message.includes("already registered 10/10 installations") ||
+      message.includes("Maximum XMTP installations")
+    );
+  }, [unhandledRejectionError]);
 
   // Check if an error should be suppressed (not shown to user)
   const shouldSuppressError = (error: Error | unknown): boolean => {
@@ -77,23 +90,29 @@ export const ErrorModal: React.FC = () => {
 
   const footer = useMemo(() => {
     return (
-      <Group justify="space-between" flex={1} p="md">
-        <Button
-          variant="default"
-          component="a"
-          href="https://github.com/xmtp/xmtp-js/issues/new/choose"
-          target="_blank">
-          Report issue
-        </Button>
-        <Button
-          onClick={() => {
-            setUnhandledRejectionError(null);
-          }}>
-          OK
-        </Button>
+      <Group justify="space-between" flex={1} p="md" wrap="wrap" gap="sm">
+        {!isInstallationLimitError && (
+          <Button
+            variant="default"
+            component="a"
+            href="https://github.com/xmtp/xmtp-js/issues/new/choose"
+            target="_blank"
+            size="sm">
+            Report issue
+          </Button>
+        )}
+        <Group gap="sm" ml="auto">
+          <Button
+            size="sm"
+            onClick={() => {
+              setUnhandledRejectionError(null);
+            }}>
+            {isInstallationLimitError ? "Close" : "OK"}
+          </Button>
+        </Group>
       </Group>
     );
-  }, []);
+  }, [isInstallationLimitError]);
 
   return unhandledRejectionError ? (
     <Modal
@@ -108,28 +127,59 @@ export const ErrorModal: React.FC = () => {
       padding={0}
       centered>
       <ContentLayout
-        title="Application error"
+        title={isInstallationLimitError ? "Installation Limit Reached" : "Application error"}
         maxHeight={contentHeight}
         footer={footer}
         withScrollFade={false}
         withScrollAreaPadding={false}>
         <Box p="md">
-          <Tabs defaultValue="message">
-            <Tabs.List>
-              <Tabs.Tab value="message">Message</Tabs.Tab>
-              <Tabs.Tab value="stackTrace">Stack trace</Tabs.Tab>
-            </Tabs.List>
-            <Tabs.Panel value="message" py="md">
-              <CodeWithCopy code={unhandledRejectionError.message} />
-            </Tabs.Panel>
-            <Tabs.Panel value="stackTrace" py="md">
-              <CodeWithCopy
-                code={
-                  unhandledRejectionError.stack ?? "Stack trace not available"
-                }
+          {isInstallationLimitError ? (
+            <Stack gap="md">
+              <Text size="sm" c="dimmed">
+                You've reached the maximum number of XMTP installations (10/10) for this wallet.
+              </Text>
+              
+              <AutoRevokeInstallations
+                onSuccess={() => {
+                  // Will reload the page from the component
+                }}
+                onError={(error) => {
+                  console.error("Auto-revoke failed:", error);
+                }}
               />
-            </Tabs.Panel>
-          </Tabs>
+
+              <Text size="xs" c="dimmed" ta="center" mt="sm">
+                Or manually manage at{" "}
+                <Text
+                  component="span"
+                  c="blue"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setUnhandledRejectionError(null);
+                    navigate("/inbox-tools");
+                  }}>
+                  Installation Management
+                </Text>
+              </Text>
+            </Stack>
+          ) : (
+            <Tabs defaultValue="message">
+              <Tabs.List>
+                <Tabs.Tab value="message">Message</Tabs.Tab>
+                <Tabs.Tab value="stackTrace">Stack trace</Tabs.Tab>
+              </Tabs.List>
+              <Tabs.Panel value="message" py="md">
+                <CodeWithCopy code={unhandledRejectionError.message} />
+              </Tabs.Panel>
+              <Tabs.Panel value="stackTrace" py="md">
+                <CodeWithCopy
+                  code={
+                    unhandledRejectionError.stack ?? "Stack trace not available"
+                  }
+                />
+              </Tabs.Panel>
+            </Tabs>
+          )}
         </Box>
       </ContentLayout>
     </Modal>

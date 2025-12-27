@@ -1,7 +1,7 @@
 import { ActionIcon, Group, Text, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Dm, Group as XmtpGroup } from "@xmtp/browser-sdk";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { Outlet, useNavigate } from "react-router";
 import { ConversationMenu } from "@/components/Conversation/ConversationMenu";
 import { MembersList } from "@/components/Conversation/MembersList";
@@ -13,6 +13,7 @@ import { isValidInboxId, shortAddress } from "@/helpers/strings";
 import { getMemberAddress } from "@/helpers/xmtp";
 import { useConversation } from "@/hooks/useConversation";
 import { useMobile } from "@/hooks/useMobile";
+import { useContactNickname } from "@/stores/contacts";
 import { IconBack } from "@/icons/IconBack";
 import { IconUsers } from "@/icons/IconUsers";
 import { ContentLayout } from "@/layouts/ContentLayout";
@@ -30,6 +31,7 @@ export const Conversation: React.FC<ConversationProps> = ({
   const client = useClient();
   const navigate = useNavigate();
   const isMobile = useMobile();
+  const menuOpenRef = useRef(false);
   const {
     conversation,
     name,
@@ -50,8 +52,11 @@ export const Conversation: React.FC<ConversationProps> = ({
   // Auto-sync messages every 1 second for live updates
   useEffect(() => {
     const intervalId = setInterval(() => {
-      // Sync from network to get live messages
-      void sync(true);
+      // Don't sync while menu is open to prevent flickering
+      if (!menuOpenRef.current) {
+        // Sync from network to get live messages
+        void sync(true);
+      }
     }, 1000); // Sync every 1 second
 
     return () => {
@@ -87,7 +92,14 @@ export const Conversation: React.FC<ConversationProps> = ({
     return otherMember ? getMemberAddress(otherMember) : null;
   }, [conversation, members, client.inboxId]);
 
+  // Get nickname for DM contacts
+  const { nickname } = useContactNickname(otherMemberAddress ?? undefined);
+
   const displayTitle = useMemo(() => {
+    // Priority: nickname > group name > ENS/basename > truncated address
+    if (nickname) {
+      return nickname;
+    }
     if (name && !isValidInboxId(name)) {
       return name;
     }
@@ -98,7 +110,7 @@ export const Conversation: React.FC<ConversationProps> = ({
       return shortAddress(name, 4);
     }
     return "Untitled";
-  }, [name, otherMemberAddress]);
+  }, [name, otherMemberAddress, nickname]);
 
   return (
     <>
@@ -132,6 +144,13 @@ export const Conversation: React.FC<ConversationProps> = ({
                 type={conversation instanceof XmtpGroup ? "group" : "dm"}
                 onSync={() => void handleSync()}
                 disabled={conversationSyncing}
+                otherMemberAddress={otherMemberAddress}
+                onMenuOpen={() => {
+                  menuOpenRef.current = true;
+                }}
+                onMenuClose={() => {
+                  menuOpenRef.current = false;
+                }}
               />
               {!isMobile && (
                 <Tooltip

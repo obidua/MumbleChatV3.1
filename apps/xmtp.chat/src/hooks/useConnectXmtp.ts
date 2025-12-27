@@ -9,7 +9,8 @@ import { useSettings } from "@/hooks/useSettings";
 
 export const useConnectXmtp = () => {
   const navigate = useNavigate();
-  const { signer: ephemeralSigner } = useEphemeralSigner();
+  const { signer: ephemeralSigner, address: ephemeralAddress } =
+    useEphemeralSigner();
   const { initializing, client, initialize } = useXMTP();
   const account = useAccount();
   const { signMessageAsync } = useSignMessage();
@@ -23,6 +24,8 @@ export const useConnectXmtp = () => {
     useSCW,
     autoConnect,
     setAutoConnect,
+    isWalletRegistered,
+    markWalletAsRegistered,
   } = useSettings();
 
   const connect = useCallback(() => {
@@ -33,6 +36,9 @@ export const useConnectXmtp = () => {
 
     // connect ephemeral account if enabled
     if (ephemeralAccountEnabled) {
+      // Check if ephemeral wallet is already registered
+      const isRegistered = isWalletRegistered(ephemeralAddress);
+
       void initialize({
         dbEncryptionKey: encryptionKey
           ? hexToUint8Array(encryptionKey)
@@ -40,6 +46,12 @@ export const useConnectXmtp = () => {
         env: environment,
         loggingLevel,
         signer: ephemeralSigner,
+        disableAutoRegister: isRegistered,
+      }).then(() => {
+        // Mark ephemeral wallet as registered after successful connection
+        if (ephemeralAddress) {
+          markWalletAsRegistered(ephemeralAddress);
+        }
       });
       setAutoConnect(true);
       return;
@@ -49,6 +61,14 @@ export const useConnectXmtp = () => {
     if (!account.address || (useSCW && !account.chainId)) {
       return;
     }
+
+    // Check if this wallet is already registered with XMTP
+    const isRegistered = isWalletRegistered(account.address);
+
+    console.log("XMTP: Wallet registration status:", {
+      address: account.address,
+      isRegistered,
+    });
 
     // For Ramestta chain (1370) and other custom chains, always use EOA signer
     // SCW (Smart Contract Wallet) mode is only supported on certain chains by XMTP
@@ -60,6 +80,7 @@ export const useConnectXmtp = () => {
       chainId: account.chainId,
       useSCW: shouldUseSCW,
       isCustomChain,
+      disableAutoRegister: isRegistered,
     });
 
     void initialize({
@@ -77,6 +98,12 @@ export const useConnectXmtp = () => {
         : createEOASigner(account.address, (message: string) =>
             signMessageAsync({ message }),
           ),
+      // Disable auto-registration if wallet is already registered
+      // This prevents creating new installations on every reconnect
+      disableAutoRegister: isRegistered,
+    }).then(() => {
+      // Mark wallet as registered after successful connection
+      markWalletAsRegistered(account.address);
     });
     setAutoConnect(true);
   }, [
@@ -85,6 +112,8 @@ export const useConnectXmtp = () => {
     setEphemeralAccountKey,
     ephemeralAccountEnabled,
     ephemeralAccountKey,
+    ephemeralAddress,
+    ephemeralSigner,
     encryptionKey,
     environment,
     loggingLevel,
@@ -93,6 +122,8 @@ export const useConnectXmtp = () => {
     account.chainId,
     signMessageAsync,
     setAutoConnect,
+    isWalletRegistered,
+    markWalletAsRegistered,
   ]);
 
   useEffect(() => {
