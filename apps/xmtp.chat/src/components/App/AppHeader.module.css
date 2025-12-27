@@ -140,8 +140,8 @@
 .statusContainer {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
+  gap: 4px;
+  padding: 4px 8px;
   background: rgba(16, 185, 129, 0.08);
   border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: 999px;
@@ -154,12 +154,13 @@
 }
 
 .statusDot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background: #10b981;
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.8);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  flex-shrink: 0;
 }
 
 @keyframes pulse {
@@ -179,6 +180,30 @@
   font-weight: 600;
   color: rgba(16, 185, 129, 0.9);
   letter-spacing: 0.05em;
+}
+
+.addressText {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: rgba(16, 185, 129, 0.85);
+  font-family:
+    "JetBrains Mono", "SF Mono", "Monaco", "Inconsolata", "Fira Mono",
+    "Droid Sans Mono", "Source Code Pro", monospace;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.copyIcon {
+  color: rgba(16, 185, 129, 0.7);
+  transition: all 0.2s ease;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.copyIcon:hover {
+  color: rgba(16, 185, 129, 1);
+  transform: scale(1.1);
 }
 
 .disconnectIcon {
@@ -295,6 +320,25 @@
   .brandText {
     gap: 4px;
   }
+
+  .statusContainer {
+    gap: 3px;
+    padding: 3px 6px;
+  }
+
+  .addressText {
+    font-size: 0.55rem;
+  }
+
+  .copyIcon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .statusDot {
+    width: 5px;
+    height: 5px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -315,6 +359,25 @@
 
   .brandTagline {
     font-size: 0.5rem;
+  }
+
+  .statusContainer {
+    gap: 2px;
+    padding: 2px 5px;
+  }
+
+  .addressText {
+    font-size: 0.5rem;
+  }
+
+  .copyIcon {
+    width: 10px;
+    height: 10px;
+  }
+
+  .statusDot {
+    width: 4px;
+    height: 4px;
   }
 }
 

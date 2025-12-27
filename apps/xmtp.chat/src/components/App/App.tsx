@@ -17,7 +17,7 @@ import { HelpModal } from "@/components/Identity/HelpModal";
 import { IdentityModal } from "@/components/Identity/IdentityModal";
 import { InboxTools } from "@/components/InboxTools/InboxTools";
 import { InboxToolsLayout } from "@/components/InboxTools/InboxToolsLayout";
-import { MumbleLanding } from "@/components/Landing/MumbleLanding";
+import { LandingRouter } from "@/components/Landing/LandingRouter";
 import { MessageModal } from "@/components/Messages/MessageModal";
 import { InstallPrompt } from "@/components/PWA/InstallPrompt";
 import { IOSInstallPrompt } from "@/components/PWA/IOSInstallPrompt";
@@ -32,7 +32,6 @@ export const App: React.FC = () => {
       <InstallPrompt />
       <IOSInstallPrompt />
       <Routes>
-        <Route path="/" element={<MumbleLanding />} />
         <Route path="/welcome/*" element={<BasicLayout />}>
           <Route index element={<Welcome />} />
         </Route>
@@ -68,6 +67,14 @@ export const App: React.FC = () => {
           </Route>
           <Route path="/disconnect" element={<Disconnect />} />
         </Route>
+        {/* Landing pages should be last to avoid catching app routes */}
+        <Route path="/" element={<LandingRouter />} />
+        <Route path="/features" element={<LandingRouter />} />
+        <Route path="/how-it-works" element={<LandingRouter />} />
+        <Route path="/security" element={<LandingRouter />} />
+        <Route path="/mobile" element={<LandingRouter />} />
+        <Route path="/faqs" element={<LandingRouter />} />
+        <Route path="/support" element={<LandingRouter />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

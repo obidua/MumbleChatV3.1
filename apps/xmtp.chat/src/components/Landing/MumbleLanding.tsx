@@ -5,12 +5,12 @@ import classes from "./MumbleLanding.module.css";
 
 const navLinks = [
   { label: "Home", href: "#home" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Features", href: "#features" },
-  { label: "Mobile", href: "#mobile-support" },
-  { label: "Security", href: "#security" },
-  { label: "FAQs", href: "#faqs" },
-  { label: "Support", href: "#support" },
+  { label: "How It Works", href: "/landing/how-it-works", isPage: true },
+  { label: "Features", href: "/landing/features", isPage: true },
+  { label: "Mobile", href: "/landing/mobile", isPage: true },
+  { label: "Security", href: "/landing/security", isPage: true },
+  { label: "FAQs", href: "/landing/faqs", isPage: true },
+  { label: "Support", href: "/landing/support", isPage: true },
 ];
 
 const featureCards = [
@@ -352,8 +352,8 @@ export const MumbleLanding: FC = () => {
             <a className={classes.primaryButton} href="/welcome">
               Launch App
             </a>
-            <a className={classes.secondaryButton} href="#powered-by">
-              Learn More About Ramestta
+            <a className={classes.secondaryButton} href="/landing">
+              Explore Features →
             </a>
           </div>
           <p className={classes.heroCopy}>
