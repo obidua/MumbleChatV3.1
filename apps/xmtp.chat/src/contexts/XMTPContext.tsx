@@ -219,18 +219,9 @@ export const XMTPProvider: React.FC<XMTPProviderProps> = ({
           // Handle "Multiple create operations detected" error
           if (error.message.includes("Multiple create operations detected")) {
             console.error(
-              "XMTP identity already exists for this address. Please reset your ephemeral wallet or clear browser data.",
+              "XMTP identity already exists for this address. Please try reconnecting.",
             );
-
-            // Try to clear IndexedDB to recover
-            try {
-              indexedDB.deleteDatabase("xmtp");
-              console.log(
-                "Cleared XMTP database. Please try connecting again.",
-              );
-            } catch (dbError) {
-              console.error("Failed to clear XMTP database:", dbError);
-            }
+            // Note: Do NOT delete IndexedDB as it contains message history
           }
 
           // Handle installation limit error

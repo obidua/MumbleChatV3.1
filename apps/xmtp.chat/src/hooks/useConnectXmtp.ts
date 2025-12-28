@@ -128,7 +128,7 @@ export const useConnectXmtp = () => {
 
   useEffect(() => {
     if (client) {
-      void navigate("/");
+      void navigate("/conversations");
     } else if (autoConnect) {
       connect();
     }
